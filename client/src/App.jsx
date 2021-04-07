@@ -5,12 +5,17 @@ import UpdatePage from "./routes/UpdatePage";
 import RestaurantDetailPage from "./routes/RestaurantDetailPage";
 import { RestaurantsContextProvider } from "./context/RestaurantsContext";
 import Footer from './components/Footer';
+import Sidebar from "./components/Sidebar";
+
+
 
 const App = () => {
   return (
     <RestaurantsContextProvider>
       <div className="container">
         <Router>
+        <Sidebar/>
+
           <Switch>
             <Route exact path="/" component={Home} />
             <Route
@@ -26,6 +31,7 @@ const App = () => {
           </Switch>
         </Router>
         <Footer/>
+        
 
       </div>
     </RestaurantsContextProvider>

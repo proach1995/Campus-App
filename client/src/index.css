@@ -1,9 +1,12 @@
-.footer{
-    margin-top: 1rem;
-    padding: 1rem;
-    background-color: rgb(235, 195, 64);
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+
+/* base styles */
+* {
+  margin: 0;
+  font-family: "Quicksand";
+}
+
+
+
+  
