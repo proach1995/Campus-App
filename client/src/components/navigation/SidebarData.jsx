@@ -23,6 +23,12 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
+    title: 'Etwas posten',
+    path: '/About',
+    icon: <IoIcons.IoIosPaper />,
+    cName: 'nav-text'
+  },
+  {
   title: 'Einstellungen',
     path: '/Contact',
     icon: <AiIcons.AiOutlineMail />,

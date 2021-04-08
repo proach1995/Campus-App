@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const Home = () => {
+const PostDetail = () => {
   return (
     <div>
       {/* Add components here*/}
@@ -11,4 +11,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default PostDetail;
