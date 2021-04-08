@@ -7,6 +7,7 @@ import './NavbarTop.css';
 
 
 
+
 function NavigationBars () {
     const [isActive, setIsActive] = useState(false)
     
@@ -18,7 +19,7 @@ function NavigationBars () {
     return (
         <div>
             <Sidebar isActive={isActive} toggleButton={toggleButton} />
-            <NavbarTop isActive={isActive} toggleButton={toggleButton} />
+            <NavbarTop isActive={isActive} toggleButton={toggleButton} className="NavbarTop"/>
             <Link to='#' className='menu-bars'>
                 <HamburgerSpring className="Hamburger"
                     buttonColor="transparent"

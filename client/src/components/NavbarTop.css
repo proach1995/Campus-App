@@ -1,10 +1,17 @@
-.color {
-    background-color: white;
+
+
+.navbar {
+    background-color: #185363;
+    margin-bottom: 0.5em;
+    
 }
 
-.background-color {
-    background-color: #185363;
+.navbarTop {
+    position: fixed;
+    
 }
+
+/* Need to add transition overlay for sidebar for bigger viewports */
 
 .menu-bars {
   
@@ -13,3 +20,10 @@
       top: 4px;
       z-index: 105;
   }
+
+  .dropdown-btn {
+      color: white;
+      background: #007466;
+      border-color: #007466;
+  }
+
