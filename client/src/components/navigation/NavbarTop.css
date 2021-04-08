@@ -1,8 +1,9 @@
 
 
 .navbar {
-    background-color: #185363;
+    
     margin-bottom: 0.5em;
+    background: linear-gradient(to right,#1d6a7f,#82b432 0,#1e9650 17%,#0a5a64 45%,#32828c 78%,#28b4dc 100%);
     
 }
 
@@ -25,5 +26,6 @@
       color: white;
       background: #007466;
       border-color: #007466;
+      
   }
 
