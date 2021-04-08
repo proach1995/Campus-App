@@ -2,8 +2,6 @@ import React, { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import { IconContext } from 'react-icons';
-import {Animate} from 'react-rebound';
-import { HamburgerSpring } from 'react-animated-burgers';
 import './Sidebar.css';
 
 
@@ -12,31 +10,13 @@ import './Sidebar.css';
 
 
 
-function Sidebar() {
-  // sidebar als Variable hier definiert
-   const [isActive, setIsActive] = useState(false)
-
-  const toggleButton = useCallback(
-    () => setIsActive(prevState => !prevState),
-    [],
-  );
-  //const [clicked] = React.useState(false);
-
+function Sidebar({isActive},{toggleButton}) {
+ 
 
   return (
     <>
-      <IconContext.Provider value={{ color: 'blue' }}>
-        <Animate translateX={isActive ? 200 : 0} tension={10000} friction={1000} delay={0}>
-          <Link to='#' className='menu-bars'>
-          <HamburgerSpring className="Hamburger"
-            buttonColor="transparent"
-            barColor="#007466"
-            buttonWidth={35}
-            {...{ isActive, toggleButton }}
-            />
-
-          </Link>
-          </Animate>
+    
+      <IconContext.Provider value={{ color: 'white' }}>
         <nav className={isActive ? 'nav-menu active' : 'nav-menu'}>
           <div className='nav-menu-items'>
             <ul  onClick={toggleButton}>

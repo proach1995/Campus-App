@@ -1,0 +1,15 @@
+.color {
+    background-color: white;
+}
+
+.background-color {
+    background-color: #185363;
+}
+
+.menu-bars {
+  
+    position: fixed;
+      right: 10px;
+      top: 4px;
+      z-index: 105;
+  }
