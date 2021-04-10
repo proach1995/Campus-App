@@ -34,6 +34,7 @@ function Sidebar({isActive},{toggleButton}) {
                 Vorname Name Mail Adresse.
               </Figure.Caption>
             </Figure>
+            <div className="divider" />
             <ul  onClick={toggleButton}>
               {SidebarData.map((item, index) => {
                 return (

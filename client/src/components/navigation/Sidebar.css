@@ -1,10 +1,7 @@
   
   
   
-  .navbar a {
-    text-decoration: none;
-    margin-left: 2rem;
-  }
+  
   
   .nav-menu {
     width: 300px;
@@ -27,7 +24,8 @@
     background-color: #185363;
     left: 0;
     transition: 450ms;
-    border-right: 2px solid black;
+    border-right: 2px solid  ;
+    z-index: 1000100;
   }
   
   .nav-text {
@@ -65,7 +63,7 @@
 	bottom: .1em;
 
 	/* Create gradient */
-  background: radial-gradient(circle, rgb(145, 248, 131) 44%, rgba(0,0,0,0.8743872549019608) 100%);
+  background: radial-gradient(circle, rgb(145, 248, 131) 44%, transparent 100%);
 	/* Set-up fade-in animation */
 	opacity: 0;
 	animation: fadeIn 400ms ease-out forwards;
@@ -97,7 +95,6 @@
 
 /*** PROFIL SECTION *****/
 .sidebarProfilSection {
-  background-color: black;
   height: 13em;
   width: 100%;
   color: white;
@@ -110,7 +107,16 @@
 }
 
 .profilSectionCaption {
+  color: white;
   position: absolute;
   left: 3em;
   top: 12em;
+}
+.divider {
+  height: 2px;
+  width:100%;
+  display:block; /* for use on default inline elements like span */
+  margin: 9px 0;
+  overflow: hidden;
+  background: radial-gradient(circle, rgb(145, 248, 131) 44%, transparent 100%);
 }

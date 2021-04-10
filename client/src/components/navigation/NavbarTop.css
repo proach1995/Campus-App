@@ -4,13 +4,16 @@
     
     margin-bottom: 0.5em;
     background: linear-gradient(to right,#1d6a7f,#82b432 0,#1e9650 17%,#0a5a64 45%,#32828c 78%,#28b4dc 100%);
-    
-}
-
-.navbarTop {
     position: fixed;
+    z-index: 1000;
+    width: 100%;
     
 }
+.navbar a {
+    text-decoration: none;
+    margin-left: 2rem;
+  }
+
 
 /* Need to add transition overlay for sidebar for bigger viewports */
 
@@ -19,7 +22,7 @@
     position: fixed;
       right: 10px;
       top: 4px;
-      z-index: 105;
+      z-index: 1005;
   }
 
   .dropdown-btn {

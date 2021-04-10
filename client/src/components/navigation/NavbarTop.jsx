@@ -21,7 +21,6 @@ const NavbarTop = ({isActive},{toggleButton}) => {
       alt="React Bootstrap logo"
     />
       </Navbar.Brand>
-  </Navbar>
 
     {/*https://react-bootstrap.github.io/layout/grid/#grid-props 
       Positioning with offset , sm und md
@@ -55,6 +54,7 @@ const NavbarTop = ({isActive},{toggleButton}) => {
       </Col>
     </Row>
   </Container> 
+  </Navbar>
 
 </>
   );
