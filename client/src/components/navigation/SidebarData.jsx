@@ -18,19 +18,25 @@ export const SidebarData = [
   },
   {
     title: 'Mein Profil',
-    path: '/About',
+    path: '/profil',
     icon: <IoIcons.IoIosPaper />,
     cName: 'nav-text'
   },
   {
     title: 'Etwas posten',
-    path: '/About',
+    path: '/postupload',
+    icon: <IoIcons.IoIosPaper />,
+    cName: 'nav-text'
+  },
+  {
+    title: 'Meine Posts',
+    path: '/meineposts',
     icon: <IoIcons.IoIosPaper />,
     cName: 'nav-text'
   },
   {
   title: 'Einstellungen',
-    path: '/Contact',
+    path: '/Einstellungen',
     icon: <AiIcons.AiOutlineMail />,
     cName: 'nav-text'
 }

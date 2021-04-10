@@ -80,7 +80,8 @@
 
 .nav-menu-items {
   width: 100%;
-  margin-top: 5em;
+  margin-top: 0em;
+  justify-content: flex-start;
   
 }
 
@@ -91,4 +92,25 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+}
+
+
+/*** PROFIL SECTION *****/
+.sidebarProfilSection {
+  background-color: black;
+  height: 13em;
+  width: 100%;
+  color: white;
+}
+
+.profilSectionImage {
+  position: absolute;
+  left: 3em;
+  top:2em
+}
+
+.profilSectionCaption {
+  position: absolute;
+  left: 3em;
+  top: 12em;
 }
