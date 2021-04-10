@@ -6,6 +6,7 @@ import './NavbarTop.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button'
 
 const NavbarTop = ({isActive},{toggleButton}) => {
   return (
@@ -13,6 +14,7 @@ const NavbarTop = ({isActive},{toggleButton}) => {
 
   <Navbar className="navbar" variant="light">  
     <Navbar.Brand href="#home">
+      
       <img
       src="https://pbs.twimg.com/profile_images/603568605796634624/Nq0nXZZA_400x400.jpg"
       width="30"
@@ -20,7 +22,16 @@ const NavbarTop = ({isActive},{toggleButton}) => {
       className="d-inline-block align-top"
       alt="React Bootstrap logo"
     />
+    
+    
       </Navbar.Brand>
+
+      <div>
+      <Button variant="primary" className="login-btn">Login</Button>{' '}
+    </div>
+    <div>
+      <Button variant="primary" className="login-btn">Registrieren</Button>{' '}
+    </div> 
   </Navbar>
 
     {/*https://react-bootstrap.github.io/layout/grid/#grid-props 

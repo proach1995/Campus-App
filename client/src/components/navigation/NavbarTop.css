@@ -29,3 +29,19 @@
       
   }
 
+  .login-btn {
+    background-color:#1d6a7f ;
+    border-color:#1d6a7f;
+    display: block;
+    margin-left: 0.5rem;
+    margin-right: 0,5rem;
+    
+    
+    
+  }
+
+  .login-btn:hover{
+      background-color: #007466 ;
+  }
+  
+
