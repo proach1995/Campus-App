@@ -7,6 +7,20 @@
   font-family: "Quicksand";
 }
 
-
-
+.button {
+  color: white;
+      background: #007466;
+      border-color: #007466;
+      height: 2.3em;
+}
+.button:focus {
+  color: white;
+  background: #007466;
+  border-color: #007466;
+}
+.button:hover {
+  color: white;
+  background: #007466;
+  border-color: #007466;
+}
   

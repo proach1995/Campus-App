@@ -5,12 +5,14 @@ import Col from 'react-bootstrap/Col';
 import CardDeck from 'react-bootstrap/CardDeck';
 import Card from 'react-bootstrap/Card';
 import Carousel from 'react-bootstrap/Carousel';
+import Button from 'react-bootstrap/Button';
+import './route.css';
 
 
 
 const Home = () => {
   return (
-    <Container>
+    <Container className="routeContainer">
       <Row>
         <Col>
         <h1>Willkommen zum Marktplatz der Hochschule Kaiserslautern</h1>
@@ -24,9 +26,9 @@ const Home = () => {
 
       <Row>
       <Carousel>
-        <Carousel.Item>
+        <Carousel.Item className="carouselItem">
           <img
-            className="d-block w-100"
+            className="d-block w-100 "
             src="./pb.jpg"
             alt="First slide"
           />
@@ -65,94 +67,79 @@ const Home = () => {
 
       {/*****           CARDS MARKTPLATZ         **********/}
       <Row>
-      <CardDeck>
-        <Card>
-          <Card.Img variant="top" src="./trump.jpg" />
+      <Col>
+        <Card className=" Card text-center col-sm-6">
+          <Card.Img variant="top" src="./party.jpg" />
           <Card.Body>
-            <Card.Title>Card title</Card.Title>
-            <Card.Text>
-              This is a wider card with supporting text below as a natural lead-in to
-              additional content. This content is a little bit longer.
-            </Card.Text>
+            <Card.Title>Erstiparty Heute</Card.Title>
           </Card.Body>
           <Card.Footer>
-            <small className="text-muted">Last updated 3 mins ago</small>
+            <small className="text-muted">Gepostet vor 3 Minuten</small>
           </Card.Footer>
         </Card>
-        <Card>
-          <Card.Img variant="top" src="./trump.jpg" />
+        </Col>
+        <Col>
+        <Card className="Card text-center col-sm-6">
+          <Card.Img variant="top" src="./party.jpg" />
           <Card.Body>
-            <Card.Title>Card title</Card.Title>
-            <Card.Text>
-              This card has supporting text below as a natural lead-in to additional
-              content.{' '}
-            </Card.Text>
+            <Card.Title>Erstiparty Heute</Card.Title>
           </Card.Body>
           <Card.Footer>
-            <small className="text-muted">Last updated 3 mins ago</small>
+            <small className="text-muted">Gepostet vor 3 Minuten</small>
           </Card.Footer>
         </Card>
-        <Card>
-          <Card.Img variant="top" src="./trump.jpg" />
+        </Col>
+        <Col>
+        <Card className="Card text-center col-sm-6">
+          <Card.Img variant="top" src="./party.jpg" />
           <Card.Body>
-            <Card.Title>Card title</Card.Title>
-            <Card.Text>
-              This is a wider card with supporting text below as a natural lead-in to
-              additional content. This card has even longer content than the first to
-              show that equal height action.
-            </Card.Text>
+            <Card.Title>Erstiparty Heute</Card.Title>
           </Card.Body>
           <Card.Footer>
-            <small className="text-muted">Last updated 3 mins ago</small>
+            <small className="text-muted">Gepostet vor 3 Minuten</small>
           </Card.Footer>
         </Card>
-      </CardDeck>
+        </Col>
       </Row>
 
+      <div className="buttonBackground" >
+        <Button href="/events" className="button">Zu den Events</Button>
+      </div>
       {/*****           CARDS Events         **********/}
       <Row>
       <CardDeck>
-        <Card>
-          <Card.Img variant="top" src="./trump.jpg" />
+        <Card >
+          <Card.Img variant="top" src="./490.jpg" />
           <Card.Body>
-            <Card.Title>Card title</Card.Title>
-            <Card.Text>
-              This is a wider card with supporting text below as a natural lead-in to
-              additional content. This content is a little bit longer.
-            </Card.Text>
+            <Card.Title>Rasenmäher gesucht</Card.Title>
           </Card.Body>
           <Card.Footer>
             <small className="text-muted">Last updated 3 mins ago</small>
           </Card.Footer>
         </Card>
         <Card>
-          <Card.Img variant="top" src="./trump.jpg" />
+          <Card.Img variant="top" src="./490.jpg" />
           <Card.Body>
-            <Card.Title>Card title</Card.Title>
-            <Card.Text>
-              This card has supporting text below as a natural lead-in to additional
-              content.{' '}
-            </Card.Text>
+            <Card.Title>Rasenmäher gesucht</Card.Title>
           </Card.Body>
           <Card.Footer>
             <small className="text-muted">Last updated 3 mins ago</small>
           </Card.Footer>
         </Card>
         <Card>
-          <Card.Img variant="top" src="./trump.jpg" />
+          <Card.Img variant="top" src="./490.jpg" />
           <Card.Body>
-            <Card.Title>Card title</Card.Title>
-            <Card.Text>
-              This is a wider card with supporting text below as a natural lead-in to
-              additional content. This card has even longer content than the first to
-              show that equal height action.
-            </Card.Text>
+            <Card.Title>Rasenmäher gesucht</Card.Title>
           </Card.Body>
           <Card.Footer>
             <small className="text-muted">Last updated 3 mins ago</small>
           </Card.Footer>
         </Card>
       </CardDeck>
+        <div className="buttonBackground" >
+          <Button href="/marktplatz" className="button">Zum Marktplatz</Button>
+        </div>
+      
       </Row>
     </Container>
      

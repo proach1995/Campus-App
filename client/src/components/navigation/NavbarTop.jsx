@@ -11,8 +11,8 @@ const NavbarTop = ({isActive},{toggleButton}) => {
   return (
     <>
 
-  <Navbar className="navbar" variant="light">  
-    <Navbar.Brand href="#home">
+  <Navbar className="navbarStyling" variant="light">  
+    <Navbar.Brand href="/">
       <img
       src="https://pbs.twimg.com/profile_images/603568605796634624/Nq0nXZZA_400x400.jpg"
       width="30"
@@ -26,9 +26,9 @@ const NavbarTop = ({isActive},{toggleButton}) => {
       Positioning with offset , sm und md
     
     */}
-
-  <Container >
-    <Row>
+  </Navbar>
+  <Navbar className="navbarSubline">
+    <Row >
       <Col>
         <Dropdown >
             <Dropdown.Toggle className="color dropdown-btn"  id="dropdown-basic">
@@ -53,7 +53,6 @@ const NavbarTop = ({isActive},{toggleButton}) => {
         />
       </Col>
     </Row>
-  </Container> 
   </Navbar>
 
 </>

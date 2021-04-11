@@ -25,7 +25,7 @@
     left: 0;
     transition: 450ms;
     border-right: 2px solid  ;
-    z-index: 1000100;
+    z-index: 10000;
   }
   
   .nav-text {
@@ -119,4 +119,17 @@
   margin: 9px 0;
   overflow: hidden;
   background: radial-gradient(circle, rgb(145, 248, 131) 44%, transparent 100%);
+}
+
+.loginButtons {
+  height: 13em;
+  display: block;
+  position: relative;
+  left: 35%;
+  top: 10%;
+}
+.register-btn {
+  margin-top: 2em;
+  background-color: white ;
+  color: black;
 }
