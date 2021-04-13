@@ -23,7 +23,7 @@ function Sidebar() {
      [],
   );
 
-  const isLoggedIn = false;
+  const isLoggedIn = true;
 
   return (
     <>

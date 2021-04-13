@@ -6,15 +6,23 @@
     width: 100%;
     height: auto;
 }
-.Card {
-    max-width: 40vw;
+
+
+.card-title {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
 }
 
-.CardText {
-    background-color: black;
-    position: relative;
-    top: -20em;
-
+.card {
+    margin-bottom: 2em;
+    border: 0px;
+}
+.card-body {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0rem;
+    padding-right: 0rem;
 }
 
 .buttonBackground {
@@ -28,4 +36,9 @@
     justify-content: center;
     align-items: center;
   
+  }
+  @media screen and (min-width: 576px) {
+      .buttonBackground {
+   
+      }
   }
