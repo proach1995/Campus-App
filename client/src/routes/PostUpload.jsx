@@ -9,9 +9,13 @@ import Container from "react-bootstrap/Container";
 
 const PostUpload = () => {
   return (
+
     <Container className="routeContainer">
 
       <h1>Anzeige erstellen</h1>
+      
+      
+      
       <Form>
           <Form.Check inline label="Angebot" type="radio" id="radio" />
           <Form.Check inline label="Gesuch" type="radio" id="radio" />

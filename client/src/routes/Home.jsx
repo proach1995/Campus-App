@@ -5,20 +5,54 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import './route.css';
-import MarktplatzRecent from "./../components/Content/MarktplatzRecent";
-import EventsRecent from "./../components/Content/EventsRecent";
+import PostsRow from "../components/Content/PostsRow";
 
 
 
 
 
 const Home = () => {
+
+  {/*
+  componentDidMount() {
+    fetch('http://localhost:8080/UIServices/rest/dataService/getUserDetails?userName=SIVASO')
+      .then((response) => {
+          return response.json()
+      }).then((json) => {
+          this.setState({data: json})
+      })
+}
+*/}
+
+const data = [
+  {
+    title: 'Ersti',
+    imagesrc: './490.jpg',
+    url: '/meineposts'
+},
+{
+  title: 'Ersti',
+  imagesrc: './490.jpg',
+  url: '/meineposts'
+},
+{
+  title: 'Ersti',
+  imagesrc: './490.jpg',
+  url: '/meineposts'
+},
+
+];
+
+
+  
+
+
   return (
     <div>
     <Container className="routeContainer">
       <Row>
         <Col>
-        <h1>Willkommen zum Marktplatz der Hochschule Kaiserslautern</h1>
+        <h1>Willkommen zur Campusapp der Hochschule Kaiserslautern</h1>
         <p>Willkommen in unserer App. <br/>
             Brauchst du Bücher, Konsolen oder willst wissen welche Events unser Camput bietet? Dann schau mal rein! :) 
         </p>
@@ -33,7 +67,7 @@ const Home = () => {
 
       {/*****           CARDS MARKTPLATZ         **********/}
       
-      <MarktplatzRecent/>
+      <PostsRow data={data}/>
       <div className="buttonBackground " >
         <Button href="/events" className="button">Zu den Events</Button>
       </div>
@@ -42,7 +76,7 @@ const Home = () => {
       </div>
       {/*****           CARDS Events         **********/}
       
-     <EventsRecent/>
+     <PostsRow data={data}/>
      <div className="buttonBackground" >
         <Button href="/events" className="button">Zu den Events</Button>
       </div>
