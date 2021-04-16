@@ -1,19 +1,4 @@
 import React from "react";
-<<<<<<< Updated upstream
-
-
-const Login = () => {
-  return (
-    <div>
-      {/* Add components here*/}
-
-
-    </div>
-  );
-};
-
-export default Login;
-=======
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -52,4 +37,3 @@ const Login = () => {
   };
   
   export default Login;
->>>>>>> Stashed changes

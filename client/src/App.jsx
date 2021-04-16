@@ -5,8 +5,6 @@ import Footer from './components/navigation/Footer';
 import NavigationBars from "./components/navigation/NavigationBars";
 import PostUpload from "./routes/PostUpload";
 import PostDetail from "./routes/PostDetail";
-<<<<<<< Updated upstream
-=======
 import Marktplatz from "./routes/Marktplatz";
 import Events from "./routes/Events";
 import MeinProfil from "./routes/MeinProfil";
@@ -18,7 +16,6 @@ import Login from "./routes/Login";
 import Register from "./routes/Register";
 
 
->>>>>>> Stashed changes
 
 
 
@@ -42,8 +39,6 @@ const App = () => {
               path="/postdetail"
               component={PostDetail}
             />
-<<<<<<< Updated upstream
-=======
             <Route
               exact
               path="/meineposts"
@@ -66,7 +61,6 @@ const App = () => {
             />
             
             
->>>>>>> Stashed changes
             
           </Switch>
         </Router>
