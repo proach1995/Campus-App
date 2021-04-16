@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./routes/Home";
 import Footer from './components/navigation/Footer';
-import NavigationBars from "./components/navigation/NavigationBars";
 import PostUpload from "./routes/PostUpload";
 import PostDetail from "./routes/PostDetail";
 import Marktplatz from "./routes/Marktplatz";
@@ -24,10 +23,25 @@ const App = () => {
   return (
       <div className="">
         <Router>
-        <NavigationBars/>
+      <Sidebar/>
+      <NavbarTop/>
           <Switch>
             <Route exact path="/" component={Home} />
-            
+            <Route
+              exact
+              path="/marktplatz"
+              component={Marktplatz}
+            />
+            <Route
+              exact
+              path="/events"
+              component={Events}
+            />
+            <Route
+              exact
+              path="/meinprofil"
+              component={MeinProfil}
+            />
             <Route
               exact
               path="/postupload"

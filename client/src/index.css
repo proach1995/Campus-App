@@ -7,6 +7,35 @@
   font-family: "Quicksand";
 }
 
+h1 {
+  color: #234565;
+  font-weight: 700;
+  text-align: center;
+}
 
+h2 {
+  color: white;
+  text-align: center;
 
+}
+
+p {
+  text-align: justify;
+}
+.button {
+  color: white;
+      background: #007466;
+      border-color: #007466;
+      height: 2.3em;
+}
+.button:focus {
+  color: white;
+  background: #007466;
+  border-color: #007466;
+}
+.button:hover {
+  color: white;
+  background: #007466;
+  border-color: #007466;
+}
   

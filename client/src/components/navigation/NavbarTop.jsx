@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button'
 
 const NavbarTop = ({isActive},{toggleButton}) => {
   return (
-    <>
+    
 
   <Navbar className="navbar" variant="light">  
     <Navbar.Brand href="#home">
@@ -38,9 +38,9 @@ const NavbarTop = ({isActive},{toggleButton}) => {
       Positioning with offset , sm und md
     
     */}
-
-  <Container >
-    <Row>
+  </Navbar>
+  <Navbar className="navbarSubline">
+    <Row >
       <Col>
         <Dropdown >
             <Dropdown.Toggle className="color dropdown-btn"  id="dropdown-basic">
@@ -65,7 +65,7 @@ const NavbarTop = ({isActive},{toggleButton}) => {
         />
       </Col>
     </Row>
-  </Container> 
+  </Navbar>
 
 </>
   );

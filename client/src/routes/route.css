@@ -1,0 +1,40 @@
+.routeContainer {
+    padding-top: 8em;
+}
+
+.Carousel {
+    width: 100%;
+    height: auto;
+}
+
+
+.card-title {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.card {
+    margin-bottom: 2em;
+    border: 0px;
+}
+.card-body {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0rem;
+    padding-right: 0rem;
+}
+
+.buttonBackground {
+    background-color: #234565;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    width: 100%;
+    height: 5em;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+  }
+  

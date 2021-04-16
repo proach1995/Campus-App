@@ -3,10 +3,10 @@
   .footer-dark {
     padding:50px 0;
     background-color: #185363;
-    position: absolute;
     bottom: 0;
     width: 100%;
     color: white;
+    margin-top: 5em;
   }
   
   .footer-dark h3 {

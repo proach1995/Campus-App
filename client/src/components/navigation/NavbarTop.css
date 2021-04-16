@@ -1,16 +1,40 @@
 
 
-.navbar {
+.navbarStyling{
     
     margin-bottom: 0.5em;
     background: linear-gradient(to right,#1d6a7f,#82b432 0,#1e9650 17%,#0a5a64 45%,#32828c 78%,#28b4dc 100%);
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
     
+    
+}
+.navbar a {
+    text-decoration: none;
+    margin-left: 2rem;
+  }
+
+.navbarSubline {
+    background-color: white;
+    height: 3em;
+    position: absolute;
+    top: 4em;
+    z-index: 999;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media screen and (min-width: 576px) {
+    .navbarSubline {
+        top: 0.5em;
+        z-index: 1000;
+        background-color: transparent;
+        position: fixed;
+    }
 }
 
-.navbarTop {
-    position: fixed;
-    
-}
 
 /* Need to add transition overlay for sidebar for bigger viewports */
 
@@ -19,7 +43,8 @@
     position: fixed;
       right: 10px;
       top: 4px;
-      z-index: 105;
+      z-index: 10001;
+      ;
   }
 
   .dropdown-btn {
