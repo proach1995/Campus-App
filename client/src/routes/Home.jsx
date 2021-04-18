@@ -6,6 +6,9 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import './route.css';
 import PostsRow from "../components/Content/PostsRow";
+import getProducts from "../api/getProducts";
+import {useState, useEffect } from "react";
+
 
 
 
@@ -13,16 +16,26 @@ import PostsRow from "../components/Content/PostsRow";
 
 const Home = () => {
 
-  {/*
-  componentDidMount() {
-    fetch('http://localhost:8080/UIServices/rest/dataService/getUserDetails?userName=SIVASO')
-      .then((response) => {
-          return response.json()
-      }).then((json) => {
-          this.setState({data: json})
-      })
-}
-*/}
+  
+{/*
+
+    useEffect( async() => {
+      console.log("test");
+
+        try {
+          console.log("fail");
+          const response = await getProducts.get('/');
+          console.log(response.data.data.products);
+          const data =response.data.data.products;
+          console.log(data)
+        } catch (err) {}
+      
+    }); 
+
+
+ */}
+  
+
 
 const data = [
   {
@@ -44,7 +57,6 @@ const data = [
 ];
 
 
-  
 
 
   return (
@@ -65,7 +77,8 @@ const data = [
 
       
 
-      {/*****           CARDS MARKTPLATZ         **********/}
+      {/*****           CARDS MARKTPLATZ         *********/}
+  
       
       <PostsRow data={data}/>
       <div className="buttonBackground " >
@@ -75,11 +88,13 @@ const data = [
         <h2>Neues im Marktplatz</h2>
       </div>
       {/*****           CARDS Events         **********/}
+  
       
      <PostsRow data={data}/>
      <div className="buttonBackground" >
         <Button href="/events" className="button">Zu den Events</Button>
       </div>
+    
       </Container>
 
   </div>

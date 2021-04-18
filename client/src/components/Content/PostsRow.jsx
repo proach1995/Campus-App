@@ -12,7 +12,7 @@ import {Link} from 'react-router-dom'
 
 
 const PostsRow = ({data}) => {
-  console.log(data)
+  console.log(data + "is in postsrow")
 
   
 

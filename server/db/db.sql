@@ -1,30 +1,61 @@
-CREATE TABLE reviews (
-    id BIGSERIAL NOT NULL PRIMARY KEY,
-    restaurant_id BIGINT NOT NULL REFERENCES restaurants(id),
-    name VARCHAR(50) NOT NULL,
-    review TEXT NOT NULL,
-    rating INT NOT NULL check(
-        rating >= 1
-        and rating <= 5
-    )
+CREATE TABLE user (
+    userId BIGSERIAL NOT NULL PRIMARY KEY,
+    userName VARCHAR(20) UNIQUE NOT NULL,
+    mailId VARCHAR(320) UNIQUE NOT NULL,
+    birthday DATE,
+
+
 );
-select *
-from restaurants
-    left join(
-        select restaurant_id,
-            count(*),
-            TRUNC(AVG(rating, 1)) as average_rating
-        from reviews
-        group by restaurant_id
-    ) reviews on restaurants.id = reviews.restaurant_id;
+
+CREATE TABLE user_post (
+    userId REFERENCES user(userId) PRIMARY KEY,
+    postId REFERENCES posts(postId)PRIMARY KEY,
+    postDate,
+)
+
+
+CREATE TABLE loginData (
+    registerId BIGSERIAL PRIMARY KEY NOT NULL,
+    userId FOREIGN KEY REFERENCES user(userId),
+
+)
 
 
 
-    CREATE TABLE restaurants (
-        id BIGSERIAL NOT NULL PRIMARY KEY,
-        name VARCHAR(50) NOT NULL,
-        location VARCHAR (50) NOT NULL,
-        price_range INT NOT NULL check (price_range >= 1 and price_range <=5)
-    );
 
-    INSERT INTO restaurants (id, name, location, price_range) values (123, 'macdonalds','new yorks', 3)
+
+CREATE TABLE posts
+postId BIGSERIAL PRIMARY KEY,
+userId REFERENCES user(userId),
+title
+postDescription
+postDate
+price
+priceType --> Fest, VHB , geschenkt, verleih
+imagesrc
+postType --> Angebot & Gesuch
+
+
+
+CREATE TABLE categories
+catId
+catName
+
+<-- Testtabelle -->
+
+CREATE TABLE dataTable (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    title VARCHAR(200) NOT NULL,
+    imagesrc VARCHAR(200),
+    url VARCHAR(100)
+);
+
+INSERT INTO dataTable (
+
+    title, imagesrc, url) values("meme1", "./490.jpg", "/meineposts" );
+
+    INSERT INTO dataTable VALUES
+    ('UA502', './490.jpg', '/meineposts');
+
+    INSERT INTO dataTable (title, imagesrc, url)
+    VALUES ('T_601', './490.jpg', '/meineposts');
