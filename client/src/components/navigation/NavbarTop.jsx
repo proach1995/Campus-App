@@ -3,25 +3,19 @@ import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
 import Dropdown from "react-bootstrap/Dropdown";
 import './NavbarTop.css';
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Nav from 'react-bootstrap/Nav';
+import { Link } from 'react-router-dom';
+
+
 
 const NavbarTop = ({isActive},{toggleButton}) => {
   return (
     <>
 
   <Navbar className="navbarStyling" variant="light">  
-    <Navbar.Brand href="/">
-      <img
-      src="https://pbs.twimg.com/profile_images/603568605796634624/Nq0nXZZA_400x400.jpg"
-      width="30"
-      height="30"
-      className="d-inline-block align-top"
-      alt="React Bootstrap logo"
-    />
-      </Navbar.Brand>
-
+    <a href="/" className="branding">Campus<span className="brandingFat">APP</span></a>
     {/*https://react-bootstrap.github.io/layout/grid/#grid-props 
       Positioning with offset , sm und md
     

@@ -123,13 +123,20 @@
 
 .loginButtons {
   height: 13em;
-  display: block;
-  position: relative;
-  left: 35%;
-  top: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+.login-btn {
+  width: 120px;
+}
+.centerLoginButtons {
+  align-items: center;
+  justify-content: center;
+}
+
 .register-btn {
-  margin-top: 2em;
+  margin-top: 1em;
   background-color: white ;
   color: black;
 }

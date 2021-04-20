@@ -38,3 +38,15 @@
   
   }
   
+.editData {
+    display: flex;
+    align-items: center;
+    vertical-align: center;
+}
+
+.profilSectionWrapper {
+    display: flex;
+    align-items: center;
+    vertical-align: center;
+    justify-content: center;
+}
