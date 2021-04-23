@@ -18,7 +18,7 @@ const Register = () => {
     </Form.Group>
 
     <Form.Group  controlId="formGridPassword">
-      <Form.Label>Password</Form.Label>
+      <Form.Label>Passwort</Form.Label>
       <Form.Control type="password" placeholder="Passwort" />
     </Form.Group>
   </Form.Row>

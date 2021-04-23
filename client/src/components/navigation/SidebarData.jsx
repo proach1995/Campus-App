@@ -2,6 +2,13 @@ import React from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
+import { BsPeopleCircle } from "react-icons/bs";
+import { BsFileArrowUp } from "react-icons/bs";
+import { IoCalendarOutline } from "react-icons/io5";  
+import { IoAddCircleOutline } from "react-icons/io5";
+import { IoEarthOutline } from "react-icons/io5"; 
+import { IoLibraryOutline } from "react-icons/io5";
+import { IoCogSharp } from "react-icons/io5";
 
 export const SidebarData = [
   {
@@ -13,37 +20,37 @@ export const SidebarData = [
   {
     title: 'Marktplatz',
     path: '/marktplatz',
-    icon: <IoIcons.IoIosPaper />,
+    icon: <IoEarthOutline />,
     cName: 'nav-text'
   },
   {
     title: 'Events',
     path: '/events',
-    icon: <IoIcons.IoIosPaper />,
+    icon: <IoCalendarOutline/>,
     cName: 'nav-text'
   },
   {
     title: 'Mein Profil',
     path: '/meinprofil',
-    icon: <IoIcons.IoIosPaper />,
+    icon: <BsPeopleCircle />,
     cName: 'nav-text'
   },
   {
     title: 'Etwas posten',
     path: '/postupload',
-    icon: <IoIcons.IoIosPaper />,
+    icon: <IoAddCircleOutline />,
     cName: 'nav-text'
   },
   {
     title: 'Meine Posts',
     path: '/meineposts',
-    icon: <IoIcons.IoIosPaper />,
+    icon: <IoLibraryOutline />,
     cName: 'nav-text'
   },
   {
   title: 'Einstellungen',
     path: '/Einstellungen',
-    icon: <AiIcons.AiOutlineMail />,
+    icon: <IoCogSharp />,
     cName: 'nav-text'
 }
 ];
