@@ -6,6 +6,7 @@ import './route.css';
 
 const Login = () => {
     return (
+      
       <Container className="routeContainer">
         <h1>Willkommen beim Login!</h1>
           
@@ -19,8 +20,8 @@ const Login = () => {
   </Form.Group>
 
   <Form.Group controlId="formBasicPassword">
-    <Form.Label>Password</Form.Label>
-    <Form.Control type="password" placeholder="Password" />
+    <Form.Label>Passwort</Form.Label>
+    <Form.Control type="password" placeholder="Passwort" />
   </Form.Group>
   <Form.Group controlId="formBasicCheckbox">
     <Form.Check type="checkbox" label="eingeloggt bleiben" />
