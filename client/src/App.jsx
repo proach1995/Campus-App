@@ -9,11 +9,8 @@ import Events from "./routes/Events";
 import MeinProfil from "./routes/MeinProfil";
 import Sidebar from "./components/navigation/Sidebar";
 import NavbarTop from "./components/navigation/NavbarTop";
-import MeinePosts from "./routes/MeinePosts";
 import Einstellungen from "./routes/Einstellungen";
-import Login from "./routes/Login";
-import Register from "./routes/Register";
-
+import Post from "./routes/Post";
 
 
 
@@ -55,26 +52,14 @@ const App = () => {
             />
             <Route
               exact
-              path="/meineposts"
-              component={MeinePosts}
+              path="/post"
+              component={Post}
             />
             <Route
               exact
               path="/einstellungen"
               component={Einstellungen}
             />
-            <Route
-              exact
-              path="/login"
-              component={Login}
-            />
-            <Route
-              exact
-              path="/register"
-              component={Register}
-            />
-            
-            
             
           </Switch>
         </Router>

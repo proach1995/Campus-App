@@ -55,8 +55,10 @@ function Sidebar() {
               </Figure.Caption>
             </Figure>
             <div className="loginButtons" style={{display: isLoggedIn ? '' : 'none' }}>
-              <Button size="lg" href="/login" className="button">Login</Button><br/>
-              <Button href="/register" className="button register-btn">Registrieren</Button>
+              <div className="centerLoginButtons">
+                <Button size="lg" href="/login" className="button login-btn">Login</Button><br/>
+                <Button href="/register" className="button register-btn login-btn">Registrieren</Button>
+              </div>
             </div>
             
 
@@ -64,12 +66,13 @@ function Sidebar() {
             <ul  >
               {SidebarData.map((item, index) => {
                 return (
+                  <Link to={item.path}  >
                   <li key={index} className={item.cName}>
-                    <Link to={item.path}  >
                       {item.icon}
                       <span onClick={toggleButton}>{item.title}</span>
-                    </Link>
                   </li>
+                  </Link>
+
                 );
               })}
             </ul>

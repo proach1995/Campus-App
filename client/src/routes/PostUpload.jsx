@@ -1,6 +1,5 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -22,6 +21,7 @@ const PostUpload = () => {
          
        
 
+          <Form.File id="productimage" label="Titelbild hochladen" />
 
 
         <Form.Group  controlId="formGridEmail">
