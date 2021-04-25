@@ -94,7 +94,7 @@ const MeinProfil = () => {
         <Col>
             <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
                 <Tab eventKey="home" title="Meine Posts">
-                 <PostsRow data={data}/>
+                 {/*<PostsRow data={data}*/}
                 </Tab>
                 <Tab eventKey="profile" title="Bewertungen">
                     <div>Hier könnten ihre Bewertungen stehen</div>
