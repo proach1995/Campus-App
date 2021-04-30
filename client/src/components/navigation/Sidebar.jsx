@@ -6,6 +6,8 @@ import './Sidebar.css';
 import Figure from 'react-bootstrap/Figure';
 import { HamburgerSpring } from 'react-animated-burgers';
 import Button from 'react-bootstrap/Button';
+import LoginPopUp from '../../routes/LoginPopUp';
+import RegisterPopUp from '../../routes/RegisterPopUp';
 
 
 
@@ -16,7 +18,8 @@ import Button from 'react-bootstrap/Button';
 
 function Sidebar() {
  
-  const [isActive, setIsActive] = useState(false)
+  const [isActive, setIsActive] = useState(false);
+
     
   const toggleButton = useCallback(
     () => setIsActive(prevState => !prevState),
@@ -24,6 +27,11 @@ function Sidebar() {
   );
 
   const isLoggedIn = true;
+
+  
+
+  
+  
 
   return (
     <>
@@ -37,6 +45,7 @@ function Sidebar() {
                     />
       </Link>  
       <IconContext.Provider value={{ color: 'white' }}>
+     
 
 
         <nav className={isActive ? 'nav-menu active' : 'nav-menu'}>
@@ -56,8 +65,12 @@ function Sidebar() {
             </Figure>
             <div className="loginButtons" style={{display: isLoggedIn ? '' : 'none' }}>
               <div className="centerLoginButtons">
-                <Button size="lg" href="/login" className="button login-btn">Login</Button><br/>
-                <Button href="/register" className="button register-btn login-btn">Registrieren</Button>
+
+                
+                <LoginPopUp>
+                
+                </LoginPopUp> <br/>
+                <RegisterPopUp></RegisterPopUp>
               </div>
             </div>
             
