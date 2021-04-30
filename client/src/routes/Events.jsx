@@ -1,55 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import PostsRow from "../components/Content/PostsRow";
 import Dropdown from "react-bootstrap/Dropdown";
+import DataServer from "../api/DataServer";
+
 
 
 
 const Events = () => {
 
-  const data = [
-    {
-      title: 'Party auf der Kontrastbühne',
-      imagesrc: './party.jpg',
-      url: '/meineposts'
-  },
-  {
-    title: 'Party auf der Kontrastbühne',
-    imagesrc: './party.jpg',
-    url: '/meineposts'
-},
-{
-  title: 'Party auf der Kontrastbühne',
-  imagesrc: './party.jpg',
-  url: '/meineposts'
-},
-{
-  title: 'Party auf der Kontrastbühne',
-  imagesrc: './party.jpg',
-  url: '/meineposts'
-},
-{
-  title: 'Party auf der Kontrastbühne',
-  imagesrc: './party.jpg',
-  url: '/meineposts'
-},
-{
-  title: 'Party auf der Kontrastbühne',
-  imagesrc: './party.jpg',
-  url: '/meineposts'
-},
-{
-  title: 'Party auf der Kontrastbühne',
-  imagesrc: './party.jpg',
-  url: '/meineposts'
-},
-{
-  title: 'Party auf der Kontrastbühne',
-  imagesrc: './party.jpg',
-  url: '/meineposts'
-},
+  const [posts, setPost] = useState(null);
+
+  useEffect(() =>{
+
+    const getPosts = async ()=>{
+
+      try{
+        console.log("fetching");
+        const latestPosts = await DataServer.get("/Home");
+        //console.log(latestPosts); Klar das es leer ist
+        setPost(latestPosts.data);
+      }catch(err){
+        console.log(err);
+      }
+
+    }
+    getPosts();
+
+  },[]);
   
-  ];
+   useEffect(() =>{
+     if(posts != null){
+      console.log("2. Hook");
+      console.log(posts.postList.post.length);
+     }
+
+  },[posts]);
 
 
   return (
@@ -71,7 +57,11 @@ const Events = () => {
             </Dropdown>
         
        
-      <PostsRow data={data}/>
+            {posts!==null && (
+              <>
+            <PostsRow dataObjects={posts.postList}/>  
+            </>
+            )}
     </Container>
   );
 };

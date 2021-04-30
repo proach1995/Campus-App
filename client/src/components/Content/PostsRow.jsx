@@ -20,7 +20,7 @@ return (
     
     <Container>
       <Row>
-        {dataObjects.post.length !=0 && dataObjects.post.map((postInfo) => {
+        {dataObjects.post.length !==0 && dataObjects.post.map((postInfo) => {
           
               return (
         <Col className="col-6 col-md-6 col-lg-3 card">
@@ -32,8 +32,6 @@ return (
                 </Card.Body>
               </Card>
             </Link>
-            
-          
           </Col>
         );
       })}

@@ -29,10 +29,10 @@ const NavbarTop = ({isActive},{toggleButton}) => {
             Kategorien
             </Dropdown.Toggle>
               <Dropdown.Menu>
-                  <Dropdown.Item href="#/action-1">Bücher</Dropdown.Item>
-                  <Dropdown.Item href="#/action-2">Veranstaltungen</Dropdown.Item>
+                  <Dropdown.Item href="/marktplatz">Marktplatz</Dropdown.Item>
+                  <Dropdown.Item href="/events">Veranstaltungen</Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item href="#/action-3">Etwas Posten</Dropdown.Item>
+                  <Dropdown.Item href="/postupload">Etwas Posten</Dropdown.Item>
               </Dropdown.Menu>
         </Dropdown>
       </Col>

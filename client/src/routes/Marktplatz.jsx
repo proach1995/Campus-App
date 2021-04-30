@@ -1,64 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import PostsRow from "../components/Content/PostsRow";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Dropdown from "react-bootstrap/Dropdown";
+import DataServer from "../api/DataServer";
+
 
 
 
 const Marktplatz = () => {
 
-  const data = [
-    {
-      title: 'Ersti',
-      imagesrc: './490.jpg',
-      url: '/meineposts'
-  },
-  {
-    title: 'Ersti',
-    imagesrc: './490.jpg',
-    url: '/meineposts'
-  },
-  {
-    title: 'Ersti',
-    imagesrc: './490.jpg',
-    url: '/meineposts'
-  },
-  {
-    title: 'Ersti',
-    imagesrc: './490.jpg',
-    url: '/meineposts'
-  },
-  {
-    title: 'Ersti',
-    imagesrc: './490.jpg',
-    url: '/meineposts'
-  },
-  {
-    title: 'Ersti',
-    imagesrc: './490.jpg',
-    url: '/meineposts'
-  },
-  {
-    title: 'Ersti',
-    imagesrc: './490.jpg',
-    url: '/meineposts'
-  },
-  {
-    title: 'Ersti',
-    imagesrc: './490.jpg',
-    url: '/meineposts'
-  },
+  const [posts, setPost] = useState(null);
+
+  useEffect(() =>{
+
+    const getPosts = async ()=>{
+
+      try{
+        console.log("fetching");
+        const latestPosts = await DataServer.get("/Home");
+        //console.log(latestPosts); Klar das es leer ist
+        setPost(latestPosts.data);
+      }catch(err){
+        console.log(err);
+      }
+
+    }
+    getPosts();
+
+  },[]);
   
-  ];
+   useEffect(() =>{
+     if(posts != null){
+      console.log("2. Hook");
+      console.log(posts.postList.post.length);
+     }
+
+  },[posts]);
+
+
 
 
   return (
     <Container className="routeContainer">
       
       {/* https://dowjones.github.io/react-dropdown-tree-select/#/story/with-bootstrap-styles */}
-        <h1>Willkommen zum Marktplatz der Hochschule Kaiserslautern</h1>
+        <h1> Marktplatz </h1>
   
   
             <Dropdown >
@@ -73,8 +61,11 @@ const Marktplatz = () => {
                 </Dropdown.Menu>
             </Dropdown>
        
-       
-      <PostsRow data={data}/>
+            {posts!==null && (
+              <>
+            <PostsRow dataObjects={posts.postList}/>  
+            </>
+            )}
     </Container>
   );
 };

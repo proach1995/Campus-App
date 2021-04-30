@@ -37,9 +37,9 @@ INSERT INTO nutzer(userVorname,userNachname, geburtsDatum, userImage, userBeschr
 );
 
 INSERT INTO post(userId, titel, postImage, kategorie, handelTyp, preis) values(
-    1, 'Testmäher', '490.png', 'gartengeräte', 'Verkauf', 200
+    1, 'Freunde gesucht', './pb.jpg', 'Events', 'Verkauf', 200
 );
 
 INSERT INTO post(userId, titel, postImage, kategorie, handelTyp, preis) values(
-    2, 'Testmäher', '490.png', 'gartengeräte', 'Verkauf', 200
+    2, 'Testmäher', './490.jpg', 'gartengeräte', 'Verkauf', 200
 );

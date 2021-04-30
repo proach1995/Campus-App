@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./routes/Home";
 import Footer from './components/navigation/Footer';
 import PostUpload from "./routes/PostUpload";
-import PostDetail from "./routes/PostDetail";
 import Marktplatz from "./routes/Marktplatz";
 import Events from "./routes/Events";
 import MeinProfil from "./routes/MeinProfil";
@@ -47,8 +46,8 @@ const App = () => {
             
             <Route
               exact
-              path="/postdetail"
-              component={PostDetail}
+              path="/postupload"
+              component={PostUpload}
             />
             <Route
               exact
