@@ -24,8 +24,8 @@ app.get("/Database/Marktplatz/Home", async (req, res) =>{
     const posts = await db.query("select * from post");
     console.log(posts);
     res.status(200).json({
-      
-      postList:{
+      status: "success",
+      postList :{
             post: posts.rows,
       }
     });
@@ -39,19 +39,18 @@ app.get("/Database/Marktplatz/Home", async (req, res) =>{
 
 
 
-// Get all Restaurants
-/*app.get("/api/v1/restaurants", async (req, res) => {
+// Get all postDetail data
+app.get("/Database/Marktplatz/Post/:id", async (req, res) => {
   try {
-    //const results = await db.query("select * from restaurants");
-    const restaurantRatingsData = await db.query(
-      "select * from restaurants left join (select restaurant_id, COUNT(*), TRUNC(AVG(rating),1) as average_rating from reviews group by restaurant_id) reviews on restaurants.id = reviews.restaurant_id;"
+    const postDetail = await db.query(
+      "Select * from post where postId=$1", [req.params.id]
     );
+    console.log("test");
 
     res.status(200).json({
       status: "success",
-      results: restaurantRatingsData.rows.length,
-      data: {
-        restaurants: restaurantRatingsData.rows,
+      postDetail:{
+        post: postDetail.rows[0], 
       },
     });
   } catch (err) {
@@ -60,7 +59,7 @@ app.get("/Database/Marktplatz/Home", async (req, res) =>{
 });
 
 //Get a Restaurant
-app.get("/api/v1/restaurants/:id", async (req, res) => {
+{/*app.get("/api/v1/restaurants/:id", async (req, res) => {
   console.log(req.params.id);
 
   try {
@@ -164,5 +163,5 @@ app.post("/api/v1/restaurants/:id/addReview", async (req, res) => {
     console.log(err);
   }
 });
-*/
+*/}
 

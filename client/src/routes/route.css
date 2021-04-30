@@ -50,3 +50,9 @@
     vertical-align: center;
     justify-content: center;
 }
+
+.modal-dialog {
+    margin-top: 10vh;
+    
+}
+

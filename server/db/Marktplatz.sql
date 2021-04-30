@@ -18,12 +18,13 @@ CREATE TABLE nutzer(
 CREATE TABLE post(
     postId bigint primary key generated always as identity,
     userId bigint references nutzer(userId),
-    titel varchar(50) not null,
-    postImage varchar(100) not null,
-    postDatum date default CURRENT_DATE,
-    kategorie varchar(100) not null,
+    title varchar(50) not null,
+    postDescription varchar(500),
+    postImagePath varchar(100) not null,
+    postDate date default CURRENT_DATE,
+    category varchar(100) not null,
     handelTyp varchar(20) not null,
-    preis int not null
+    price int not null
 );
 
 CREATE TABLE registrie(
@@ -40,6 +41,6 @@ INSERT INTO post(userId, titel, postImage, kategorie, handelTyp, preis) values(
     1, 'Freunde gesucht', './pb.jpg', 'Events', 'Verkauf', 200
 );
 
-INSERT INTO post(userId, titel, postImage, kategorie, handelTyp, preis) values(
-    2, 'Testmäher', './490.jpg', 'gartengeräte', 'Verkauf', 200
+INSERT INTO post(userId, title, postDescription, postImagePath, category, handelTyp, price) values(
+    2, 'Testmäher', 'jkhjkhjkhkjhkjkjhkjhkkj', './490.jpg', 'gartengeräte', 'Verkauf', 200
 );

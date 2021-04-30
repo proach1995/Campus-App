@@ -4,37 +4,35 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
+import { Link } from 'react-router-dom';
 
-function RegisterPopUp() {
-    const [show, setShow] = useState(false);
+
+function RegisterPopUp({show}) {
   
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-  
+    
+
+    const handleClose = () => show = false;
+
     return (
-      <>
-        <Button  className="button register-btn login-btn" variant="primary" onClick={handleShow}>
-          Registrieren
-        </Button>
-  
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Registriere dich!</Modal.Title>
-          </Modal.Header>
+      <>  
+      <div className="modalWrapper">
+      <Modal className="modal" show={show} onHide={handleClose}>
+            <Modal.Header closeButton >
+              <Modal.Title>Registriere dich!</Modal.Title>
+            </Modal.Header>
           <Modal.Body>
-
           <Form>
-          <Form.Row>
-            <Form.Group  controlId="formGridEmail">
-            <Form.Label>E-Mail Adresse</Form.Label>
-            <Form.Control type="email" placeholder="test0001@stud.hs-kl.de" />
-            </Form.Group>
+            <Form.Row>
+              <Form.Group  controlId="formGridEmail">
+              <Form.Label>E-Mail Adresse</Form.Label>
+              <Form.Control type="email" placeholder="test0001@stud.hs-kl.de" />
+              </Form.Group>
 
-            <Form.Group  controlId="formGridPassword">
-            <Form.Label>Passwort</Form.Label>
-            <Form.Control type="password" placeholder="Passwort" />
-            </Form.Group>
-        </Form.Row>
+              <Form.Group  controlId="formGridPassword">
+              <Form.Label>Passwort</Form.Label>
+              <Form.Control type="password" placeholder="Passwort" />
+              </Form.Group>
+          </Form.Row>
 
   
 
@@ -72,9 +70,12 @@ function RegisterPopUp() {
           <Modal.Footer>
             <div className="buttonBackground" >
                 <Button href="/home" className="button">Registrieren</Button>
+                <Button onClick={handleClose} className="button">close</Button>
+
             </div>
           </Modal.Footer>
         </Modal>
+        </div>
       </>
     );
   }

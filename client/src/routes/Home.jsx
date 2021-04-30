@@ -43,24 +43,6 @@ const Home = () => {
 
   },[posts]);
 
-const data = [
-  {
-    title: 'Ersti',
-    imagesrc: './490.jpg',
-    url: '/meineposts'
-},
-{
-  title: 'Ersti',
-  imagesrc: './490.jpg',
-  url: '/meineposts'
-},
-{
-  title: 'Ersti',
-  imagesrc: '../Images/490.jpg',
-  url: '/meineposts'
-},
-
-];
 
   
   return (

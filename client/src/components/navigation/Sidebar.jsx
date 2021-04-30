@@ -6,7 +6,6 @@ import './Sidebar.css';
 import Figure from 'react-bootstrap/Figure';
 import { HamburgerSpring } from 'react-animated-burgers';
 import Button from 'react-bootstrap/Button';
-import LoginPopUp from '../../routes/LoginPopUp';
 import RegisterPopUp from '../../routes/RegisterPopUp';
 
 
@@ -66,11 +65,17 @@ function Sidebar() {
             <div className="loginButtons" style={{display: isLoggedIn ? '' : 'none' }}>
               <div className="centerLoginButtons">
 
-                
-                <LoginPopUp>
-                
-                </LoginPopUp> <br/>
-                <RegisterPopUp></RegisterPopUp>
+              <Link to='/login' onClick={toggleButton}>
+                <Button  className="button login-btn" variant="primary" >
+                    Login
+                  </Button> 
+              </Link>
+                <br/>
+                <Link to='/login' onClick={toggleButton}>
+                  <Button  className="button register-btn login-btn" variant="secondary" >
+                      Registrieren
+                    </Button> 
+                </Link>
               </div>
             </div>
             

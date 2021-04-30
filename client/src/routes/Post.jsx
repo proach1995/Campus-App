@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -8,7 +8,8 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import Button from 'react-bootstrap/Button';
 import Image from "react-bootstrap/esm/Image";
-;
+import DataServer from "../api/DataServer";
+
 
 
 
@@ -18,69 +19,55 @@ import Image from "react-bootstrap/esm/Image";
 const Post = () => {
 
 
-    const data = [
-        {
-          title: 'Ersti',
-          imagesrc: './490.jpg',
-          url: '/meineposts'
-      },
-      {
-        title: 'Ersti',
-        imagesrc: './490.jpg',
-        url: '/meineposts'
-      },
-      {
-        title: 'Ersti',
-        imagesrc: './490.jpg',
-        url: '/meineposts'
-      },
-      {
-        title: 'Ersti',
-        imagesrc: './490.jpg',
-        url: '/meineposts'
-      },
-      {
-        title: 'Ersti',
-        imagesrc: './490.jpg',
-        url: '/meineposts'
-      },
-      {
-        title: 'Ersti',
-        imagesrc: './490.jpg',
-        url: '/meineposts'
-      },
-      {
-        title: 'Ersti',
-        imagesrc: './490.jpg',
-        url: '/meineposts'
-      },
-      {
-        title: 'Ersti',
-        imagesrc: './490.jpg',
-        url: '/meineposts'
-      },
-      
-      ];
+  const [post, setPost] = useState(null);
+
+  useEffect(() =>{
+
+    const getPosts = async ()=>{
+
+      try{
+        console.log("fetching");
+        const postDetail = await DataServer.get("/Post/" + 1);
+        console.log(postDetail);
+        setPost(postDetail.data);
+      }catch(err){
+        console.log(err);
+      }
+
+    }
+    getPosts();
+
+  },[]);
+  
+   useEffect(() =>{
+     if(post != null){
+      console.log("2. Hook");
+      console.log(post.postDetail.post.title);
+     }
+
+  },[post]);
   
 
 
   return (
     <Container className="routeContainer">
     
+    {post!==null && (
+      <>
         <Row>
-            <Image src="pb.jpg" fluid/>
+            <Image src={post.postDetail.post.postImagePath} fluid/>
         </Row>
         <Row>
-            <h1>Title</h1>
+            <h1>{post.postDetail.post.title}</h1>
         </Row>
         <Row>
             <Col>
-                <div>Preis: 25€</div>
-                <div>Datum: 14. Apr.</div>
+                <div>Preis: {post.postDetail.post.price} €</div>
+                <div>Datum: {post.postDetail.post.postDate}</div>
             </Col>
             <Col>
                 <div>
-                    ID:08908907807
+                  {post.postDetail.post.postId}
                 </div>
             </Col>
         </Row>
@@ -88,7 +75,7 @@ const Post = () => {
             <div>
                 <h3>Beschreibung</h3>
                 <p>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                    {post.postDetail.post.postDescription}                
                 </p>
             </div>
         </Row>
@@ -116,7 +103,8 @@ const Post = () => {
             </Figure>
         </Row>
  
-       
+        </>
+    )}
     </Container>
   );
 };

@@ -45,12 +45,6 @@ const App = () => {
               path="/postupload"
               component={PostUpload}
             />
-            
-            <Route
-              exact
-              path="/postupload"
-              component={PostUpload}
-            />
             <Route
               exact
               path="/post"
