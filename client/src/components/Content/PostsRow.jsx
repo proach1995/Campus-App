@@ -23,17 +23,19 @@ return (
         {dataObjects.post.length !=0 && dataObjects.post.map((postInfo) => {
           
               return (
+        
         <Col className="col-6 col-md-6 col-lg-3 card">
             <Link to={'/'}>
               <Card className="  text-center ">
-                <Card.Img variant="top" src={postInfo.postimage} />
+              
+                <Card.Img variant="top" src={postInfo.postimage}/>
                 <Card.Body>
                   <Card.Title>{postInfo.titel}</Card.Title>
                 </Card.Body>
               </Card>
             </Link>
             
-          
+        
           </Col>
         );
       })}

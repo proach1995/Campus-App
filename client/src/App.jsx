@@ -11,6 +11,7 @@ import Sidebar from "./components/navigation/Sidebar";
 import NavbarTop from "./components/navigation/NavbarTop";
 import Einstellungen from "./routes/Einstellungen";
 import Post from "./routes/Post";
+import TestPage from './routes/TestPage';
 
 
 
@@ -59,6 +60,11 @@ const App = () => {
               exact
               path="/einstellungen"
               component={Einstellungen}
+            />
+              <Route
+              exact
+              path="/TestPage"
+              component={TestPage}
             />
             
           </Switch>
