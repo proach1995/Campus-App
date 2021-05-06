@@ -1,22 +1,27 @@
 module.exports = function(req, res, next) {
-  const { email, name, password } = req.body;
+  console.log(req.body);
+  const { username, useremail, userpassword } = req.body;
+  console.log(username + "in validinfo");
+  console.log(useremail );
+  console.log(userpassword );
 
-  function validEmail(userEmail) {
-    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userEmail);
+  //checks if userEmail is really an Email
+  function validEmail(useremail) {
+    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(useremail);
   }
 
   if (req.path === "/register") {
-    console.log(!email.length);
-    if (![email, name, password].every(Boolean)) {
-      return res.json("Missing Credentials");
-    } else if (!validEmail(email)) {
-      return res.json("Invalid Email");
+    
+    if (![useremail, username, userpassword].every(Boolean)) {
+      return res.json("Falsche Zugangsdaten");
+    } else if (!validEmail(useremail)) {
+      return res.json("ungültige Email");
     }
   } else if (req.path === "/login") {
-    if (![email, password].every(Boolean)) {
-      return res.json("Missing Credentials");
-    } else if (!validEmail(email)) {
-      return res.json("Invalid Email");
+    if (![useremail, userpassword].every(Boolean)) { //.every checkt, ob alle Items im Array bool sind
+      return res.json("Falsche Zugangsdaten");
+    } else if (!validEmail(useremail)) {
+      return res.json("Ungültige Email");
     }
   }
 

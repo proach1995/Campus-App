@@ -9,10 +9,11 @@ Fürs erste 3 Einträge die wichtig sind
 /* Vorher Extension installieren: create extension if not exists "uuid-ossp"; */
 CREATE TABLE users(
     userId uuid DEFAULT uuid_generate_v4(),
-    userEmail varchar(255) NOT NULL,
+    userName varchar(255) NOT NULL,
+    userEmail varchar(255) NOT NULL unique,
     userPassword varchar(255) NOT NULL,
     userPrename varchar(20) not null,
-    userName varchar(20) not null,
+    userLastname varchar(20) not null,
     userBirthdate date  not null,
     userImage varchar(100) ,
     userDescription varchar(500),
@@ -43,8 +44,8 @@ CREATE TABLE images(
     FOREIGN KEY (postId) references posts(postId) 
 );
 
-INSERT INTO users(userEmail,userPassword, userPrename, userName, userBirthdate, userImage, userDescription) values(
-    'depy0001@stud.hs-kl.de','Passwort1234','Dennis', 'pyka', TO_DATE('18/09/1995', 'DD.MM.YYYY'),'./pb.jpg','Test' 
+INSERT INTO users(userName, userEmail,userPassword, userPrename, userLastname, userBirthdate, userImage, userDescription) values(
+    'uludag', 'depy0002@stud.hs-kl.de','Passwort1234','Dennis', 'pyka', TO_DATE('18/09/1995', 'DD.MM.YYYY'),'./pb.jpg','Test' 
 );
 
 INSERT INTO posts( postTitle, postCategory, postType, postPriceType, postPrice, postDescription) values(

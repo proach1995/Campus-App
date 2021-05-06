@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const db = require("./db");
+const db = require("./db/index");
 const fileUpload = require('express-fileupload');
 
 //const morgan = require("morgan");
@@ -20,7 +20,13 @@ app.listen(port, () => {
   console.log(`server is up and listening on port ${port}`);
 });
 
+/************** ROUTES ********************/
 
+app.use("/database/marktplatz/authentication", require("./routes/jwtAuth"));
+
+app.use("/database/marktplatz/home", require("./routes/home"));
+
+{/*
 app.get("/Database/Marktplatz/Home", async (req, res) =>{
   //console.log("treffer");
   try{
@@ -36,7 +42,7 @@ app.get("/Database/Marktplatz/Home", async (req, res) =>{
     console.log(err);
   }
 })
-
+*/}
 // Get all postDetail data
 app.get("/Database/Marktplatz/Post/:id", async (req, res) => {
   try {
