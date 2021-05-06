@@ -6,47 +6,49 @@ Fürs erste 3 Einträge die wichtig sind
     -User
 */
 
-
+/* Vorher Extension installieren: create extension if not exists "uuid-ossp"; */
 CREATE TABLE users(
-    userId bigint primary key generated always as identity,
-    userVorname varchar(20) not null,
-    userNachname varchar(20) not null,
-    geburtsDatum date  not null,
-    userImage varchar(100) not null,
-    userDescription varchar(500) not null
+    userId uuid DEFAULT uuid_generate_v4(),
+    userEmail varchar(255) NOT NULL,
+    userPassword varchar(255) NOT NULL,
+    userPrename varchar(20) not null,
+    userName varchar(20) not null,
+    userBirthdate date  not null,
+    userImage varchar(100) ,
+    userDescription varchar(500),
+    primary key (userId)
 );
 
 CREATE TABLE posts(
-    postId bigint primary key generated always as identity,
-    userId bigint references users(userId),
-    postTitle varchar(50) not null,
-    postDatum date default CURRENT_DATE,
+    postId bigint generated always as identity,
+    userId UUID, 
+    postTitle varchar(200) not null,
+    postDate date default CURRENT_DATE,
     postCategory varchar(100) not null,
-    postTradetype varchar(20) not null,
-    postCriterion varchar(20) not null,
+    postType varchar(100) not null,
     postPrice int,
-    postDescription varchar(500)
+    postPriceType varchar(100),
+    postDescription varchar(500),
+    PRIMARY KEY (postId), 
+    FOREIGN KEY (userId) references users(userId)
+
 );
 
-CREATE TABLE registry(
-    eMailId bigint primary key generated always as identity,
-    userId bigint references users(userId),
-    eMail varchar(100) not null unique,
-    userPassword varchar(20) not null
-);
 
 CREATE TABLE images(
-    imageId bigint primary key generated always as identity,
-    postId bigint references posts(postId),
-    imagePath varchar(100) not null
+    imageId bigint generated always as identity,
+    postId bigint,
+    imagePath varchar(100) not null,
+    primary key (imageId),
+    FOREIGN KEY (postId) references posts(postId) 
 );
 
-INSERT INTO users(userVorname,userNachname, geburtsDatum, userImage, userDescription) values(
-    'Dennis','Semke',TO_DATE('18/09/1995', 'DD.MM.YYYY'),'...','Test' 
+INSERT INTO users(userEmail,userPassword, userPrename, userName, userBirthdate, userImage, userDescription) values(
+    'depy0001@stud.hs-kl.de','Passwort1234','Dennis', 'pyka', TO_DATE('18/09/1995', 'DD.MM.YYYY'),'./pb.jpg','Test' 
 );
 
-INSERT INTO posts(userId, postTitle, postCategory, postTradeType, postCriterion, postPrice, postDescription) values(
-    1, 'Freunde gesucht', 'Events', 'Verkauf', 'Angebot', 200, 'Einsam und allein'
+INSERT INTO posts( postTitle, postCategory, postType, postPriceType, postPrice, postDescription) values(
+     'Freunde gesucht', 'Events', 'Verkauf', 'Angebot', 200, 'Einsam und allein'
 );
 
 INSERT INTO posts(userId, postTitle, postCategory, postTradeType, postCriterion, postPrice, postDescription values(
