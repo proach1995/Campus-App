@@ -10,8 +10,46 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+<<<<<<< Updated upstream
 // Get all Restaurants
 app.get("/api/v1/restaurants", async (req, res) => {
+=======
+const port = 3001;
+app.listen(port, () => {
+  console.log(`server is up and listening on port ${port}`);
+});
+
+
+//Login routes
+app.use("/Database/Marktplatz/authentication", require("./routes/jwtAuth"));
+
+app.use("/Database/Marktplatz/home", require("./routes/home"));
+
+
+/*normal routes
+app.get("/Database/Marktplatz/Home", async (req, res) =>{
+  console.log("treffer");
+  try{
+    const posts = await db.query("select * from post");
+    console.log(posts);
+    res.status(200).json({
+      status: "success",
+      postList :{
+            post: posts.rows,
+      }
+    });
+  }catch(err){
+    console.log(err);
+  }
+})
+
+*/
+
+
+
+// Get all postDetail data
+app.get("/Database/Marktplatz/Post/:id", async (req, res) => {
+>>>>>>> Stashed changes
   try {
     //const results = await db.query("select * from restaurants");
     const restaurantRatingsData = await db.query(
