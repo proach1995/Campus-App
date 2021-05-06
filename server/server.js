@@ -2,15 +2,18 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const db = require("./db");
+const fileUpload = require('express-fileupload');
 
-const morgan = require("morgan");
+//const morgan = require("morgan");
 
 
 const app = express();
+const imagePath = "Images/postImages/";
 
 //Middelware
-app.use(cors());
-app.use(express.json());
+app.use(cors());//Cross Origin fehler beheben
+app.use(express.json());//JSON dateien Empfangen zu können
+app.use(fileUpload());//Ein muss um Files zu Empfangen
 
 const port = 3001;
 app.listen(port, () => {
@@ -19,7 +22,7 @@ app.listen(port, () => {
 
 
 app.get("/Database/Marktplatz/Home", async (req, res) =>{
-  console.log("treffer");
+  //console.log("treffer");
   try{
     const posts = await db.query("select * from post");
     console.log(posts);
@@ -33,11 +36,6 @@ app.get("/Database/Marktplatz/Home", async (req, res) =>{
     console.log(err);
   }
 })
-
-
-
-
-
 
 // Get all postDetail data
 app.get("/Database/Marktplatz/Post/:id", async (req, res) => {
@@ -58,8 +56,92 @@ app.get("/Database/Marktplatz/Post/:id", async (req, res) => {
   }
 });
 
+//Post eintrag
+app.post("/Database/Marktplatz/AddPost",async (req, res)=>{
+  console.log(req.body);
+  try{
+      const result = await db.query("INSERT INTO posts(userId, postTitle, postCategory,"+
+                              "postTradeType, postCriterion, postPrice, postDescription) "+
+                              "values($1, $2, $3, $4, $5, $6, $7) returning *",[ req.body.userId,
+                                 req.body.postTitle, req.body.postCategory, req.body.postTradeType,
+                                req.body.postCriterion, req.body.postPrice, req.body.postDescription]);
+      
+                                //Das Ergebnis des Posts zurück senden
+      res.status(200).json({
+        success:true,
+          data: {
+            post: res.rows
+          }
+      });
+      }catch(e){
+        console.error(e);
+      }           
+})
+
+//Bilder Speichern
+app.post("/Database/Marktplatz/UploadImages/:postId", async (req, res) =>{
+  try{
+  
+      let imageFiles = req.files.imageFile;
+      const maxImageIdResponse = await db.query("select max(imageId) from images");
+      let maxNumber;
+      
+      //Suche nach der größten ID nummer
+      if(maxImageIdResponse.rows[0].max == null){
+        maxNumber =0;
+      }
+      else{
+        maxNumber = Number(maxImageIdResponse.rows[0].max);
+      }
+
+      //Ein bild speichern
+      if(imageFiles.length == null){
+        maxNumber = maxNumber +1;
+        const insertedImage = await db.query("INSERT INTO images(postId, imagePath) values($1, $2) returning*",
+                              [req.params.postId,imagePath+maxNumber+imageFiles.name]);
+                    
+        imageFiles.mv("../client/public/"+imagePath+maxNumber+imageFiles.name, err => {
+          //Falls etwas nicht funktioniert
+          if (err) {
+              console.error(err);
+              return res.status(600).send(err);
+            }
+          else{
+            res.status(200).json({
+          success:true
+            });
+          }});
+        }
+
+      //Mehrere Bilder speichern
+      else{
+        for(let i = 0; i< imageFiles.length;i++){
+          maxNumber = maxNumber +1;
+          const insertedImage = await db.query("INSERT INTO images(postId, imagePath) values($1, $2) returning*",
+                                [req.params.postId,imagePath+maxNumber+imageFiles[i].name]);
+                      
+          imageFiles[i].mv("../client/public/"+imagePath+maxNumber+imageFiles[i].name, err => {
+            //Falls etwas nicht funktioniert
+            if (err) {
+                console.error(err);
+                return res.status(600).send(err);
+              }
+            })
+          }
+    
+    res.status(200).json({
+      success:true
+    });
+  }
+  }catch(e){console.error(e);}
+
+})
+
+
+
+
 //Get a Restaurant
-{/*app.get("/api/v1/restaurants/:id", async (req, res) => {
+/*app.get("/api/v1/restaurants/:id", async (req, res) => {
   console.log(req.params.id);
 
   try {
@@ -163,5 +245,5 @@ app.post("/api/v1/restaurants/:id/addReview", async (req, res) => {
     console.log(err);
   }
 });
-*/}
+*/
 
