@@ -61,10 +61,10 @@ app.post("/Database/Marktplatz/AddPost",async (req, res)=>{
   console.log(req.body);
   try{
       const result = await db.query("INSERT INTO posts(userId, postTitle, postCategory,"+
-                              "postTradeType, postCriterion, postPrice, postDescription) "+
+                              "postType, postPriceType, postPrice, postDescription) "+
                               "values($1, $2, $3, $4, $5, $6, $7) returning *",[ req.body.userId,
-                                 req.body.postTitle, req.body.postCategory, req.body.postTradeType,
-                                req.body.postCriterion, req.body.postPrice, req.body.postDescription]);
+                                 req.body.postTitle, req.body.postCategory, req.body.postType,
+                                req.body.postPriceType, req.body.postPrice, req.body.postDescription]);
       
                                 //Das Ergebnis des Posts zurück senden
       res.status(200).json({

@@ -12,7 +12,7 @@ const PostUpload = () => {
   //radio
   const [radioAngebot, setRadioAngebot] = useState(true);
   const [radioGesucht, setRadioGesucht] = useState(false);
-  const [postCriterion, setPostCriterion] = useState("Angebot");
+  const [postCategory, setPostCategory] = useState("Angebot");
 
   //error = 0 wird nicht funktionieren, da neu gerendert wird, wenn das State abgeändert wird
   //Error flags
@@ -22,13 +22,13 @@ const PostUpload = () => {
   const [postTitle, setPostTitle] = useState("");
   
   //Kategorie
-  const [postCategory, setPostCategory] = useState("Marktplatz");
+  const [postType, setPostType] = useState("Marktplatz");
 
   //Preis
   const [postPrice, setPostPrice] = useState(0);
 
   //Preisart
-  const [postTradeType, setPostTradeType] = useState("Festpreis");
+  const [postPriceType, setPostPriceType] = useState("Festpreis");
 
     //Description
   const [postDescription, setDescription] = useState("");
@@ -67,7 +67,7 @@ const PostUpload = () => {
    
     setRadioAngebot(true);
     setRadioGesucht(false);
-    setPostCriterion("Angebot");
+    setPostCategory("Angebot");
     //console.log(criteria);
     }
 
@@ -75,7 +75,7 @@ const PostUpload = () => {
 
     setRadioGesucht(true);
     setRadioAngebot(false);
-    setPostCriterion("Gesucht");
+    setPostCategory("Gesucht");
     //console.log(criteria);
   }
 
@@ -175,17 +175,17 @@ const PostUpload = () => {
       //Post erstellen
       const postResult = await DataServer.post("/AddPost",{
         postTitle: postTitle,
-        userId: 1,                   //hardcode
+        userId: "13ac3797-4cb5-4598-93f5-4678d457364c",                   //hardcode
         postCategory: postCategory,
-        postCriterion: postCriterion,
-        postTradeType: postTradeType,
-        postDescription: postDescription,
-        postPrice: postPrice
+        postType: postType,
+        postPriceType: postPriceType,
+        postPrice: postPrice,
+        postDescription: postDescription
       });
       
       console.log(postResult);
       
-
+      
     //Mit formData die bilder füllen und zum backend Server schicken
     const formData = new FormData();
     let index = 0;
@@ -200,11 +200,11 @@ const PostUpload = () => {
   } 
 
     const headers = {'content-type': 'multipart/form-data'}
-    const res = await DataServer.post("/UploadImages/"+1, formData, {headers}//Header ist ein muss
+    const res = await DataServer.post("/UploadImages/"+2, formData, {headers}//Header ist ein muss
 );
-}
-
   }
+
+}
   return(
     <Container className="routeContainer">
 
@@ -274,7 +274,7 @@ const PostUpload = () => {
 
       <Form.Group controlId="formGridAddress1">
       <Form.Label>Kategorie</Form.Label>
-          <Form.Control as="select" defaultValue="Kategorie" onChange ={(e)=>{setPostCategory(e.target.value)}}>
+          <Form.Control as="select" defaultValue="Kategorie" onChange ={(e)=>{setPostType(e.target.value)}}>
             <option>Marktplatz</option>
             <option>Events</option>
           </Form.Control>
@@ -296,7 +296,7 @@ const PostUpload = () => {
 
         <Form.Group as={Col} controlId="formGridAddress1">
           <Form.Label>Preisart</Form.Label>
-              <Form.Control as="select" defaultValue="Festpreis" onChange={(e) =>{setPostTradeType(e.target.value)}}>
+              <Form.Control as="select" defaultValue="Festpreis" onChange={(e) =>{setPostPriceType(e.target.value)}}>
                 <option value="Festpreis">Festpreis</option>
                 <option value="Verhandelbar">Verhandelbar</option>
                 <option value="Leihen">Leihen</option>
