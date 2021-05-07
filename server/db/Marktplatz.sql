@@ -12,25 +12,27 @@ CREATE TABLE nutzer(
     userNachname varchar(20) not null,
     geburtsDatum date  not null,
     userImage varchar(100) not null,
-    userBeschreibung varchar(500) not null
+    userDescription varchar(500) not null
 );
 
 CREATE TABLE post(
     postId bigint primary key generated always as identity,
     userId bigint references nutzer(userId),
     titel varchar(50) not null,
-    postImage varchar(100) not null,
     postDatum date default CURRENT_DATE,
     kategorie varchar(100) not null,
     handelTyp varchar(20) not null,
-    preis int not null
+    preis int
 );
 
 CREATE TABLE registrie(
     eMailId bigint primary key generated always as identity,
+    userId bigint references nutzer(userId)
     eMail varchar(100) not null unique,
     userPassword varchar(20) not null
 );
+
+
 
 INSERT INTO nutzer(userVorname,userNachname, geburtsDatum, userImage, userBeschreibung) values(
     'Dennis','Semke',TO_DATE('18/09/1995', 'DD.MM.YYYY'),'...','Test' 

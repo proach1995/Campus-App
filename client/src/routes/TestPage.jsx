@@ -20,7 +20,17 @@ const TestPage=()=>{
         id:0
     }]);
 
+ 
+    useEffect(()=>{
+        console.log("ausgeführt")
+        if(imageFiles.length==0){
+            setNoImage(true);
+        }
+        else{
+            setNoImage(false);
+        }
 
+    },[noImage])
     //Submithandler um ein einzelnes Bild hochzuladen
     //IDEE: Das bild wird in FormData gespeichert und zu backend server gesenet und dort gespeichert
     const submitHanlderImage = async e =>{
