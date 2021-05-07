@@ -70,7 +70,7 @@ const Home = ({setAuth},{isAuthenticated}) => {
       localStorage.removeItem("token");
       setAuth(false);
       console.log("Sicher ausgeloggt");
-      {/*toast.success("Logout successfully"); */}
+
     } catch (err) {
       console.error(err.message);
     }
@@ -85,10 +85,10 @@ const Home = ({setAuth},{isAuthenticated}) => {
     <div>
     
     <Container className="routeContainer">
-    <Button  onClick={e => logout(e)}  className="button logout-btn login-btn" variant="secondary" >
+    <Button  onClick={e => logout(e)} href="/home" className="button logout-btn login-btn" variant="secondary" >
                       Logout
             </Button>
-    {/*
+    
     
     {posts!==null && (
       <>
@@ -103,13 +103,13 @@ const Home = ({setAuth},{isAuthenticated}) => {
       <div className="buttonBackground" >
         <h2>Die neuesten Events</h2>
       </div>
-            {/*****           SLIDER         *********
+            {/*****           SLIDER         *********/}
 
 
 
       
 
-      {/*****           CARDS MARKTPLATZ         **********
+      {/*****           CARDS MARKTPLATZ         **********/}
       
      <PostsRow dataObjects={posts.postList}/>
       <div className="buttonBackground " >
@@ -118,7 +118,7 @@ const Home = ({setAuth},{isAuthenticated}) => {
       <div className="buttonBackground" >
         <h2>Neues im Marktplatz</h2>
       </div>
-      {/*****           CARDS Events         **********
+      {/*****           CARDS Events         **********/}
       
       <PostsRow dataObjects={posts.postList}/>  
      <div className="buttonBackground" >
@@ -126,9 +126,7 @@ const Home = ({setAuth},{isAuthenticated}) => {
       </div>
        </>
     )}
-    <Button  onClick={e => logout(e)} style={{display: isLoggedIn ? '' : 'none' }} className="button logout-btn login-btn" variant="secondary" >
-                      Logout
-            </Button>*/}
+    
       </Container>
   
   </div>

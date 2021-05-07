@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import { IconContext } from 'react-icons';
@@ -6,9 +6,7 @@ import './Sidebar.css';
 import Figure from 'react-bootstrap/Figure';
 import { HamburgerSpring } from 'react-animated-burgers';
 import Button from 'react-bootstrap/Button';
-
-
-
+import DataServer from "../api/DataServer";
 
 
 
@@ -16,13 +14,41 @@ import Button from 'react-bootstrap/Button';
 
 function Sidebar({isAuthenticated}, {logout}) {
  
+  {/* Setzt state für das Anzeigen der Sidebar*/}
   const [isActive, setIsActive] = useState(false);
-
-    
   const toggleButton = useCallback(
     () => setIsActive(prevState => !prevState),
      [],
   );
+
+
+  const [user, setUser] = useState(null);
+
+
+  useEffect(() =>{
+
+    const getUser= async ()=>{
+
+      try{
+        console.log("fetching");
+        const userData = await DataServer.get("/user");
+        setUser(userData.data);
+      }catch(err){
+        console.log(err);
+      }
+
+    }
+    getUser();
+
+  },[]);
+  
+   useEffect(() =>{
+     if(user != null){
+      console.log("2. Hook");
+     }
+
+  },[user]);
+
 
 
   return (

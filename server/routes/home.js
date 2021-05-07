@@ -28,6 +28,26 @@ router.get("/Database/Marktplatz/Home", authorize, async (req, res) => {
   }
 });
 
+{/*
+app.get("/Database/Marktplatz/Home", async (req, res) =>{
+  //console.log("treffer");
+  try{
+    const posts = await db.query("select * from post");
+    console.log(posts);
+    res.status(200).json({
+      status: "success",
+      postList :{
+            post: posts.rows,
+      }
+    });
+  }catch(err){
+    console.log(err);
+  }
+})
+*/}
+
+
+
 module.exports = router;
 
 
