@@ -6,6 +6,7 @@ module.exports = function(req, res, next) {
   console.log(userpassword );
 
   //checks if userEmail is really an Email
+  //hier könnte man die Mail nach hskl filtern
   function validEmail(useremail) {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(useremail);
   }

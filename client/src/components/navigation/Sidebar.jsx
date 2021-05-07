@@ -6,7 +6,6 @@ import './Sidebar.css';
 import Figure from 'react-bootstrap/Figure';
 import { HamburgerSpring } from 'react-animated-burgers';
 import Button from 'react-bootstrap/Button';
-import RegisterPopUp from '../../routes/RegisterPopUp';
 
 
 
@@ -15,7 +14,7 @@ import RegisterPopUp from '../../routes/RegisterPopUp';
 
 
 
-function Sidebar() {
+function Sidebar({isAuthenticated}, {logout}) {
  
   const [isActive, setIsActive] = useState(false);
 
@@ -25,12 +24,6 @@ function Sidebar() {
      [],
   );
 
-  const isLoggedIn = true;
-
-  
-
-  
-  
 
   return (
     <>
@@ -49,7 +42,7 @@ function Sidebar() {
 
         <nav className={isActive ? 'nav-menu active' : 'nav-menu'}>
           <div className='nav-menu-items'>
-            <Figure style={{display: isLoggedIn ? 'none' : '' }} className="sidebarProfilSection">
+            <Figure style={{display: isAuthenticated ? '' : 'none' }} className="sidebarProfilSection">
               <Figure.Image className="profilSectionImage"
                 href="/meinprofil"
                 width={120}
@@ -62,7 +55,7 @@ function Sidebar() {
                 Vorname Name Mail Adresse.
               </Figure.Caption>
             </Figure>
-            <div className="loginButtons" style={{display: isLoggedIn ? '' : 'none' }}>
+            <div className="loginButtons" style={{display: isAuthenticated ? 'none' : '' }}>
               <div className="centerLoginButtons">
 
               <Link to='/login' onClick={toggleButton}>
@@ -71,7 +64,7 @@ function Sidebar() {
                   </Button> 
               </Link>
                 <br/>
-                <Link to='/login' onClick={toggleButton}>
+                <Link to='/register' onClick={toggleButton}>
                   <Button  className="button register-btn login-btn" variant="secondary" >
                       Registrieren
                     </Button> 
@@ -81,6 +74,7 @@ function Sidebar() {
             
 
             <div className="divider" />
+            <div className="items">
             <ul  >
               {SidebarData.map((item, index) => {
                 return (
@@ -94,8 +88,13 @@ function Sidebar() {
                 );
               })}
             </ul>
+            </div>
+            <div className="logout-btn-container">
+            <Button  onClick={e => logout(e)} style={{display: isAuthenticated ? '' : 'none' }} className="button logout-btn login-btn" variant="secondary" >
+                      Logout
+            </Button>
+            </div>
             
-
 
 
           </div>

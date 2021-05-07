@@ -11,6 +11,7 @@ const authorize = require("../middleware/authorize");
 //Post funktion gibt token zurück und saved Eingaben in DB
 //validInfo checks if Input Mail is really an mail
 router.post("/register", validInfo, async (req, res) => {
+  console.log("register wird ausgeführt");
   //deconstruct  http request
   const { useremail, username, userpassword, userprename, userlastname, userbirthdate } = req.body;
 
@@ -83,6 +84,7 @@ router.post("/login", validInfo, async (req, res) => {
 //authentification != authorization
 //verifiziert mittels authorize, ob der im Client gespeicherte Token valide ist
 router.post("/verify", authorize, (req, res) => {
+  console.log("verify wird ausgeführt");
   try {
     res.json(true);
   } catch (err) {

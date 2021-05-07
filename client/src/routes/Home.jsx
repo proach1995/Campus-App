@@ -13,7 +13,7 @@ import DataServer from "../api/DataServer";
 
 
 
-const Home = () => {
+const Home = ({setAuth},{isAuthenticated}) => {
 
   const [posts, setPost] = useState(null);
 
@@ -44,12 +44,51 @@ const Home = () => {
   },[posts]);
 
 
+
+
+
+
+  const [name, setName] = useState("");
+
+  const getProfile = async () => {
+    try {
+      const res = await fetch("http://localhost:3001/Database/Marktplatz/home/", {
+        method: "POST",
+        headers: { jwt_token: localStorage.token }
+      });
+
+      const parseData = await res.json();
+      setName(parseData.username);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const logout = async e => {
+    e.preventDefault();
+    try {
+      localStorage.removeItem("token");
+      setAuth(false);
+      console.log("Sicher ausgeloggt");
+      {/*toast.success("Logout successfully"); */}
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    getProfile();
+  }, []);
+
   
   return (
     <div>
-      
-  
+    
     <Container className="routeContainer">
+    <Button  onClick={e => logout(e)}  className="button logout-btn login-btn" variant="secondary" >
+                      Logout
+            </Button>
+    {/*
     
     {posts!==null && (
       <>
@@ -64,11 +103,13 @@ const Home = () => {
       <div className="buttonBackground" >
         <h2>Die neuesten Events</h2>
       </div>
-            {/*****           SLIDER         **********/}
+            {/*****           SLIDER         *********
+
+
 
       
 
-      {/*****           CARDS MARKTPLATZ         **********/}
+      {/*****           CARDS MARKTPLATZ         **********
       
      <PostsRow dataObjects={posts.postList}/>
       <div className="buttonBackground " >
@@ -77,7 +118,7 @@ const Home = () => {
       <div className="buttonBackground" >
         <h2>Neues im Marktplatz</h2>
       </div>
-      {/*****           CARDS Events         **********/}
+      {/*****           CARDS Events         **********
       
       <PostsRow dataObjects={posts.postList}/>  
      <div className="buttonBackground" >
@@ -85,6 +126,9 @@ const Home = () => {
       </div>
        </>
     )}
+    <Button  onClick={e => logout(e)} style={{display: isLoggedIn ? '' : 'none' }} className="button logout-btn login-btn" variant="secondary" >
+                      Logout
+            </Button>*/}
       </Container>
   
   </div>
