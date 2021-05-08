@@ -6,7 +6,7 @@ import './Sidebar.css';
 import Figure from 'react-bootstrap/Figure';
 import { HamburgerSpring } from 'react-animated-burgers';
 import Button from 'react-bootstrap/Button';
-import DataServer from "../api/DataServer";
+import DataServer from "../../api/DataServer";
 
 
 
