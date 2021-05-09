@@ -1,7 +1,9 @@
 {
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express-fileupload": "^1.2.1",
     "file-upload": "*",
+    "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.7"
   }
 }

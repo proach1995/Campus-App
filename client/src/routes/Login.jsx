@@ -31,6 +31,7 @@ const Login = ({setAuth}) => {
       
       {/* Hier muss Axios fetch rein. Frage: Wie macht man 
       einen Axios post request? */}
+      console.log("Dennis: step1");
       const response = await fetch(
         "http://localhost:3001/Database/Marktplatz/authentication/login",
         {
@@ -41,7 +42,7 @@ const Login = ({setAuth}) => {
           body: JSON.stringify(body)
         }
       );
-
+        
       const parseRes = await response.json();
 
       if (parseRes.jwtToken) {
