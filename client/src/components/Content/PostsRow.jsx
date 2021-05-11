@@ -20,15 +20,15 @@ return (
     
     <Container>
       <Row>
-        {dataObjects.post.length !==0 && dataObjects.post.map((postInfo) => {
+        {dataObjects.length !==0 && dataObjects.map((postInfo) => {
           
               return (
         <Col className="col-6 col-md-6 col-lg-3 card">
             <Link to={'/'}>
               <Card className="  text-center ">
-                <Card.Img variant="top" src={postInfo.postimage} />
+                <Card.Img variant="top" src="/.490.png" />
                 <Card.Body>
-                  <Card.Title>{postInfo.titel}</Card.Title>
+                  <Card.Title>{postInfo.posttitle}</Card.Title>
                 </Card.Body>
               </Card>
             </Link>
@@ -37,6 +37,7 @@ return (
       })}
       </Row>
     </Container>
+    
   );
 };
 

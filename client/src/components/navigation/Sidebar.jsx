@@ -12,7 +12,7 @@ import DataServer from "../../api/DataServer";
 
 
 
-function Sidebar({isAuthenticated}, {logout}) {
+function Sidebar({isAuthenticated, logout}) {
  
   {/* Setzt state für das Anzeigen der Sidebar*/}
   const [isActive, setIsActive] = useState(false);
@@ -30,8 +30,8 @@ function Sidebar({isAuthenticated}, {logout}) {
     const getUser= async ()=>{
 
       try{
-        console.log("fetching");
-        const userData = await DataServer.get("/user");
+        console.log("fetching in Sidebar with userdata");
+        const userData = await DataServer.get("/user/");
         setUser(userData.data);
       }catch(err){
         console.log(err);

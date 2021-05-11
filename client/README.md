@@ -54,6 +54,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/an
 ### Making a Progressive Web App
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+https://dev.to/codicacom/how-to-create-a-progressive-web-application-with-react-539o
 
 ### Advanced Configuration
 

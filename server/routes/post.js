@@ -1,11 +1,11 @@
 const router = require("express").Router();
 const authorize = require("../Middleware/authorize");
-const pool = require("../db/index");
+const db = require("../db/index");
 
 // Get all postDetail data
 
 
-router.get("/Database/Marktplatz/Post/:id", authorize, async (req, res) => {
+router.get("/:id", async (req, res) => {
     try {
       const postDetail = await db.query(
         "Select * from post where postId=$1", [req.params.id]
@@ -24,9 +24,26 @@ router.get("/Database/Marktplatz/Post/:id", authorize, async (req, res) => {
   });
 
 
+  // Alle Posts fetchen
+  router.get("/allposts", async (req, res) =>{
+    //console.log("treffer");
+    try{
+      const posts = await db.query("select * from post");
+      console.log(posts);
+      res.status(200).json({
+        status: "success",
+        postList :{
+              post: posts.rows,
+        }
+      });
+    }catch(err){
+      console.log(err);
+    }
+  })
+
 
   //Post eintrag
-router.post("/Database/Marktplatz/AddPost", authorize, async (req, res)=>{
+router.post("/AddPost", async (req, res)=>{
     console.log(req.body);
     try{
         const result = await db.query("INSERT INTO posts(userId, postTitle, postCategory,"+
