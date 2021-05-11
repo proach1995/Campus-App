@@ -209,7 +209,7 @@ const PostUpload = () => {
     <Container className="routeContainer">
 
       <h1>Anzeige erstellen</h1>    
-
+      
       <Form>
           <Form.Check inline label="Angebot"
           type="radio"

@@ -114,10 +114,10 @@ const App = () => {
               exact
               path="/postupload"
               render={props =>
-                !isAuthenticated ? (
-                  <Login {...props} setAuth={setAuth} />
+                isAuthenticated ? (
+                  <PostUpload {...props} setAuth={setAuth} />
                 ) : (
-                  <Redirect to="/postupload" />
+                  <Redirect to="/" />
                 )
               }
             />
