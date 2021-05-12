@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const authorize = require("../Middleware/authorize");
 const pool = require("../db/index");
+const imagePath = "Images/postImages/";
 
 //Bilder Speichern
 router.post("/Database/Marktplatz/UploadImages/:postId", async (req, res) =>{

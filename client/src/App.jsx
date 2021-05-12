@@ -70,6 +70,7 @@ const App = () => {
       }
     };
   
+    {/* muss eine Callbackfunktion sein*/}
     const logout = async e => {
       e.preventDefault();
       try {
@@ -89,7 +90,7 @@ const App = () => {
 
   return (
       <div className="">
-        <Router>
+    <Router>
       <Sidebar isAuthenticated={isAuthenticated} logout={logout}/>
       <NavbarTop/>
           <Switch>
@@ -113,10 +114,10 @@ const App = () => {
               exact
               path="/postupload"
               render={props =>
-                !isAuthenticated ? (
-                  <Login {...props} setAuth={setAuth} />
+                isAuthenticated ? (
+                  <PostUpload {...props} setAuth={setAuth} />
                 ) : (
-                  <Redirect to="/postupload" />
+                  <Redirect to="/" />
                 )
               }
             />
@@ -137,7 +138,7 @@ const App = () => {
                 !isAuthenticated ? (
                   <Login {...props} setAuth={setAuth} />
                 ) : (
-                  <Redirect to="/home" />
+                  <Redirect to="/" />
                 )
               }
 
@@ -149,7 +150,7 @@ const App = () => {
                 !isAuthenticated ? (
                   <Register {...props} setAuth={setAuth} />
                 ) : (
-                  <Redirect to="/home" />
+                  <Redirect to="/" />
                 )
               }
             />

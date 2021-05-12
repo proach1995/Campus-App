@@ -15,54 +15,26 @@ import DataServer from "../api/DataServer";
 
 const Home = ({setAuth},{isAuthenticated}) => {
 
-  const [posts, setPost] = useState(null);
+  const [posts, setPosts] = useState([]);
 
-  useEffect(() =>{
-
-    const getPosts = async ()=>{
-
-      try{
-        console.log("fetching");
-        const latestPosts = await DataServer.get("/Home");
-        //console.log(latestPosts); Klar das es leer ist
-        setPost(latestPosts.data);
-      }catch(err){
-        console.log(err);
-      }
-
-    }
-    getPosts();
-
-  },[]);
-  
-   useEffect(() =>{
-     if(posts != null){
-      console.log("2. Hook");
-      console.log(posts.postList.post.length);
-     }
-
-  },[posts]);
-
-
-
-
-
-
-  const [name, setName] = useState("");
-
-  const getProfile = async () => {
+  const getPosts = async () => {
     try {
-      const res = await fetch("http://localhost:3001/Database/Marktplatz/home/", {
-        method: "POST",
-        headers: { jwt_token: localStorage.token }
-      });
-
-      const parseData = await res.json();
-      setName(parseData.username);
+      console.log("getPosts wird ausgeführt");
+      const res = await DataServer.get("/Home", {
+        headers: {'jwt_token': localStorage.token}
+      })
+      console.log("fetching from home");
+      console.log(res.data.postList);
+      setPosts(res.data.postList.post);
     } catch (err) {
       console.error(err.message);
     }
   };
+
+  useEffect(() => {
+    console.log("getPosts wird ausgeführt im UseEffekt")
+    getPosts();
+  }, []);
 
   const logout = async e => {
     e.preventDefault();
@@ -76,16 +48,13 @@ const Home = ({setAuth},{isAuthenticated}) => {
     }
   };
 
-  useEffect(() => {
-    getProfile();
-  }, []);
-
+ 
   
   return (
     <div>
     
     <Container className="routeContainer">
-    <Button  onClick={e => logout(e)} href="/home" className="button logout-btn login-btn" variant="secondary" >
+    <Button  onClick={e => logout(e)} href="/" className="button logout-btn login-btn" variant="secondary" >
                       Logout
             </Button>
     
@@ -103,7 +72,6 @@ const Home = ({setAuth},{isAuthenticated}) => {
       <div className="buttonBackground" >
         <h2>Die neuesten Events</h2>
       </div>
-            {/*****           SLIDER         *********/}
 
 
 
@@ -111,16 +79,16 @@ const Home = ({setAuth},{isAuthenticated}) => {
 
       {/*****           CARDS MARKTPLATZ         **********/}
       
-     <PostsRow dataObjects={posts.postList}/>
-      <div className="buttonBackground " >
+      <PostsRow dataObjects={posts}/>  
+     <div className="buttonBackground " >
         <Button href="/events" className="button">Zu den Events</Button>
       </div>
       <div className="buttonBackground" >
         <h2>Neues im Marktplatz</h2>
       </div>
-      {/*****           CARDS Events         **********/}
+      {/*****           CARDS Events         ***********/}
       
-      <PostsRow dataObjects={posts.postList}/>  
+     {/*} <PostsRow dataObjects={posts}/>  */}
      <div className="buttonBackground" >
         <Button href="/events" className="button">Zu den Events</Button>
       </div>

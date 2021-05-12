@@ -8,7 +8,6 @@ const fileUpload = require('express-fileupload');
 
 
 const app = express();
-const imagePath = "Images/postImages/";
 
 //Middelware
 app.use(cors());//Cross Origin fehler beheben
@@ -24,11 +23,12 @@ app.listen(port, () => {
 
 app.use("/database/marktplatz/authentication", require("./routes/jwtAuth"));
 
-app.use("/database/marktplatz/home", require("./routes/home"));
+app.use("/Database/Marktplatz/Home", require("./routes/home"));
 
-app.use("/database/marktplatz/Post/:id", require("./routes/post"));
+app.use("/Database/Marktplatz/Post", require("./routes/post"));
 
-app.use("/database/marktplatz/addpost", require("./routes/post"));
+app.use("/Database/Marktplatz/User", require("./routes/user"));
+
 
 
 
