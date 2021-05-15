@@ -11,25 +11,29 @@ import DataServer from "../api/DataServer";
 
 const Marktplatz = () => {
 
-  const [posts, setPost] = useState(null);
+  const [posts, setPosts] = useState(null);
 
-  useEffect(() =>{
 
-    const getPosts = async ()=>{
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await DataServer.get("/Post/allposts");
+        console.log(response.data);
 
-      try{
-        console.log("fetching");
-        const latestPosts = await DataServer.get("/Home");
-        //console.log(latestPosts); Klar das es leer ist
-        setPost(latestPosts.data);
-      }catch(err){
+        setPosts(response.data.postDetail.post);
+      } catch (err) {
         console.log(err);
+        console.log("FetchPosts hat nicht funktioniert");
       }
+    };
 
-    }
-    getPosts();
+    fetchPosts();
+  }, []);
 
-  },[]);
+
+
+console.log(posts);
+
   
    useEffect(() =>{
      if(posts != null){

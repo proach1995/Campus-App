@@ -107,7 +107,7 @@ const App = () => {
             />
             <Route
               exact
-              path="/meinprofil"
+              path="/user/:userid"
               component={MeinProfil}
             />
             <Route
@@ -123,7 +123,7 @@ const App = () => {
             />
             <Route
               exact
-              path="/post"
+              path="/post/:postid"
               component={Post}
             />
             <Route

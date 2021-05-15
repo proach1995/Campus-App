@@ -22,34 +22,6 @@ function Sidebar({isAuthenticated, logout}) {
   );
 
 
-  const [user, setUser] = useState(null);
-
-
-  useEffect(() =>{
-
-    const getUser= async ()=>{
-
-      try{
-        console.log("fetching in Sidebar with userdata");
-        const userData = await DataServer.get("/user/");
-        setUser(userData.data);
-      }catch(err){
-        console.log(err);
-      }
-
-    }
-    getUser();
-
-  },[]);
-  
-   useEffect(() =>{
-     if(user != null){
-      console.log("2. Hook");
-     }
-
-  },[user]);
-
-
 
   return (
     <>
@@ -74,7 +46,7 @@ function Sidebar({isAuthenticated, logout}) {
                 width={120}
                 height={130}
                 alt="171x180"
-                src="./pb.jpg"
+                src="../pb.jpg"
                 roundedCircle
               />
               <Figure.Caption className="profilSectionCaption">

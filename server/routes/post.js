@@ -2,13 +2,13 @@ const router = require("express").Router();
 const authorize = require("../Middleware/authorize");
 const db = require("../db/index");
 
-// Get all postDetail data
 
-
-router.get("/:id", async (req, res) => {
+// Bestimmten Post fetchen
+router.get("/:postid", async (req, res) => {
+  console.log(req.params.postid + " is param");
     try {
       const postDetail = await db.query(
-        "Select * from post where postId=$1", [req.params.id]
+        "Select * from posts where postId=$1", [req.params.postid]
       );
       console.log("test");
   
@@ -28,7 +28,7 @@ router.get("/:id", async (req, res) => {
   router.get("/allposts", async (req, res) =>{
     //console.log("treffer");
     try{
-      const posts = await db.query("select * from post");
+      const posts = await db.query("select * from posts");
       console.log(posts);
       res.status(200).json({
         status: "success",
@@ -42,7 +42,7 @@ router.get("/:id", async (req, res) => {
   })
 
 
-  //Post eintrag
+  //Post hinzufügen
 router.post("/AddPost", async (req, res)=>{
     console.log(req.body);
     try{
@@ -63,5 +63,11 @@ router.post("/AddPost", async (req, res)=>{
           console.error(e);
         }           
   })
+
+//Post updaten
+
+//Post löschen
+
+
 
   module.exports = router;
