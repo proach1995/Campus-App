@@ -2,15 +2,38 @@ const router = require("express").Router();
 const authorize = require("../Middleware/authorize");
 const db = require("../db/index");
 
-router.get("/", authorize, async (req, res) => {
+router.post("/Offerings", authorize, async (req, res) => {
   try {   
-    console.log("Home wird ausgeführt");
-    const posts = await db.query("select * from posts;");
-    console.log(posts);
+    //console.log("Home wird ausgeführt");
+    const resOfferings = await db.query("select * from posts p inner join images i on"+
+                                " p.postid =i.postid where p.postcategory='Angebot'"+
+                                " order by p.postdate desc limit 6");
+    //console.log(resOfferings);
     res.status(200).json({
       status: "success",
-      postList :{
-            post: posts.rows,
+      offeringList :{
+            offer: resOfferings.rows,
+      }
+    });
+    
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+
+router.post("/Events", authorize, async (req, res) => {
+  try {   
+    //console.log("Home wird ausgeführt");
+    const resEvents = await db.query("select * from posts p inner join images i on"+
+                                " p.postid =i.postid where p.postcategory='Events'"+
+                                " order by p.postdate desc limit 6");
+    //console.log(resEvents);
+    res.status(200).json({
+      status: "success",
+      eventList :{
+            event: resEvents.rows,
       }
     });
     

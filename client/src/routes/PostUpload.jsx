@@ -173,9 +173,9 @@ const PostUpload = () => {
     if(errorFlag == false){
     
       //Post erstellen
-      const postResult = await DataServer.post("/AddPost",{
+      const postResult = await DataServer.post("/Post/AddPost",{
         postTitle: postTitle,
-        userId: "13ac3797-4cb5-4598-93f5-4678d457364c",                   //hardcode
+        userId: "d0d5efe5-fdb7-4daa-a574-fb2224ee4bd9",                 //hardcode meine UserID
         postCategory: postCategory,
         postType: postType,
         postPriceType: postPriceType,
@@ -183,7 +183,8 @@ const PostUpload = () => {
         postDescription: postDescription
       });
       
-      console.log(postResult);
+      //console.log("results");
+      //console.log(postResult.data.data.post[0].postid);
       
       
     //Mit formData die bilder füllen und zum backend Server schicken
@@ -200,7 +201,9 @@ const PostUpload = () => {
   } 
 
     const headers = {'content-type': 'multipart/form-data'}
-    const res = await DataServer.post("/UploadImages/"+2, formData, {headers}//Header ist ein muss
+    const res = await DataServer.post("/Upload/PostImages/"+
+                                postResult.data.data.post[0].postid,
+                                 formData, {headers}//Header ist ein muss
 );
   }
 

@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import { IconContext } from 'react-icons';
 import './Sidebar.css';
@@ -14,6 +14,7 @@ import DataServer from "../../api/DataServer";
 
 function Sidebar({isAuthenticated, logout}) {
  
+  let history = useHistory();
   {/* Setzt state für das Anzeigen der Sidebar*/}
   const [isActive, setIsActive] = useState(false);
   const toggleButton = useCallback(
@@ -24,6 +25,14 @@ function Sidebar({isAuthenticated, logout}) {
 
   const [user, setUser] = useState(null);
 
+const logoutHandler =(e) =>{
+
+  logout(e);
+
+  //History muss in einem componenten benutzt werden und nicht in der App
+  history.push("/login");
+
+}
 
   useEffect(() =>{
 
@@ -42,12 +51,6 @@ function Sidebar({isAuthenticated, logout}) {
 
   },[]);
   
-   useEffect(() =>{
-     if(user != null){
-      console.log("2. Hook");
-     }
-
-  },[user]);
 
 
 
@@ -116,7 +119,7 @@ function Sidebar({isAuthenticated, logout}) {
             </ul>
             </div>
             <div className="logout-btn-container">
-            <Button  onClick={e => logout(e)} style={{display: isAuthenticated ? '' : 'none' }} className="button logout-btn login-btn" variant="secondary" >
+            <Button  onClick={(e) => logoutHandler(e)} style={{display: isAuthenticated ? '' : 'none' }} className="button logout-btn login-btn" variant="secondary" >
                       Logout
             </Button>
             </div>

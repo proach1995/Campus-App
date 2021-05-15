@@ -53,10 +53,11 @@ router.post("/AddPost", async (req, res)=>{
                                   req.body.postPriceType, req.body.postPrice, req.body.postDescription]);
         
                                   //Das Ergebnis des Posts zurück senden
+        //console.log(result.rows);
         res.status(200).json({
           success:true,
             data: {
-              post: res.rows
+              post: result.rows
             }
         });
         }catch(e){

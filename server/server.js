@@ -21,7 +21,7 @@ app.listen(port, () => {
 
 /************** ROUTES ********************/
 
-app.use("/database/marktplatz/authentication", require("./routes/jwtAuth"));
+app.use("/database/marktplatz/Authentication", require("./routes/jwtAuth"));
 
 app.use("/Database/Marktplatz/Home", require("./routes/home"));
 
@@ -29,15 +29,7 @@ app.use("/Database/Marktplatz/Post", require("./routes/post"));
 
 app.use("/Database/Marktplatz/User", require("./routes/user"));
 
-
-
-
-
-
-
-
-
-
+app.use("/Database/Marktplatz/Upload", require("./routes/fileupload"));
 
 
 

@@ -15,25 +15,39 @@ import DataServer from "../api/DataServer";
 
 const Home = ({setAuth},{isAuthenticated}) => {
 
-  const [posts, setPosts] = useState([]);
+  //In den States werden die Angebote und Events gespeichert
+  const [offerings, setOfferings] = useState([]);
+  const [events, setEvents] = useState([]);
 
-  const getPosts = async () => {
+  const getOffers = async () => {
     try {
-      console.log("getPosts wird ausgeführt");
-      const res = await DataServer.get("/Home", {
-        headers: {'jwt_token': localStorage.token}
-      })
-      console.log("fetching from home");
-      console.log(res.data.postList);
-      setPosts(res.data.postList.post);
+      //console.log("getPosts wird ausgeführt");
+      const resOfferings = await DataServer.post("/Home/Offerings", {jwt_token:localStorage.token})
+      
+      //console.log("fetching from offer");
+      //console.log(resOfferings.data);
+      setOfferings(resOfferings.data.offeringList.offer);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const getEvents = async () => {
+    try {
+      //console.log("getPosts wird ausgeführt");
+      const resEvents = await DataServer.post("/Home/Events", {jwt_token:localStorage.token})
+      //console.log("fetching from events");
+      //console.log(resEvents.data);
+      setEvents(resEvents.data.eventList.event);
     } catch (err) {
       console.error(err.message);
     }
   };
 
   useEffect(() => {
-    console.log("getPosts wird ausgeführt im UseEffekt")
-    getPosts();
+    //console.log("getPosts wird ausgeführt im UseEffekt")
+    getOffers();
+    getEvents();
   }, []);
 
   const logout = async e => {
@@ -59,7 +73,7 @@ const Home = ({setAuth},{isAuthenticated}) => {
             </Button>
     
     
-    {posts!==null && (
+    
       <>
       <Row>
         <Col>
@@ -79,7 +93,7 @@ const Home = ({setAuth},{isAuthenticated}) => {
 
       {/*****           CARDS MARKTPLATZ         **********/}
       
-      <PostsRow dataObjects={posts}/>  
+      <PostsRow postElement={offerings}/>  
      <div className="buttonBackground " >
         <Button href="/events" className="button">Zu den Events</Button>
       </div>
@@ -88,12 +102,11 @@ const Home = ({setAuth},{isAuthenticated}) => {
       </div>
       {/*****           CARDS Events         ***********/}
       
-     {/*} <PostsRow dataObjects={posts}/>  */}
+     { <PostsRow postElement={events}/>  }
      <div className="buttonBackground" >
         <Button href="/events" className="button">Zu den Events</Button>
       </div>
        </>
-    )}
     
       </Container>
   

@@ -83,7 +83,7 @@ router.post("/login", validInfo, async (req, res) => {
 });
 //authentification != authorization
 //verifiziert mittels authorize, ob der im Client gespeicherte Token valide ist
-router.post("/verify", authorize, (req, res) => {
+router.post("/Verify", authorize, (req, res) => {
   console.log("verify wird ausgeführt");
   try {
     res.json(true);
