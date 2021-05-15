@@ -5,6 +5,8 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import {Link} from 'react-router-dom';
+import { useParams } from "react-router-dom";
+
 
 const PostsRow = ({postElement}) => {
 
@@ -27,6 +29,7 @@ const PostsRow = ({postElement}) => {
   var postImagesHelper = [];
   const [postImages, setPostImages] = useState([]);
   
+
 
     useEffect(()=>{
 
@@ -108,6 +111,7 @@ const PostsRow = ({postElement}) => {
         {postImages !=null && postImages.map((imageInfo, index) => {
           
               return (
+
         <div key = {index}>
         <Col className="col-6 col-md-6 col-lg-3 card" >
             <Link to={'/'}>

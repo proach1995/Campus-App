@@ -54,6 +54,7 @@ const logoutHandler =(e) =>{
 
 
 
+
   return (
     <>
       
@@ -77,7 +78,7 @@ const logoutHandler =(e) =>{
                 width={120}
                 height={130}
                 alt="171x180"
-                src="./pb.jpg"
+                src="../pb.jpg"
                 roundedCircle
               />
               <Figure.Caption className="profilSectionCaption">

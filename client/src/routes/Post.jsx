@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -18,56 +19,55 @@ import DataServer from "../api/DataServer";
 
 const Post = () => {
 
-
+  const { postid } = useParams();
   const [post, setPost] = useState(null);
+  console.log("postid: " + postid);
 
-  useEffect(() =>{
 
-    const getPosts = async ()=>{
 
-      try{
-        console.log("fetching");
-        const postDetail = await DataServer.get("/Post/" + 1);
-        console.log(postDetail);
-        setPost(postDetail.data);
-      }catch(err){
+  useEffect(() => {
+    const fetchPost= async () => {
+      try {
+        const response = await DataServer.get(`/Post/${postid}`);
+        console.log(response.data.postDetail.post);
+
+        setPost(response.data.postDetail.post);
+      } catch (err) {
         console.log(err);
+        console.log("FetchPost hat nicht funktioniert");
       }
+    };
 
-    }
-    getPosts();
+    fetchPost();
+  }, []);
 
-  },[]);
-  
-   useEffect(() =>{
-     if(post != null){
-      console.log("2. Hook");
-      console.log(post.postDetail.post.title);
-     }
 
-  },[post]);
-  
+
+console.log(post);
+
+
+
 
 
   return (
     <Container className="routeContainer">
     
     {post!==null && (
-      <>
+    <> 
         <Row>
-            <Image src={post.postDetail.post.postImagePath} fluid/>
+            <Image src="./490.jpg" fluid/>
         </Row>
         <Row>
-            <h1>{post.postDetail.post.title}</h1>
+            <h1>{post.posttitle}</h1>
         </Row>
         <Row>
             <Col>
-                <div>Preis: {post.postDetail.post.price} €</div>
-                <div>Datum: {post.postDetail.post.postDate}</div>
+                <div>Preis:  {post.postprice}€</div>
+                <div>Datum: {post.postdate}</div>
             </Col>
             <Col>
                 <div>
-                  {post.postDetail.post.postId}
+                  Postid: {post.postid}
                 </div>
             </Col>
         </Row>
@@ -75,7 +75,7 @@ const Post = () => {
             <div>
                 <h3>Beschreibung</h3>
                 <p>
-                    {post.postDetail.post.postDescription}                
+                  {post.postdescription}
                 </p>
             </div>
         </Row>
@@ -102,9 +102,8 @@ const Post = () => {
               
             </Figure>
         </Row>
- 
         </>
-    )}
+ )} 
     </Container>
   );
 };

@@ -50,17 +50,6 @@ const Home = ({setAuth},{isAuthenticated}) => {
     getEvents();
   }, []);
 
-  const logout = async e => {
-    e.preventDefault();
-    try {
-      localStorage.removeItem("token");
-      setAuth(false);
-      console.log("Sicher ausgeloggt");
-
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
 
  
   
@@ -68,10 +57,7 @@ const Home = ({setAuth},{isAuthenticated}) => {
     <div>
     
     <Container className="routeContainer">
-    <Button  onClick={e => logout(e)} href="/" className="button logout-btn login-btn" variant="secondary" >
-                      Logout
-            </Button>
-    
+   
     
     
       <>
