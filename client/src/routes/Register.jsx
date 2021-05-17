@@ -118,16 +118,18 @@ const Register = ({setAuth}) => {
             </Form.Group>
 
             <Form.Group  controlId="Userpassword">
-              <Form.Label>Passwort</Form.Label>
+              <Form.Label htmlFor="inputPassword5">Passwort</Form.Label>
               <Form.Control 
                 required
                 type="password" 
                 name="userpassword"
+                id = " inputPassword5 "
                 placeholder="Passwort"
+                aria-descriptionby = "passwordHelpBlock"
                 value={userpassword}
                 onChange={e => onChange(e)}
               />
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Text id = " inputPassword5 " muted>Dein Passwort muss zwischen 8 und 20 Zeilen sein.</Form.Text>
                <Form.Control.Feedback type="invalid">
               Du musst ein Passwort eingeben
             </Form.Control.Feedback>
