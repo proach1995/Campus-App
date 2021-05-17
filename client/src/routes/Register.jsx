@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import './route.css';
 
 
+
 const Register = ({setAuth}) => {
 
   {/* Werte mit State in Input Objekt initialisieren*/}
@@ -65,20 +66,52 @@ const Register = ({setAuth}) => {
     }
   };
 
+
+
+  //Register Validation 
+  function validEmail(useremail) {
+    return /^[a-zA-Z]{4}\d{4}@stud.hs-kl.de/.test(useremail);
+  }
+ 
+    const [validated, setValidated] = useState(false);
+  
+    const handleSubmit = (event) => {
+      const form = event.currentTarget;
+      if (form.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+      } if (!validEmail(useremail))  {
+        alert("Bitte gebe eine richtige Hochschuladresse ein!");
+        
+        
+      } else {
+        alert("Richtige E-Mailadresse");
+        console.log(useremail);
+        console.log(useremail);
+      }
+  
+      setValidated(true);
+    }
+ 
     return (
       <Container className="routeContainer">
           <h1>Registriere dich!</h1>
-       <Form onSubmit={onSubmitForm}>
+       <Form noValidate validated={validated} onSubmit={onSubmitForm , handleSubmit}>
           <Form.Row>
             <Form.Group  controlId="Useremail">
               <Form.Label>E-Mail Adresse</Form.Label>
               <Form.Control 
+                required
                 type="email" 
                 name="useremail"
                 placeholder="test0001@stud.hs-kl.de" 
                 value={useremail}
                 onChange={e => onChange(e)}
               />
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">
+              Deine E-Mailadresse ist keine Hochschuladresse
+            </Form.Control.Feedback>
               <Form.Text id="passwordHelpBlock" muted>
               Es muss sich um eine offizielle E-Mailadresse der Hochschule Kaiserslautern handeln.
             </Form.Text>
@@ -87,49 +120,74 @@ const Register = ({setAuth}) => {
             <Form.Group  controlId="Userpassword">
               <Form.Label>Passwort</Form.Label>
               <Form.Control 
+                required
                 type="password" 
                 name="userpassword"
                 placeholder="Passwort"
                 value={userpassword}
                 onChange={e => onChange(e)}
               />
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+               <Form.Control.Feedback type="invalid">
+              Du musst ein Passwort eingeben
+            </Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
             <Form.Group controlId="UserLastname">
               <Form.Label>Nachname</Form.Label>
               <Form.Control 
+                required
                 placeholder="Mustermann" 
                 name="userlastname"
                 value={userlastname}
                 onChange={e => onChange(e)}
                 />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+               <Form.Control.Feedback type="invalid">
+              Du musst ein Nachnamen eingeben
+            </Form.Control.Feedback>
             </Form.Group>
             <Form.Group controlId="UserPrename">
               <Form.Label>Vorname</Form.Label>
               <Form.Control 
+                required
                 placeholder="Max" 
                 name="userprename"
                 value={userprename}
                 onChange={e => onChange(e)}
                 />
+               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+               <Form.Control.Feedback type="invalid">
+              Du musst ein Vornamen eingeben
+            </Form.Control.Feedback>
             </Form.Group>
             <Form.Group controlId="username">
               <Form.Label>Username</Form.Label>
               <Form.Control 
+                required
                 placeholder="Amerikastraße 1" 
                 name="username"
                 value={username}
                 onChange={e => onChange(e)}
                 />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+               <Form.Control.Feedback type="invalid">
+              Du musst ein Usernamen eingeben
+            </Form.Control.Feedback>
             </Form.Group>
             <Form.Group controlId="UserBirthdate">
               <Form.Label>Geburtsdatum</Form.Label>
-              <Form.Control 
+              <Form.Control
+                required
                 type="date"
                 name="userbirthdate"
                 value={userbirthdate}
                 onChange={e => onChange(e)}
                 />
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+               <Form.Control.Feedback type="invalid">
+              Du musst ein Geburtsdatum eingeben
+            </Form.Control.Feedback>
             </Form.Group>
             <Form.Group controlId="UserDescription">
               <Form.Label>Über Mich</Form.Label>
@@ -149,19 +207,30 @@ const Register = ({setAuth}) => {
               />
             </Form.Group>
           <Form.Group id="formGridCheckbox">
-            <Form.Check 
-              type="checkbox" 
-              label="Datenschutzbestimmungen" 
-              name="dataprivacy"
-              />
+            <Form.Row>
+            
+              <Form.Check
+                required
+                type="checkbox" 
+                label="Datenschutzbestimmungen" 
+                name="dataprivacy"
+                > 
+                </Form.Check> 
+                <a className="link" href="./Cookiepolicy"> siehe hier</a>
+              
+              </Form.Row>
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">
+             Du musst die Datenschutzbestimmungen akzeptieren
+           </Form.Control.Feedback>
           </Form.Group>
 
  
     <div className="buttonBackground" >
-        <Button onSubmit={onSubmitForm} type="submit" className="button">Registrieren</Button>
-        <Link to="/login">login</Link>
+        <Button onSubmit={onSubmitForm , handleSubmit} type="submit" className="button">Registrieren</Button>
+        
     </div>
-    <input type="submit" value="Submit" />
+    
       
 </Form>
       </Container>

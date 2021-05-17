@@ -14,6 +14,8 @@ import Login from "./routes/Login";
 import Register from "./routes/Register";
 import Post from "./routes/Post";
 import DataServer from "./api/DataServer";
+import CookiePolicy from "./routes/CookiePolicy";
+import CookieBanner from 'react-cookie-banner';
 
 
 
@@ -103,6 +105,11 @@ const App = () => {
             />
             <Route
               exact
+              path="/CookiePolicy"
+              component={CookiePolicy}
+            />
+            <Route
+              exact
               path="/events"
               component={Events}
             />
@@ -157,10 +164,25 @@ const App = () => {
             />
           </Switch>
         </Router>
-        <Footer/>
+
         
+    
+        <CookieBanner 
+            styles={{
+              
+              banner: { backgroundColor: 'rgba(60, 60, 60, 0.8)'},
+              message: { fontWeight: 400 }
+              
+            }}
+            
+            message='COOKIE Bannere !!!'
+            >
+            </CookieBanner>
+        <Footer/>
+      
 
       </div>
+      
   );
 };
 
