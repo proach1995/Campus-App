@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import { IconContext } from 'react-icons';
@@ -6,7 +6,6 @@ import './Sidebar.css';
 import Figure from 'react-bootstrap/Figure';
 import { HamburgerSpring } from 'react-animated-burgers';
 import Button from 'react-bootstrap/Button';
-import DataServer from "../../api/DataServer";
 
 
 
@@ -14,8 +13,10 @@ import DataServer from "../../api/DataServer";
 
 function Sidebar({isAuthenticated, logout}) {
  
+  
+
   let history = useHistory();
-  {/* Setzt state für das Anzeigen der Sidebar*/}
+  // eslint-disable-next-line no-lone-blocks
   const [isActive, setIsActive] = useState(false);
   const toggleButton = useCallback(
     () => setIsActive(prevState => !prevState),
@@ -23,34 +24,21 @@ function Sidebar({isAuthenticated, logout}) {
   );
 
 
-  const [user, setUser] = useState(null);
 
-const logoutHandler =(e) =>{
 
-  logout(e);
+    const logoutHandler =(e) =>{
 
-  //History muss in einem componenten benutzt werden und nicht in der App
-  history.push("/login");
+      logout(e);
 
-}
-
-  useEffect(() =>{
-
-    const getUser= async ()=>{
-
-      try{
-        console.log("fetching in Sidebar with userdata");
-        const userData = await DataServer.get("/user/");
-        setUser(userData.data);
-      }catch(err){
-        console.log(err);
-      }
-
+      //History muss in einem componenten benutzt werden und nicht in der App
+      history.push("/login");
     }
-    getUser();
 
-  },[]);
+
+
   
+  
+  console.log(isAuthenticated + " is in Sidebar1");
 
 
 

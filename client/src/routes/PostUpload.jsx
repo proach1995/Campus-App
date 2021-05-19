@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
+import { Link } from 'react-router-dom';
 import DataServer from "../api/DataServer";
 
 
@@ -169,13 +170,13 @@ const PostUpload = () => {
       setNoImage(false);
     }
     	
-    //Datenbank mit inbeziehen
+    //Datenbank mit einbeziehen
     if(errorFlag == false){
     
       //Post erstellen
       const postResult = await DataServer.post("/Post/AddPost",{
         postTitle: postTitle,
-        userId: "d0d5efe5-fdb7-4daa-a574-fb2224ee4bd9",                 //hardcode meine UserID
+        userId: '349ca5eb-1ea0-4a31-9180-ede4ad0b8a10',
         postCategory: postCategory,
         postType: postType,
         postPriceType: postPriceType,
@@ -313,10 +314,12 @@ const PostUpload = () => {
           <Form.Control type="email" placeholder="Beschreibung" onChange={(e)=>{setDescription(e.target.value)}}/>
         </Form.Group>
 
-
-      <Button className="button" variant="primary" type="submit" onClick={(e)=>{submitHandler(e)}}>
-        Submit
-      </Button>
+      <Link to="/">
+        <Button className="button" variant="primary" type="submit" onClick={(e)=>{submitHandler(e)}}>
+          Submit
+        </Button>
+      </Link>
+      
 </Form>
 
 </Container>

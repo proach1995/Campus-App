@@ -99,19 +99,17 @@
   height: 13em;
   width: 100%;
   color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.profilSectionImage {
-  position: absolute;
-  left: 3em;
-  top:2em
-}
+
 
 .profilSectionCaption {
   color: white;
-  position: absolute;
-  left: 3em;
-  top: 12em;
+  
 }
 .divider {
   height: 2px;

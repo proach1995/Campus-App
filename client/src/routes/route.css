@@ -44,11 +44,19 @@
     vertical-align: center;
 }
 
-.profilSectionWrapper {
+.buttonSectionWrapper {
     display: flex;
+    flex-direction: column;
     align-items: center;
     vertical-align: center;
-    justify-content: center;
+    justify-content: space-around;
+}
+
+.profilSectionWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .modal-dialog {
@@ -56,3 +64,51 @@
     
 }
 
+.profilHeading {
+    color: #234565;
+}
+.profile {
+    margin-bottom: 2em;
+    margin-top: 2em;
+}
+.profilCaption {
+    position: relative;
+    right: -2em;
+}
+
+.settings {
+    position: absolute;
+    right: 2em;
+    top: 8em;
+    z-index: 100;
+}
+
+@media  (max-width: 576px) {
+    .header {
+        text-align: left !important;
+        padding-left: 1em;
+    }
+}
+.dropdown-btn {
+    border-radius: 50px;
+}
+.settingsbtn {
+    border-radius: 100px;
+    width: 60px;
+    height: 60px;
+}
+.delete {
+    color: red;
+}
+#dropdown-basic::after{
+    display: none; 
+ }
+
+ .icon {
+     height: 30px;
+     width: 30px;
+}
+
+.profiledescription {
+    margin-bottom: 2em;
+}

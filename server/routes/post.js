@@ -25,7 +25,7 @@ router.get("/:postid", async (req, res) => {
 
 
   // Alle Posts fetchen
-  router.get("/allposts", async (req, res) =>{
+  router.get("/allposts", authorize, async (req, res) =>{
     //console.log("treffer");
     try{
       const posts = await db.query("select * from posts");
@@ -41,6 +41,47 @@ router.get("/:postid", async (req, res) => {
     }
   })
 
+  // Alle Marktplatz Posts fetchen
+  router.get("/Marktplatz", authorize, async (req, res) => {
+    try {   
+      //console.log("Home wird ausgeführt");
+      const resEvents = await db.query("select * from posts p inner join images i on"+
+                                  " p.postid =i.postid where p.posttype='Marktplatz'"+
+                                  " order by p.postdate desc ");
+      //console.log(resEvents);
+      res.status(200).json({
+        status: "success",
+          postList :{
+              post: resEvents.rows,
+        }
+      });
+      
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server error");
+    }
+  });
+
+// Alle Event Posts fetchen
+  router.get("/Events", authorize, async (req, res) => {
+    try {   
+      //console.log("Home wird ausgeführt");
+      const resEvents = await db.query("select * from posts p inner join images i on"+
+                                  " p.postid =i.postid where p.posttype='Events'"+
+                                  " order by p.postdate desc ");
+      //console.log(resEvents);
+      res.status(200).json({
+        status: "success",
+        eventList :{
+              event: resEvents.rows,
+        }
+      });
+      
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server error");
+    }
+  });
 
   //Post hinzufügen
 router.post("/AddPost", async (req, res)=>{
@@ -66,9 +107,42 @@ router.post("/AddPost", async (req, res)=>{
   })
 
 //Post updaten
+router.put("/:postid", async (req, res) => {
+  try {
+    console.log(req.params.postid + " is param in put");
+    console.log(req.body);
+    const results = await db.query(
+      "UPDATE posts SET userId = $1, postTitle = $2, postCategory = $3, postType = §4, postPriceType = §5, postPrice = $6, postDescription = $7 where postid = $8 returning *",
+      [req.body.userId, req.body.postTitle, req.body.postCategory, req.body.postType, req.body.postPriceType, req.body.postPrice, req.body.postDescription, req.params.postid]
+    );
 
-//Post löschen
+    res.status(200).json({
+      status: "succes",
+      data: {
+        post: results.rows[0],
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
+
+//Post löschen --> Funktioniert
+router.delete("/:postid", async (req, res) => {
+  try {
+    console.log(req.params.postid + " is param in delete");
+
+    const results = db.query("DELETE FROM posts where postid = $1", [
+      req.params.postid,
+    ]);
+    res.status(204).json({
+      status: "sucess",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 
   module.exports = router;

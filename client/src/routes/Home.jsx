@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import './route.css';
 import PostsRow from "../components/Content/PostsRow";
@@ -36,8 +35,8 @@ const Home = ({setAuth},{isAuthenticated}) => {
     try {
       //console.log("getPosts wird ausgeführt");
       const resEvents = await DataServer.post("/Home/Events", {jwt_token:localStorage.token})
-      //console.log("fetching from events");
-      //console.log(resEvents.data);
+      console.log("fetching from events");
+      console.log(resEvents.data);
       setEvents(resEvents.data.eventList.event);
     } catch (err) {
       console.error(err.message);
@@ -70,7 +69,7 @@ const Home = ({setAuth},{isAuthenticated}) => {
         </Col>
       </Row>
       <div className="buttonBackground" >
-        <h2>Die neuesten Events</h2>
+        <h2>Die neuesten Angebote</h2>
       </div>
 
 
@@ -81,10 +80,10 @@ const Home = ({setAuth},{isAuthenticated}) => {
       
       <PostsRow postElement={offerings}/>  
      <div className="buttonBackground " >
-        <Button href="/events" className="button">Zu den Events</Button>
+        <Button href="/events" className="button">Zum Marktplatz</Button>
       </div>
       <div className="buttonBackground" >
-        <h2>Neues im Marktplatz</h2>
+        <h2>Neue Events</h2>
       </div>
       {/*****           CARDS Events         ***********/}
       
