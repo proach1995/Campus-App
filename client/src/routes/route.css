@@ -61,3 +61,25 @@
     justify-content: left;
     margin-left:0.5rem;
 }
+
+.banner {
+    justify-content: center;
+    background-color:rgb(0, 83, 5);
+    
+    top:20%;
+    left: 0;
+    position: fixed;
+    Width:100%;
+    height:auto;
+    padding: 1rem;
+}
+
+.banner > p {
+    display: block;
+    font-weight: bold;
+    
+}
+
+
+
+  

@@ -28,6 +28,7 @@ const Register = ({setAuth}) => {
     e.preventDefault();
     setInputs({ ...inputs, [e.target.name]: e.target.value });
     console.log("onChange in Register ausgeführt");
+    console.log("onChange2 in Register ausgeführt");
 
   }
     
@@ -69,28 +70,37 @@ const Register = ({setAuth}) => {
 
 
   //Register Validation 
+
+  
+
+
   function validEmail(useremail) {
     return /^[a-zA-Z]{4}\d{4}@stud.hs-kl.de/.test(useremail);
   }
- 
+    
     const [validated, setValidated] = useState(false);
-  
+    
+    
+
     const handleSubmit = (event) => {
+      
       const form = event.currentTarget;
-      if (form.checkValidity() === false) {
-        event.preventDefault();
-        event.stopPropagation();
-      } if (!validEmail(useremail))  {
+      event.preventDefault();
+      event.stopPropagation();
+      
+       if (!validEmail(useremail))  {
         alert("Bitte gebe eine richtige Hochschuladresse ein!");
         
-        
+          
+       
       } else {
         alert("Richtige E-Mailadresse");
         console.log(useremail);
         console.log(useremail);
+        
       }
-  
       setValidated(true);
+      
     }
  
     return (
@@ -101,6 +111,7 @@ const Register = ({setAuth}) => {
             <Form.Group  controlId="Useremail">
               <Form.Label>E-Mail Adresse</Form.Label>
               <Form.Control 
+                className="is-invalid"
                 required
                 type="email" 
                 name="useremail"
@@ -108,10 +119,7 @@ const Register = ({setAuth}) => {
                 value={useremail}
                 onChange={e => onChange(e)}
               />
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-              <Form.Control.Feedback type="invalid">
-              Deine E-Mailadresse ist keine Hochschuladresse
-            </Form.Control.Feedback>
+
               <Form.Text id="passwordHelpBlock" muted>
               Es muss sich um eine offizielle E-Mailadresse der Hochschule Kaiserslautern handeln.
             </Form.Text>
@@ -167,7 +175,7 @@ const Register = ({setAuth}) => {
               <Form.Label>Username</Form.Label>
               <Form.Control 
                 required
-                placeholder="Amerikastraße 1" 
+                placeholder="Username" 
                 name="username"
                 value={username}
                 onChange={e => onChange(e)}

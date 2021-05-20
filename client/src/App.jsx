@@ -16,6 +16,7 @@ import Post from "./routes/Post";
 import DataServer from "./api/DataServer";
 import CookiePolicy from "./routes/CookiePolicy";
 import CookieBanner from 'react-cookie-banner';
+import Banner from "./routes/Banner"
 
 
 
@@ -94,6 +95,7 @@ const App = () => {
   return (
       <div className="">
     <Router>
+    <Banner></Banner>
       <Sidebar isAuthenticated={isAuthenticated} logout={logout}/>
       <NavbarTop/>
           <Switch>
@@ -166,21 +168,9 @@ const App = () => {
         </Router>
 
         
-    
-        <CookieBanner 
-            styles={{
-              
-              banner: { backgroundColor: 'rgba(60, 60, 60, 0.8)'},
-              message: { fontWeight: 400 }
-              
-            }}
-            
-            message='COOKIE Bannere !!!'
-            >
-            </CookieBanner>
         <Footer/>
       
-
+            
       </div>
       
   );
