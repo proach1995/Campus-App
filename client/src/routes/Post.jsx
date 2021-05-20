@@ -10,6 +10,7 @@ import Tab from 'react-bootstrap/Tab';
 import Button from 'react-bootstrap/Button';
 import Image from "react-bootstrap/esm/Image";
 import DataServer from "../api/DataServer";
+import Carousel from 'react-bootstrap/Carousel'
 
 
 
@@ -59,8 +60,48 @@ console.log(post);
       <h1 className="postHeader">{post.posttitle}</h1> 
 
       <Row className="">
+          
         <Col  className="pictureSection " >
-          <Image src="../pb.jpg" width={160} height={150} />    
+          
+          <Carousel interval={null} slides={true}>
+            <Carousel.Item>
+              <img
+                className="d-block imageCarousel"
+                src="../trump.jpg"
+                alt="First slide"
+              />
+              <Carousel.Caption>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+             
+              <img
+                className="d-block imageCarousel"
+                src="../pb.jpg"
+                alt="Second slide"
+              />
+
+            
+            </Carousel.Item>
+            <Carousel.Item>
+                <img
+                className="d-block imageCarousel"
+                src="../party.jpg"
+                alt="Third slide"
+                interval={null}
+              />
+              
+            </Carousel.Item>
+            <Carousel.Item>
+                <img
+                className="d-block imageCarousel"
+                src="../face.jpg"
+                alt="Third slide"
+                interval={null}
+              />
+              
+            </Carousel.Item>
+    </Carousel>   
         </Col>
       </Row>
         <h3 className="profilHeading">Details</h3>

@@ -171,3 +171,8 @@ width:60%;
 .postHeader {
     text-align: left;
 }
+
+.imageCarousel {
+    height:200px;
+    width:200px;
+}
