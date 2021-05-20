@@ -89,7 +89,7 @@ const App = () => {
       //getProfile();
 
       console.log("authenticated", isAuthenticated);
-    }, [isAuthenticated]);
+    }, []);
 
 
   return (
