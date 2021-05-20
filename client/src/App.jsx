@@ -122,13 +122,7 @@ const App = () => {
             <Route
               exact
               path="/postupload"
-              render={props =>
-                (isAuthenticated === true ? (
-                  <PostUpload {...props} setAuth={setAuth} />
-                ) : (
-                  <Redirect to="/" />
-                ))
-              }
+              component={PostUpload}
             />
             <Route
               exact
