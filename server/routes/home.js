@@ -2,7 +2,7 @@ const router = require("express").Router();
 const authorize = require("../Middleware/authorize");
 const db = require("../db/index");
 
-router.get("/Offerings", authorize, async (req, res) => {
+router.get("/Offerings", async (req, res) => {
   try {   
     //console.log("Home wird ausgeführt");
     const resOfferings = await db.query("select * from posts p inner join images i on"+
@@ -23,7 +23,7 @@ router.get("/Offerings", authorize, async (req, res) => {
 });
 
 
-router.get("/Events", authorize, async (req, res) => {
+router.get("/Events", async (req, res) => {
   try {   
     //console.log("Home wird ausgeführt");
     const resEvents = await db.query("select * from posts p inner join images i on"+
