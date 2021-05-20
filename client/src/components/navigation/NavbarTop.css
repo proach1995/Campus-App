@@ -75,3 +75,7 @@
     letter-spacing: -0.1em;
     font-size: 28px;
 }
+
+.form-control {
+    border-radius: 50px;
+}

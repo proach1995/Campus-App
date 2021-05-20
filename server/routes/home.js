@@ -6,7 +6,7 @@ router.post("/Offerings", authorize, async (req, res) => {
   try {   
     //console.log("Home wird ausgeführt");
     const resOfferings = await db.query("select * from posts p inner join images i on"+
-                                " p.postid =i.postid where p.postcategory='Angebot'"+
+                                " p.postid =i.postid where p.posttype='Marktplatz'"+
                                 " order by p.postdate desc limit 6");
     //console.log(resOfferings);
     res.status(200).json({
@@ -27,7 +27,7 @@ router.post("/Events", authorize, async (req, res) => {
   try {   
     //console.log("Home wird ausgeführt");
     const resEvents = await db.query("select * from posts p inner join images i on"+
-                                " p.postid =i.postid where p.postcategory='Events'"+
+                                " p.postid =i.postid where p.posttype='Events'"+
                                 " order by p.postdate desc limit 6");
     //console.log(resEvents);
     res.status(200).json({

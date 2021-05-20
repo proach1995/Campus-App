@@ -1,6 +1,6 @@
 /* eslint-disable no-lone-blocks */
 import React, {useState, useEffect} from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Home from "./routes/Home";
 import Footer from './components/navigation/Footer';
 import PostUpload from "./routes/PostUpload";
@@ -50,7 +50,7 @@ const App = () => {
 
     {/*logout Funktion wird an die Child Komponenten weitergegeben*/}
 
-    const [name, setName] = useState("");
+    {/*const [name, setName] = useState(""); */}
     
     /*Kommt später
     const getProfile = async () => {
@@ -89,7 +89,7 @@ const App = () => {
       //getProfile();
 
       console.log("authenticated", isAuthenticated);
-    }, []);
+    }, [isAuthenticated]);
 
 
   return (
@@ -124,10 +124,10 @@ const App = () => {
               exact
               path="/postupload"
               render={props =>
-                (isAuthenticated== true ? (
+                (isAuthenticated === true ? (
                   <PostUpload {...props} setAuth={setAuth} />
                 ) : (
-                  <Redirect to="/postupload" />
+                  <Redirect to="/" />
                 ))
               }
             />

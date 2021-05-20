@@ -17,13 +17,13 @@ const Marktplatz = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await DataServer.get("/Post/allposts");
-        console.log(response.data);
+        const response = await DataServer.get("/Post/Marktplatz");
+        console.log(response + "in fetch posts marktplatz");
 
-        setPosts(response.data.postDetail.post);
+        setPosts(response.data.postlist.post);
       } catch (err) {
         console.log(err);
-        console.log("FetchPosts hat nicht funktioniert");
+        console.log("FetchPosts in Marktplatz hat nicht funktioniert");
       }
     };
 
@@ -35,13 +35,6 @@ const Marktplatz = () => {
 console.log(posts);
 
   
-   useEffect(() =>{
-     if(posts != null){
-      console.log("2. Hook");
-      console.log(posts.postList.post.length);
-     }
-
-  },[posts]);
 
 
 
@@ -67,7 +60,7 @@ console.log(posts);
        
             {posts!==null && (
               <>
-            <PostsRow dataObjects={posts.postList}/>  
+            <PostsRow postElement={posts}/>  
             </>
             )}
     </Container>

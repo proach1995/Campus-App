@@ -5,7 +5,6 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import {Link} from 'react-router-dom';
-import { useParams } from "react-router-dom";
 
 
 const PostsRow = ({postElement}) => {
@@ -76,14 +75,14 @@ const PostsRow = ({postElement}) => {
   //1 Post mit mehreren Bildern muss genauso abgespeichert werden
     let postIdMemory = 0;
     let innerIndex = 0;
-    console.log("filter");
-    console.log(postElement);
+   {/* console.log("filter");
+    console.log(postElement); */}
     
     postElement.map((item) =>{
 
       //Check ob die ID ein 2.mal vorkommt
       //kommt das 1. mal vor
-      if(postIdMemory !=item.postid){
+      if(postIdMemory !==item.postid){
         innerIndex = innerIndex+1;
         postIdMemory = item.postid;
         postImagesHelper.push({imagePath:item.imagepath, postTitle:item.posttitle});
@@ -91,14 +90,14 @@ const PostsRow = ({postElement}) => {
     })
 
   //Kontrollausgabe
-  console.log("Konrollaugabe");
+ // console.log("Konrollaugabe");
   postImagesHelper.map((post) =>{
-      console.log(post.imagePath)
+      //console.log(post.imagePath)
     });
 
-  console.log(postImagesHelper);
+ // console.log(postImagesHelper);
   setPostImages(postImagesHelper);
-    },[postElement])
+    },[postElement, postImagesHelper])
 
 
 

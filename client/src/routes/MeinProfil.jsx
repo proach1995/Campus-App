@@ -7,10 +7,11 @@ import Figure from 'react-bootstrap/Figure';
 import PostsRow from "../components/Content/PostsRow";
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
-import Button from 'react-bootstrap/Button';
 import DataServer from "../api/DataServer";
+import Dropdown from "react-bootstrap/Dropdown";
+import * as AiIcons from 'react-icons/ai';
 
-;
+
 
 
 
@@ -22,14 +23,14 @@ const MeinProfil = () => {
   const [user, setUser] = useState(null);
   const [userPosts, setUserPosts] = useState(null);
   const { userid } = useParams();
-  console.log("postid: " + userid);
+  console.log("userid: " + userid);
 
 
   useEffect(() => {
   const fetchUser= async () => {
     try {
       const response = await DataServer.get(`/User/${userid}`);
-      console.log(response.data.userDetail);
+      console.log(response.data.userDetail.posts);
 
       setUser(response.data.userDetail.user);
       setUserPosts(response.data.userDetail.posts);
@@ -40,55 +41,75 @@ const MeinProfil = () => {
   };
 
   fetchUser();
-}, []);
+}, [userid]);
 
 
   return (
     <Container className="routeContainer">
-        <h1>Das ist ihr Profil</h1>
+        <h1 className="header">Ihr Profil</h1> 
+
+    <Dropdown className="settings">
+        <Dropdown.Toggle className="settingsbtn color dropdown-btn "  id="dropdown-basic">
+        <AiIcons.AiOutlineSetting className="icon" />
+        </Dropdown.Toggle>
+          <Dropdown.Menu>
+              <Dropdown.Item href="/">Daten bearbeiten</Dropdown.Item>
+              <Dropdown.Item href="/">Passwort zurücksetzen</Dropdown.Item>
+              <Dropdown.Divider className="delete" />
+              <Dropdown.Item className="delete" href="/">Profil löschen</Dropdown.Item>
+          </Dropdown.Menu>
+    </Dropdown>
+
         
     {user!==null && (
     <> 
-      <Row >
-        <Col className="profilSectionWrapper">
+      <Row className="profile">
+        <Col sm={6} className=" profilSectionWrapper" >
           <Figure>
                 <Figure.Image 
-                  href="/meinprofil"
                   width={160}
                   height={150}
                   alt="171x180"
-                  src="../pb.jpg"
+                  src="../pb.jpg" //{user.userimage}
                   roundedCircle
                 />
                 <Figure.Caption className="profilCaption">
-                  
-                  Vorname Name Mail Adresse.
+                <p>{user.userprename}&nbsp;{user.userlastname}</p>
                 </Figure.Caption>
               </Figure>
         </Col>
-        <Col className="profilSectionWrapper"> 
-            <div> 
-              <p>{user.userid}</p>
-              <p>{user.username}</p>
-              <p>{user.userprename}</p>
-              <p>{user.userlastname}</p>
-              <p>{user.useremail}</p>
-              <p>{user.userbirthdate}</p>
-              <p>{user.userdescription}</p>
-              <p>{user.userimage}</p>
+        <Col sm={6} className=" profilSectionWrapper"> 
+          <div>
+          <p><strong>Username:</strong> <br/>{user.username}</p>
+          <p><strong>E-Mail:</strong> <br/>{user.useremail}</p>
+          <p><strong>Geburtsdatum:</strong> <br/>{user.userbirthdate}</p>
+          </div>
+          
 
-            </div>
-        </Col>
-        <Col className="profilSectionWrapper">
-            <Button className="button editData">Daten bearbeiten</Button>
 
         </Col>
+        
+        
+            
+
+
+      
+      </Row>
+      <Row>
+        <Col className="profiledescription">
+        <h2 className="profilHeading">Profilbeschreibung</h2>
+        <p>{user.userdescription}</p>
+        </Col>
+        
+        
+        
+        
       </Row>
       <Row>
         <Col>
             <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
                 <Tab eventKey="home" title="Meine Posts">
-               {/* <PostsRow data={userPosts.posts} /> */}
+                {/* <PostsRow postElement={userPosts} /> */}
 
                 </Tab>
                 <Tab eventKey="profile" title="Bewertungen">
@@ -102,11 +123,14 @@ const MeinProfil = () => {
           
         </Col>
       </Row>
-        
+       
+      
+
         
   </>
  )}   
     </Container>
+    
   );
 };
 
