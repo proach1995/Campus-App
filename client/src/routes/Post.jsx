@@ -112,12 +112,8 @@ console.log(post);
         </Col>
       </Row>
       <Button  className="button login-btn" variant="primary" >
-                        Kontaktieren
-              </Button>
-            
-                
-          
-       
+          Kontaktieren
+        </Button>
         </>
  )} 
     </Container>
