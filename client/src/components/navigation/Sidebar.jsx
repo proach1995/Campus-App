@@ -107,11 +107,15 @@ function Sidebar({isAuthenticated, logout}) {
               })}
             </ul>
             </div>
+            <Link to="/">
             <div className="logout-btn-container">
-            <Button  onClick={(e) => logoutHandler(e)} style={{display: isAuthenticated ? '' : 'none' }} className="button logout-btn login-btn" variant="secondary" >
-                      Logout
-            </Button>
-            </div>
+              <Button  onClick={(e) => logoutHandler(e)} style={{display: isAuthenticated ? '' : 'none' }} className="button logout-btn login-btn" variant="secondary" >
+                        Logout
+              </Button>
+              </div>
+
+            </Link>
+            
             
 
 
