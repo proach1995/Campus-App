@@ -41,7 +41,7 @@ const MeinProfil = () => {
   };
 
   fetchUser();
-}, [userid]);
+}, []);
 
 
   return (

@@ -97,7 +97,7 @@ const PostsRow = ({postElement}) => {
 
  // console.log(postImagesHelper);
   setPostImages(postImagesHelper);
-    },[postElement, postImagesHelper])
+    },[postElement])
 
 
 

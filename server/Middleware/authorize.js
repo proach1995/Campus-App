@@ -10,12 +10,12 @@ module.exports = function (req, res, next) {
   let token = null;
   if (req.header("jwt_token") == null ) {
     token = req.body.jwt_token;
-    //console.log("axios api");
-    //console.log(token)
+    console.log("axios api");
+    console.log(token)
   } else {
      token = req.header("jwt_token");
-     //console.log("fetch api");
-     //console.log (req.header);
+     console.log("fetch api");
+     console.log (req.header);
   }
   
   console.log(token +" in authorization ");

@@ -95,7 +95,6 @@ const App = () => {
   return (
       <div className="">
     <Router>
-    <Banner></Banner>
       <Sidebar isAuthenticated={isAuthenticated} logout={logout}/>
       <NavbarTop/>
           <Switch>
@@ -169,7 +168,7 @@ const App = () => {
 
         
         <Footer/>
-      
+        <Banner/>
             
       </div>
       
