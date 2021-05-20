@@ -20,10 +20,12 @@ const Register = ({setAuth}) => {
     userbirthdate: "",
 
   });
-  {/* Werte werden im Objekt inputs gespeichert um sie mit ...props zu übergeben*/}
+  /* Werte werden im Objekt inputs gespeichert um sie mit ...props zu übergeben*/
   const { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate } = inputs;
-  {/* Spricht in der e.target Funktion erst den Namen an und übergibt dann den Wert, d.h. Name muss identisch sein
-  mit dem Namen im Input field*/}
+  const [validated, setValidated] = useState(false);
+    
+  /* Spricht in der e.target Funktion erst den Namen an und übergibt dann den Wert, d.h. Name muss identisch sein
+  mit dem Namen im Input field*/
   const onChange = e => {
     e.preventDefault();
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -32,13 +34,22 @@ const Register = ({setAuth}) => {
 
   }
     
+  function validEmail(useremail) {
+    return /^[a-zA-Z]{4}\d{4}@stud.hs-kl.de/.test(useremail);
+  }
 
   const onSubmitForm = async e => {
     e.preventDefault();
     console.log("onSubmitForm in Register ausgeführt");
-
+    
+    if(!validEmail(useremail)){
+      console.log("WARNUNG hinzufügen");
+    }
+    else{
+    
     try {
       const body = { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate };
+      
       console.log("test");
       const response = await fetch(
         "http://localhost:3001/Database/Marktplatz/authentication/register",
@@ -56,57 +67,37 @@ const Register = ({setAuth}) => {
         localStorage.setItem("token", parseRes.jwtToken);
         setAuth(true);
         console.log("Registrierung erfolgreich");
-        {/* toast.success("Register Successfully"); */}
+        /* toast.success("Register Successfully"); */
+
       } else {
         setAuth(false);
         console.log(parseRes);
-      {/*  toast.error(parseRes); */}
+      /*  toast.error(parseRes); */
+      
       }
     } catch (err) {
       console.error(err.message);
     }
-  };
-
-
-
-  //Register Validation 
-
-  
-
-
-  function validEmail(useremail) {
-    return /^[a-zA-Z]{4}\d{4}@stud.hs-kl.de/.test(useremail);
+    
   }
-    
-    const [validated, setValidated] = useState(false);
-    
-    
+}
 
-    const handleSubmit = (event) => {
-      
-      const form = event.currentTarget;
-      event.preventDefault();
-      event.stopPropagation();
-      
-       if (!validEmail(useremail))  {
-        alert("Bitte gebe eine richtige Hochschuladresse ein!");
-        
-          
-       
-      } else {
-        alert("Richtige E-Mailadresse");
-        console.log(useremail);
-        console.log(useremail);
-        
+
+    useEffect(()=>{
+
+      if(validEmail(useremail)){
+        setValidated(true);
       }
-      setValidated(true);
-      
-    }
+      else{
+        setValidated(false);
+      }
+    
+    },[useremail])
  
     return (
       <Container className="routeContainer">
           <h1>Registriere dich!</h1>
-       <Form noValidate validated={validated} onSubmit={onSubmitForm , handleSubmit}>
+       <Form noValidate validated={validated} onSubmit={onSubmitForm}>
           <Form.Row>
             <Form.Group  controlId="Useremail">
               <Form.Label>E-Mail Adresse</Form.Label>
@@ -123,6 +114,12 @@ const Register = ({setAuth}) => {
               <Form.Text id="passwordHelpBlock" muted>
               Es muss sich um eine offizielle E-Mailadresse der Hochschule Kaiserslautern handeln.
             </Form.Text>
+            {validated == false ?
+            <Form.Control.Feedback type="invalid">Gib die richtige E-mail ein</Form.Control.Feedback>
+          :
+          <Form.Control.Feedback>Looks Good</Form.Control.Feedback>
+          }
+            
             </Form.Group>
 
             <Form.Group  controlId="Userpassword">
@@ -237,7 +234,7 @@ const Register = ({setAuth}) => {
 
  
     <div className="buttonBackground" >
-        <Button onSubmit={onSubmitForm , handleSubmit} type="submit" className="button">Registrieren</Button>
+        <Button type="submit" className="button">Registrieren</Button>
         
     </div>
     

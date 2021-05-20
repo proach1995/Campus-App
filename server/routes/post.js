@@ -62,8 +62,10 @@ router.get("/:postid", async (req, res) => {
     }
   });
 
+  
 // Alle Event Posts fetchen
   router.get("/Events", authorize, async (req, res) => {
+    console.log("events wird ausgeführt");
     try {   
       //console.log("Home wird ausgeführt");
       const resEvents = await db.query("select * from posts p inner join images i on"+

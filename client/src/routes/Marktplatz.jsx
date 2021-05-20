@@ -11,6 +11,26 @@ import DataServer from "../api/DataServer";
 
 const Marktplatz = () => {
 
+  const [offerings, setOfferings] = useState([]);
+
+  const getOffers = async () => {
+    try {
+      //console.log("getPosts wird ausgeführt");
+      const resOfferings = await DataServer.post("/Home/Offerings", {jwt_token:localStorage.token})
+      
+      //console.log("fetching from offer");
+      //console.log(resOfferings.data);
+      setOfferings(resOfferings.data.offeringList.offer);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    //console.log("getPosts wird ausgeführt im UseEffekt")
+    getOffers();
+  }, []);
+  {/*
   const [posts, setPosts] = useState(null);
 
 
@@ -34,6 +54,8 @@ const Marktplatz = () => {
 
 console.log(posts);
 
+*/}
+
   
 
 
@@ -44,23 +66,27 @@ console.log(posts);
       
       {/* https://dowjones.github.io/react-dropdown-tree-select/#/story/with-bootstrap-styles */}
         <h1> Marktplatz </h1>
-  
+        <p>Hier finden sie alle Posts aus den Kategorien An- und Verkauf, Verleihen sowie Verschenken am Campus Zweibrücken.</p>
   
             <Dropdown >
               <Dropdown.Toggle className="color dropdown-btn"  id="dropdown-basic">
-              Kategorien
+              Filter
               </Dropdown.Toggle>
                 <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">Bücher</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Veranstaltungen</Dropdown.Item>
-                    <Dropdown.Divider />
-                    <Dropdown.Item href="#/action-3">Etwas Posten</Dropdown.Item>
+                    <Dropdown.Item href="#/action-1">Angebote</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">Gesuche</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">Nach Preis</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">Nach Datum</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
        
-            {posts!==null && (
+
+        <div className="buttonBackground" >
+          <h2>Alle Posts</h2>
+        </div>
+            {offerings !==null && (
               <>
-            <PostsRow postElement={posts}/>  
+            <PostsRow postElement={offerings}/>  
             </>
             )}
     </Container>

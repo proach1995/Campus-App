@@ -8,7 +8,7 @@ module.exports = function(req, res, next) {
   //checks if userEmail is really an Email
   //hier könnte man die Mail nach hskl filtern
   function validEmail(useremail) {
-    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(useremail);
+    return /^[a-zA-Z]{4}\d{4}@stud.hs-kl.de/.test(useremail);
   }
 
   if (req.path === "/register") {

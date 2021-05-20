@@ -21,7 +21,7 @@ const Home = ({setAuth},{isAuthenticated}) => {
   const getOffers = async () => {
     try {
       //console.log("getPosts wird ausgeführt");
-      const resOfferings = await DataServer.post("/Home/Offerings", {jwt_token:localStorage.token})
+      const resOfferings = await DataServer.get("/Home/Offerings", {jwt_token:localStorage.token})
       
       //console.log("fetching from offer");
       //console.log(resOfferings.data);
@@ -34,7 +34,7 @@ const Home = ({setAuth},{isAuthenticated}) => {
   const getEvents = async () => {
     try {
       //console.log("getPosts wird ausgeführt");
-      const resEvents = await DataServer.post("/Home/Events", {jwt_token:localStorage.token})
+      const resEvents = await DataServer.get("/Home/Events", {jwt_token:localStorage.token})
       console.log("fetching from events");
       console.log(resEvents.data);
       setEvents(resEvents.data.eventList.event);

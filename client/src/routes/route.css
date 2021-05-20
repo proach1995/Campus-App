@@ -176,3 +176,8 @@ width:60%;
     height:200px;
     width:200px;
 }
+.register {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

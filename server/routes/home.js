@@ -2,7 +2,7 @@ const router = require("express").Router();
 const authorize = require("../Middleware/authorize");
 const db = require("../db/index");
 
-router.post("/Offerings", authorize, async (req, res) => {
+router.get("/Offerings", async (req, res) => {
   try {   
     //console.log("Home wird ausgeführt");
     const resOfferings = await db.query("select * from posts p inner join images i on"+
@@ -18,12 +18,12 @@ router.post("/Offerings", authorize, async (req, res) => {
     
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server error");
+    res.status(500).send("Server error in home/offerings");
   }
 });
 
 
-router.post("/Events", authorize, async (req, res) => {
+router.get("/Events", async (req, res) => {
   try {   
     //console.log("Home wird ausgeführt");
     const resEvents = await db.query("select * from posts p inner join images i on"+
@@ -39,7 +39,7 @@ router.post("/Events", authorize, async (req, res) => {
     
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server error");
+    res.status(500).send("Server error in home/events");
   }
 });
 

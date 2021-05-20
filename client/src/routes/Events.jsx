@@ -9,33 +9,27 @@ import DataServer from "../api/DataServer";
 
 const Events = () => {
 
-  const [posts, setPost] = useState(null);
+  const [events, setEvents] = useState([]);
 
-  useEffect(() =>{
-
-    const getPosts = async ()=>{
-
-      try{
-        console.log("fetching");
-        const latestPosts = await DataServer.get("/Home");
-        //console.log(latestPosts); Klar das es leer ist
-        setPost(latestPosts.data);
-      }catch(err){
-        console.log(err);
-      }
-
+  const getEvents = async () => {
+    try {
+      //console.log("getPosts wird ausgeführt");
+      const resEvents = await DataServer.get("/Home/Events", {jwt_token:localStorage.token})
+      console.log("fetching from events");
+      console.log(resEvents.data);
+      setEvents(resEvents.data.eventList.event);
+    } catch (err) {
+      console.error(err.message);
     }
-    getPosts();
+  };
 
-  },[]);
+  useEffect(() => {
+    //console.log("getPosts wird ausgeführt im UseEffekt")
+    getEvents();
+  }, []);
+
   
-   useEffect(() =>{
-     if(posts != null){
-      console.log("2. Hook");
-      console.log(posts.postList.post.length);
-     }
 
-  },[posts]);
 
 
   return (
@@ -44,22 +38,22 @@ const Events = () => {
         <h1>Willkommen zum Marktplatz der Hochschule Kaiserslautern</h1>
         <p>Hier findest du alle spannenden Events im Umfeld der HSKL. Von Studis für Studis</p>
         
-            <Dropdown >
+        <Dropdown >
               <Dropdown.Toggle className="color dropdown-btn"  id="dropdown-basic">
-              Kategorien
+              Filter
               </Dropdown.Toggle>
                 <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">Bücher</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Veranstaltungen</Dropdown.Item>
-                    <Dropdown.Divider />
-                    <Dropdown.Item href="#/action-3">Etwas Posten</Dropdown.Item>
+                    <Dropdown.Item href="#/action-1">Neueste Events</Dropdown.Item>
+                  
                 </Dropdown.Menu>
             </Dropdown>
         
-       
-            {posts!==null && (
+          <div className="buttonBackground" >
+           <h2>Alle Events</h2>
+          </div>
+            {events!==null && (
               <>
-            <PostsRow dataObjects={posts.postList}/>  
+            <PostsRow postElement={events}/>  
             </>
             )}
     </Container>
