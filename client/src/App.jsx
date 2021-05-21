@@ -1,5 +1,5 @@
 /* eslint-disable no-lone-blocks */
-import React, {useState, useEffect, useContext} from "react";
+import React, {useState, useEffect} from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Home from "./routes/Home";
 import Footer from './components/navigation/Footer';
@@ -13,9 +13,7 @@ import Einstellungen from "./routes/Einstellungen";
 import Login from "./routes/Login";
 import Register from "./routes/Register";
 import Post from "./routes/Post";
-import DataServer from "./api/DataServer";
 import CookiePolicy from "./routes/CookiePolicy";
-import CookieBanner from 'react-cookie-banner';
 import Banner from "./routes/Banner"
 import { AppContextProvider } from "./context/AppContext"
 
@@ -90,6 +88,7 @@ const App = () => {
       //getProfile();
 
       console.log("authenticated", isAuthenticated);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 
@@ -97,7 +96,7 @@ const App = () => {
       <div className="">
     <AppContextProvider>
     <Router>
-      <Sidebar isAuthenticated={isAuthenticated} logout={logout}/>
+      <Sidebar logout={logout}/>
       <NavbarTop/>
           <Switch>
             <Route exact path="/" component={Home} />
@@ -125,6 +124,11 @@ const App = () => {
               exact
               path="/postupload"
               component={PostUpload}
+              render={props =>
+              
+                <PostUpload isAuthenticated={isAuthenticated}
+                /> 
+            }
             />
             <Route
               exact

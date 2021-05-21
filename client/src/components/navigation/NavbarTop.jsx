@@ -5,8 +5,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import './NavbarTop.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Nav from 'react-bootstrap/Nav';
-import { Link, useHistory } from 'react-router-dom';
+import {useHistory } from 'react-router-dom';
 
 
 
@@ -18,13 +17,13 @@ const NavbarTop = ({isActive},{toggleButton}) => {
     e.preventDefault();
     console.log("navbar");
     console.log(e.target.name);
-    if(e.target.name =="marktplatz"){
+    if(e.target.name ==="marktplatz"){
       history.push("/marktplatz");
     }
-    if(e.target.name =="events"){
+    if(e.target.name ==="events"){
       history.push("/events");
     }
-    if(e.target.name =="postUpload"){
+    if(e.target.name ==="postUpload"){
       history.push("/postupload");
     }
   }

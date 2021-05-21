@@ -52,6 +52,7 @@ const Home = ({setAuth},{isAuthenticated}) => {
     getEvents();
     console.log("user =", user);
     console.log("Home logged =", logged);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 

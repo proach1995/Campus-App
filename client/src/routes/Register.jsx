@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import { Link, Redirect } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -9,6 +8,7 @@ import './route.css';
 
 const Register = ({setAuth}) => {
 
+  // eslint-disable-next-line no-lone-blocks
   {/* Werte mit State in Input Objekt initialisieren*/}
   const [inputs, setInputs] = useState({
     useremail: "",
@@ -114,7 +114,7 @@ const Register = ({setAuth}) => {
               <Form.Text id="passwordHelpBlock" muted>
               Es muss sich um eine offizielle E-Mailadresse der Hochschule Kaiserslautern handeln.
             </Form.Text>
-            {validated == false ?
+            {validated === false ?
             <Form.Control.Feedback type="invalid">Gib die richtige E-mail ein</Form.Control.Feedback>
           :
           <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
