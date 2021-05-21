@@ -40,17 +40,5 @@ export const SidebarData = [
     path: '/postupload',
     icon: <IoAddCircleOutline />,
     cName: 'nav-text'
-  },
-  {
-    title: 'Meine Posts',
-    path: '/meineposts',
-    icon: <IoLibraryOutline />,
-    cName: 'nav-text'
-  },
-  {
-  title: 'Einstellungen',
-    path: '/Einstellungen',
-    icon: <IoCogSharp />,
-    cName: 'nav-text'
-}
+  }
 ];

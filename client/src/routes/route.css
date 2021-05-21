@@ -1,5 +1,6 @@
 .routeContainer {
-    padding-top: 8em;
+    position: relative;
+    top: 8em;
 }
 
 .Carousel {
@@ -88,9 +89,6 @@
     
 }
 
-
-
-  
 .profilHeading {
     color: #234565;
 }
@@ -138,4 +136,44 @@
 
 .profiledescription {
     margin-bottom: 2em;
+}
+
+
+/** Post.jsx **/
+
+.userSection {
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.username {
+    position: relative;
+    top: -3em;
+    left: 4em;
+    color: black;
+    font-weight: bold;
+}
+
+.pictureSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.contentSection {
+width:60%;
+
+}
+
+.postHeader {
+    text-align: left;
+}
+
+.register {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }

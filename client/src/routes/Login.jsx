@@ -109,10 +109,12 @@ const Login = ({setAuth}, props) => {
                       </div>  
                     </div>
               </Form>
-
+            <div className="register">
             <Button href="/register" className="button register-btn login-btn" variant="secondary" >
                 Jetzt Registrieren 
               </Button> 
+            </div>
+            
 
 
                   

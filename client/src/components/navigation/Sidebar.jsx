@@ -48,7 +48,7 @@ function Sidebar({ logout}) {
     
   return (
     <>
-      
+    <div>
       <Link to='#' className='menu-bars'>
                 <HamburgerSpring className="Hamburger"
                     buttonColor="transparent"
@@ -110,19 +110,20 @@ function Sidebar({ logout}) {
               })}
             </ul>
             </div>
+            <Link to="/">
             <div className="logout-btn-container">
             <Button  onClick={(e) => logoutHandler(e)} style={{display: logged ? '' : 'none' }} className="button logout-btn login-btn" variant="secondary" >
                       Logout
             </Button>
             </div>
-            
-
+            </Link>
 
           </div>
         </nav>
       
           
     </IconContext.Provider>
+    </div>
     </>
   );
 }
