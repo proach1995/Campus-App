@@ -21,9 +21,36 @@ import * as AiIcons from 'react-icons/ai';
 const MeinProfil = () => {
 
   const [user, setUser] = useState(null);
-  const [userPosts, setUserPosts] = useState(null);
+  const [userPosts, setUserPosts] = useState([]);
   const { userid } = useParams();
   console.log("userid: " + userid);
+
+
+
+
+  const getOffers = async () => {
+    try {
+      //console.log("getPosts wird ausgeführt");
+      const resOfferings = await DataServer.get("/Home/Offerings", {jwt_token:localStorage.token})
+      
+      console.log("fetching from offer");
+      console.log(resOfferings.data);
+      setUserPosts(resOfferings.data.offeringList.offer);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    //console.log("getPosts wird ausgeführt im UseEffekt")
+    getOffers();
+  }, []);
+
+useEffect(() => {
+  console.log( userPosts);
+}, [userPosts])
+
+
 
 
   useEffect(() => {
@@ -86,13 +113,8 @@ const MeinProfil = () => {
           </div>
           
 
-
         </Col>
-        
-        
-            
-
-
+      
       
       </Row>
       <Row>
@@ -100,16 +122,14 @@ const MeinProfil = () => {
         <h2 className="profilHeading">Profilbeschreibung</h2>
         <p>{user.userdescription}</p>
         </Col>
-        
-        
-        
+  
         
       </Row>
       <Row>
         <Col>
-            <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+            <Tabs defaultActiveKey="profile" id="">
                 <Tab eventKey="home" title="Meine Posts">
-                {/* <PostsRow postElement={userPosts} /> */}
+                 <PostsRow postElement={userPosts} /> 
 
                 </Tab>
                 <Tab eventKey="profile" title="Bewertungen">
@@ -117,9 +137,6 @@ const MeinProfil = () => {
                 </Tab>
                 
             </Tabs>
-
-
-
           
         </Col>
       </Row>

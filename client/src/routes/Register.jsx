@@ -49,8 +49,7 @@ const Register = ({setAuth}) => {
     
     try {
       const body = { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate };
-      console.log(JSON.stringify(body))
-     /* 
+      
       console.log("test");
       const response = await fetch(
         "http://localhost:3001/Database/Marktplatz/authentication/register",
@@ -69,14 +68,13 @@ const Register = ({setAuth}) => {
         setAuth(true);
         console.log("Registrierung erfolgreich");
         /* toast.success("Register Successfully"); */
-      /*
+
       } else {
         setAuth(false);
         console.log(parseRes);
       /*  toast.error(parseRes); */
       
-     // }
-      
+      }
     } catch (err) {
       console.error(err.message);
     }
@@ -119,7 +117,7 @@ const Register = ({setAuth}) => {
             {validated == false ?
             <Form.Control.Feedback type="invalid">Gib die richtige E-mail ein</Form.Control.Feedback>
           :
-          <Form.Control.Feedback>Looks Good</Form.Control.Feedback>
+          <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
           }
             
             </Form.Group>
@@ -151,7 +149,7 @@ const Register = ({setAuth}) => {
                 value={userlastname}
                 onChange={e => onChange(e)}
                 />
-                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
                <Form.Control.Feedback type="invalid">
               Du musst ein Nachnamen eingeben
             </Form.Control.Feedback>
@@ -165,7 +163,7 @@ const Register = ({setAuth}) => {
                 value={userprename}
                 onChange={e => onChange(e)}
                 />
-               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+               <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
                <Form.Control.Feedback type="invalid">
               Du musst ein Vornamen eingeben
             </Form.Control.Feedback>
@@ -179,7 +177,7 @@ const Register = ({setAuth}) => {
                 value={username}
                 onChange={e => onChange(e)}
                 />
-                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
                <Form.Control.Feedback type="invalid">
               Du musst ein Usernamen eingeben
             </Form.Control.Feedback>
@@ -193,7 +191,7 @@ const Register = ({setAuth}) => {
                 value={userbirthdate}
                 onChange={e => onChange(e)}
                 />
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
                <Form.Control.Feedback type="invalid">
               Du musst ein Geburtsdatum eingeben
             </Form.Control.Feedback>
@@ -225,10 +223,10 @@ const Register = ({setAuth}) => {
                 name="dataprivacy"
                 > 
                 </Form.Check> 
-                <a className="link" href="./Cookiepolicy"> siehe hier</a>
+                <a className="link" href="./Cookiepolicy"> siehe hier.</a>
               
               </Form.Row>
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
               <Form.Control.Feedback type="invalid">
              Du musst die Datenschutzbestimmungen akzeptieren
            </Form.Control.Feedback>
