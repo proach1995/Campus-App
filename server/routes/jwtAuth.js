@@ -48,12 +48,12 @@ router.post("/login", validInfo, async (req, res) => {
   console.log(useremail +"1");
   console.log(userpassword + "in /login")
  
-
+ 
   try {
     const user = await pool.query("SELECT * FROM users WHERE userEmail = $1", [
       useremail
     ]);
-    console.log("neuer try");
+    //console.log("neuer try");
     console.log(user.rows[0].userid);
 
     //check 
@@ -75,7 +75,10 @@ router.post("/login", validInfo, async (req, res) => {
     }
     // if pw correct return token in json format
     const jwtToken = jwtGenerator(user.rows[0].userid);
-    return res.json({ jwtToken });
+    return res.json({ jwtToken:jwtToken,
+            data:{
+              user:user.rows[0]
+            } });
     } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error in jwtAuth/Login");

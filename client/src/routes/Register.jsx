@@ -49,7 +49,8 @@ const Register = ({setAuth}) => {
     
     try {
       const body = { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate };
-      
+      console.log(JSON.stringify(body))
+     /* 
       console.log("test");
       const response = await fetch(
         "http://localhost:3001/Database/Marktplatz/authentication/register",
@@ -68,13 +69,14 @@ const Register = ({setAuth}) => {
         setAuth(true);
         console.log("Registrierung erfolgreich");
         /* toast.success("Register Successfully"); */
-
+      /*
       } else {
         setAuth(false);
         console.log(parseRes);
       /*  toast.error(parseRes); */
       
-      }
+     // }
+      
     } catch (err) {
       console.error(err.message);
     }

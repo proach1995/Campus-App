@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import { Link } from 'react-router-dom';
 import DataServer from "../api/DataServer";
+import { AppContext } from "../context/AppContext";
 
 
 const PostUpload = () => {
+
+  const {user} = useContext(AppContext);
 
   //const {id} = useParams(); wird später benötigt
   //radio
@@ -59,6 +62,7 @@ const PostUpload = () => {
       setNoImage(false);
     }
     setInit(1);
+    console.log("user upload = ", user);
   },[imageFiles])
 
     //Die funktion wird nur ausgeführt, wenn der Wert sich ändert
@@ -176,7 +180,7 @@ const PostUpload = () => {
       //Post erstellen
       const postResult = await DataServer.post("/Post/AddPost",{
         postTitle: postTitle,
-        userId: '349ca5eb-1ea0-4a31-9180-ede4ad0b8a10',
+        userId: user.userid,
         postCategory: postCategory,
         postType: postType,
         postPriceType: postPriceType,
