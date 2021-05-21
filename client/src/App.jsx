@@ -153,7 +153,7 @@ const App = () => {
                 !isAuthenticated ? (
                   <Register {...props} setAuth={setAuth} />
                 ) : (
-                  <Redirect to="/register" />
+                  <Redirect to="/" />
                 )
               }
             />

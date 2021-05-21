@@ -80,7 +80,7 @@ const Home = ({setAuth},{isAuthenticated}) => {
       
       <PostsRow postElement={offerings}/>  
      <div className="buttonBackground " >
-        <Button href="/events" className="button">Zum Marktplatz</Button>
+        <Button href="/marktplatz" className="button">Zum Marktplatz</Button>
       </div>
       <div className="buttonBackground" >
         <h2>Neue Events</h2>

@@ -176,7 +176,7 @@ const PostUpload = () => {
       //Post erstellen
       const postResult = await DataServer.post("/Post/AddPost",{
         postTitle: postTitle,
-        userId: '349ca5eb-1ea0-4a31-9180-ede4ad0b8a10',
+        userId: '5938c76f-6ab8-4688-b2a1-3979f415aa46',
         postCategory: postCategory,
         postType: postType,
         postPriceType: postPriceType,
@@ -315,7 +315,7 @@ const PostUpload = () => {
         </Form.Group>
 
       <Link to="/">
-        <Button className="button" variant="primary" type="submit" onClick={(e)=>{submitHandler(e)}}>
+        <Button href="/" className="button" variant="primary" type="submit" onClick={(e)=>{submitHandler(e)}}>
           Submit
         </Button>
       </Link>
