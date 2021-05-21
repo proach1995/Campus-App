@@ -67,5 +67,4 @@ INSERT INTO images(postId, imagePath) values(
 /*Falls ein Fehler auftritt, kann damit gelösch werden*/
 drop table images;
 drop table posts;
-drop table registry;
 drop table users;

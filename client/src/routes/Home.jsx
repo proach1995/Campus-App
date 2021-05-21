@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import './route.css';
 import PostsRow from "../components/Content/PostsRow";
 import DataServer from "../api/DataServer";
+import { AppContext } from "../context/AppContext";
 
 
 
@@ -14,6 +15,8 @@ import DataServer from "../api/DataServer";
 
 const Home = ({setAuth},{isAuthenticated}) => {
 
+  const {logged, setLogged} = useContext(AppContext);
+  const {user, setUser} = useContext(AppContext);
   //In den States werden die Angebote und Events gespeichert
   const [offerings, setOfferings] = useState([]);
   const [events, setEvents] = useState([]);
@@ -47,6 +50,8 @@ const Home = ({setAuth},{isAuthenticated}) => {
     //console.log("getPosts wird ausgeführt im UseEffekt")
     getOffers();
     getEvents();
+    console.log("user =", user);
+    console.log("Home logged =", logged);
   }, []);
 
 

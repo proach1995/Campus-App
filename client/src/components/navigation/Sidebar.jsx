@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import { IconContext } from 'react-icons';
@@ -6,14 +6,16 @@ import './Sidebar.css';
 import Figure from 'react-bootstrap/Figure';
 import { HamburgerSpring } from 'react-animated-burgers';
 import Button from 'react-bootstrap/Button';
+import { AppContext } from '../../context/AppContext';
 
 
 
 
 
-function Sidebar({isAuthenticated, logout}) {
+function Sidebar({ logout}) {
  
-  
+  const {logged, setLogged} = useContext(AppContext);
+  const {setUser} = useContext(AppContext);
 
   let history = useHistory();
   // eslint-disable-next-line no-lone-blocks
@@ -29,20 +31,21 @@ function Sidebar({isAuthenticated, logout}) {
     const logoutHandler =(e) =>{
 
       logout(e);
+      setLogged(false);
+      setUser(null);
+      
+     
 
       //History muss in einem componenten benutzt werden und nicht in der App
       history.push("/login");
     }
 
+    useEffect(()=>{
 
+      console.log("logged = ",logged);
+    },[])
 
-  
-  
-  console.log(isAuthenticated + " is in Sidebar1");
-
-
-
-
+    
   return (
     <>
       
@@ -60,7 +63,7 @@ function Sidebar({isAuthenticated, logout}) {
 
         <nav className={isActive ? 'nav-menu active' : 'nav-menu'}>
           <div className='nav-menu-items'>
-            <Figure style={{display: isAuthenticated ? '' : 'none' }} className="sidebarProfilSection">
+            <Figure style={{display: logged ? '' : 'none' }} className="sidebarProfilSection">
               <Figure.Image className="profilSectionImage"
                 href="/meinprofil"
                 width={120}
@@ -73,7 +76,7 @@ function Sidebar({isAuthenticated, logout}) {
                 Vorname Name Mail Adresse.
               </Figure.Caption>
             </Figure>
-            <div className="loginButtons" style={{display: isAuthenticated ? 'none' : '' }}>
+            <div className="loginButtons" style={{display: logged ? 'none' : '' }}>
               <div className="centerLoginButtons">
 
               <Link to='/login' onClick={toggleButton}>
@@ -108,7 +111,7 @@ function Sidebar({isAuthenticated, logout}) {
             </ul>
             </div>
             <div className="logout-btn-container">
-            <Button  onClick={(e) => logoutHandler(e)} style={{display: isAuthenticated ? '' : 'none' }} className="button logout-btn login-btn" variant="secondary" >
+            <Button  onClick={(e) => logoutHandler(e)} style={{display: logged ? '' : 'none' }} className="button logout-btn login-btn" variant="secondary" >
                       Logout
             </Button>
             </div>

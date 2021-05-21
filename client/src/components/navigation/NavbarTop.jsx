@@ -6,11 +6,29 @@ import './NavbarTop.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 
 
 const NavbarTop = ({isActive},{toggleButton}) => {
+
+  let history = useHistory();
+  
+  const menuHandler =(e)=>{
+    e.preventDefault();
+    console.log("navbar");
+    console.log(e.target.name);
+    if(e.target.name =="marktplatz"){
+      history.push("/marktplatz");
+    }
+    if(e.target.name =="events"){
+      history.push("/events");
+    }
+    if(e.target.name =="postUpload"){
+      history.push("/postupload");
+    }
+  }
+
   return (
     <>
 
@@ -20,7 +38,6 @@ const NavbarTop = ({isActive},{toggleButton}) => {
       Positioning with offset , sm und md
     
     */}
-
     
   </Navbar>
   <Navbar className="navbarSubline">
@@ -30,11 +47,11 @@ const NavbarTop = ({isActive},{toggleButton}) => {
             <Dropdown.Toggle className="color dropdown-btn"  id="dropdown-basic">
             Kategorien
             </Dropdown.Toggle>
-              <Dropdown.Menu>
-                  <Dropdown.Item href="/marktplatz">Marktplatz</Dropdown.Item>
-                  <Dropdown.Item href="/events">Veranstaltungen</Dropdown.Item>
+              <Dropdown.Menu onClick={(e)=>{menuHandler(e)}}>
+                  <Dropdown.Item name="marktplatz">Marktplatz</Dropdown.Item>
+                  <Dropdown.Item name="events">Veranstaltungen</Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item href="/postupload">Etwas Posten</Dropdown.Item>
+                  <Dropdown.Item name="postUpload">Etwas Posten</Dropdown.Item>
               </Dropdown.Menu>
         </Dropdown>
       </Col>

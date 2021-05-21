@@ -1,5 +1,5 @@
 /* eslint-disable no-lone-blocks */
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Home from "./routes/Home";
 import Footer from './components/navigation/Footer';
@@ -17,13 +17,14 @@ import DataServer from "./api/DataServer";
 import CookiePolicy from "./routes/CookiePolicy";
 import CookieBanner from 'react-cookie-banner';
 import Banner from "./routes/Banner"
-
+import { AppContextProvider } from "./context/AppContext"
 
 
 
 const App = () => {
 
 
+  
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   {/* Mit jedem App render wird lokaler Token an Server gesendet, Server verifiziert und gibt Bool zurück
   setIsAuthenticated wird dann angepasst
@@ -94,6 +95,7 @@ const App = () => {
 
   return (
       <div className="">
+    <AppContextProvider>
     <Router>
       <Sidebar isAuthenticated={isAuthenticated} logout={logout}/>
       <NavbarTop/>
@@ -138,11 +140,8 @@ const App = () => {
               exact
               path="/login"
               render={props =>
-                !isAuthenticated ? (
-                  <Login {...props} setAuth={setAuth} />
-                ) : (
-                  <Redirect to="/" />
-                )
+              
+                  <Login {...props} setAuth={setAuth} /> 
               }
 
             />
@@ -150,16 +149,14 @@ const App = () => {
               exact
               path="/register"
               render={props =>
-                !isAuthenticated ? (
+          
                   <Register {...props} setAuth={setAuth} />
-                ) : (
-                  <Redirect to="/" />
-                )
+                
               }
             />
           </Switch>
         </Router>
-
+        </AppContextProvider>
         
         <Footer/>
         <Banner/>

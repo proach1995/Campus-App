@@ -18,6 +18,7 @@ module.exports = function(req, res, next) {
     } else if (!validEmail(useremail)) {
       return res.json("ungültige Email");
     }
+    
   } else if (req.path === "/login") {
     if (![useremail, userpassword].every(Boolean)) { //.every checkt, ob alle Items im Array bool sind
       return res.json("Falsche Zugangsdaten");
