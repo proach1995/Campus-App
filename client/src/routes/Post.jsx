@@ -10,7 +10,9 @@ import Tab from 'react-bootstrap/Tab';
 import Button from 'react-bootstrap/Button';
 import Image from "react-bootstrap/esm/Image";
 import DataServer from "../api/DataServer";
-import Carousel from 'react-bootstrap/Carousel'
+import Carousel from 'react-bootstrap/Carousel';
+import Dropdown from "react-bootstrap/Dropdown";
+import * as AiIcons from 'react-icons/ai';
 
 
 
@@ -112,22 +114,27 @@ console.log(post);
               <p>{post.posttype}</p>
             </Col>
             <Col>
-              <div>
-                
-              </div>
+            <Dropdown className="postSettings">
+              <Dropdown.Toggle className="settingsbtn color dropdown-btn "  id="dropdown-basic">
+              <AiIcons.AiOutlineSetting className="icon" />
+              </Dropdown.Toggle>
+                <Dropdown.Menu>
+                    <Dropdown.Item href="/">Daten bearbeiten</Dropdown.Item>
+                    <Dropdown.Item href="/">Passwort zurücksetzen</Dropdown.Item>
+                    <Dropdown.Divider className="delete" />
+                    <Dropdown.Item className="delete" href="/">Profil löschen</Dropdown.Item>
+                </Dropdown.Menu>
+        </Dropdown>
+    
             </Col>
           </Row>
           
      
 
-      <Row>
-        <Col className="">
-        <p></p>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
           <h3 className="contentHeading">Beschreibung</h3>
+      <Row className="contentSection ">
+        <Col>
+          
               <p>
                 {post.postdescription}
               </p>
@@ -135,7 +142,8 @@ console.log(post);
       </Row>
 
       <h3 className="contentHeading">Anbieter</h3>
-      <Row>
+      <Row className="contentcontact">
+        <Row>
         <Col className="userSection">
           <Link to="/">
           <Figure.Image 
@@ -148,10 +156,15 @@ console.log(post);
           <p className="username">CoolerTyp95</p>
           </Link>
         </Col>
-      </Row>
-      <Button  className="button login-btn" variant="primary" >
+        </Row>
+        <Row className="contentbtn">
+        <Button  className="button login-btn " variant="primary" >
                         Kontaktieren
               </Button>
+        </Row>
+        
+      </Row>
+      
             
                 
           
