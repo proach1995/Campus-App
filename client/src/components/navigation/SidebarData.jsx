@@ -31,7 +31,7 @@ export const SidebarData = [
   },
   {
     title: 'Mein Profil',
-    path: '/meinprofil',
+    path: '/user/5938c76f-6ab8-4688-b2a1-3979f415aa46 ',
     icon: <BsPeopleCircle />,
     cName: 'nav-text'
   },
