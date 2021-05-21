@@ -57,23 +57,24 @@ console.log(post);
     <> 
 
 
-      <h1 className="postHeader">{post.posttitle}</h1> 
+      <h3 className="postHeader">{post.posttitle}</h3> 
 
       <Row className="">
           
-        <Col  className="pictureSection " >
+        <Col  className="pictureSection imageCarouse" >
           
           <Carousel interval={null} slides={true}>
             <Carousel.Item>
               <img
                 className="d-block imageCarousel"
-                src="../trump.jpg"
+                src="../pb.jpg"
                 alt="First slide"
+                
               />
               <Carousel.Caption>
               </Carousel.Caption>
             </Carousel.Item>
-            <Carousel.Item>
+            <Carousel.Item >
              
               <img
                 className="d-block imageCarousel"
@@ -88,23 +89,14 @@ console.log(post);
                 className="d-block imageCarousel"
                 src="../party.jpg"
                 alt="Third slide"
-                interval={null}
-              />
-              
-            </Carousel.Item>
-            <Carousel.Item>
-                <img
-                className="d-block imageCarousel"
-                src="../face.jpg"
-                alt="Third slide"
-                interval={null}
+                
               />
               
             </Carousel.Item>
     </Carousel>   
         </Col>
       </Row>
-        <h3 className="profilHeading">Details</h3>
+        <h3 className="contentHeading">Details</h3>
         
           <Row className="contentSection "> 
             <Col>
@@ -119,6 +111,11 @@ console.log(post);
               <p>{post.postdate}</p>
               <p>{post.posttype}</p>
             </Col>
+            <Col>
+              <div>
+                
+              </div>
+            </Col>
           </Row>
           
      
@@ -130,14 +127,14 @@ console.log(post);
       </Row>
       <Row>
         <Col>
-          <h3 className="profilHeading">Beschreibung</h3>
+          <h3 className="contentHeading">Beschreibung</h3>
               <p>
                 {post.postdescription}
               </p>
         </Col>
       </Row>
 
-      <h3 className="profilHeading">Anbieter</h3>
+      <h3 className="contentHeading">Anbieter</h3>
       <Row>
         <Col className="userSection">
           <Link to="/">
@@ -153,8 +150,12 @@ console.log(post);
         </Col>
       </Row>
       <Button  className="button login-btn" variant="primary" >
-          Kontaktieren
-        </Button>
+                        Kontaktieren
+              </Button>
+            
+                
+          
+       
         </>
  )} 
     </Container>
