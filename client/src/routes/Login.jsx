@@ -56,6 +56,7 @@ const Login = ({setAuth}, props) => {
         setAuth(true);// Muss weg
         setLogged(true);
         setUser(parseRes.data.user);
+      
         console.log("Erfolgreich eingeloggt")
         history.push("/");
       } else {

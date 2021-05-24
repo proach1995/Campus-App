@@ -42,7 +42,7 @@ router.get("/:postid", async (req, res) => {
   })
 
   // Alle Marktplatz Posts fetchen
-  router.get("/Marktplatz", authorize, async (req, res) => {
+  router.get("/Marktplatz", async (req, res) => {
     try {   
       //console.log("Home wird ausgeführt");
       const resEvents = await db.query("select * from posts p inner join images i on"+
@@ -64,7 +64,7 @@ router.get("/:postid", async (req, res) => {
 
   
 // Alle Event Posts fetchen
-  router.get("/Events", authorize, async (req, res) => {
+  router.get("/Events", async (req, res) => {
     console.log("events wird ausgeführt");
     try {   
       //console.log("Home wird ausgeführt");

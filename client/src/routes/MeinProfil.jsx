@@ -27,38 +27,11 @@ const MeinProfil = () => {
 
 
 
-
-  const getOffers = async () => {
-    try {
-      //console.log("getPosts wird ausgeführt");
-      const resOfferings = await DataServer.get("/Home/Offerings", {jwt_token:localStorage.token})
-      
-      console.log("fetching from offer");
-      console.log(resOfferings.data);
-      setUserPosts(resOfferings.data.offeringList.offer);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
-  useEffect(() => {
-    //console.log("getPosts wird ausgeführt im UseEffekt")
-    getOffers();
-  }, []);
-
-useEffect(() => {
-  console.log( userPosts);
-}, [userPosts])
-
-
-
-
   useEffect(() => {
   const fetchUser= async () => {
     try {
       const response = await DataServer.get(`/User/${userid}`);
-      console.log(response.data.userDetail.posts);
-
+      console.log(response.data.userDetail);
       setUser(response.data.userDetail.user);
       setUserPosts(response.data.userDetail.posts);
     } catch (err) {
@@ -69,6 +42,11 @@ useEffect(() => {
 
   fetchUser();
 }, []);
+
+useEffect(() => {
+  console.log( userPosts);
+}, [userPosts])
+
 
 
   return (

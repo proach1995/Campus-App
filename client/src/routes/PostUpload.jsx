@@ -271,7 +271,7 @@ const PostUpload = () => {
                         fontWeight:"bold"}}>
                         Titel hinzufügen!</p> }
                     </Form.Row>
-                      <Form.Control type="email" placeholder="Titel" onChange={(e)=>{setPostTitle(e.target.value)}}/>
+                      <Form.Control type="text" placeholder="Titel" onChange={(e)=>{setPostTitle(e.target.value)}}/>
                     </Form.Group>
           <         Form.Group >
                       <Form.Label>Kategorie</Form.Label>
@@ -303,7 +303,7 @@ const PostUpload = () => {
                     </Form.Row>
                     <Form.Group  >
                         <Form.Label>Beschreibung</Form.Label>
-                        <Form.Control type="email" placeholder="Beschreibung" onChange={(e)=>{setDescription(e.target.value)}}/>
+                        <Form.Control as="textarea" rows={10} placeholder="Beschreibung" onChange={(e)=>{setDescription(e.target.value)}}/>
                       </Form.Group>
                     <Link to="/">
                       <Button className="button" variant="primary" type="submit" onClick={(e)=>{submitHandler(e)}}>
