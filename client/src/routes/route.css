@@ -197,3 +197,10 @@ width:60%;
 .jumbotron {
     margin-top: 3em;
 }
+
+.postRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

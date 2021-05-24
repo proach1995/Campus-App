@@ -54,7 +54,7 @@ const PostsRow = ({postElement}) => {
  return (
     
     <Container>
-      <Row>
+      <Row className="postRow">
         {postImages !=null && postImages.map((imageInfo, index) => {
           
               return (

@@ -84,7 +84,7 @@ const Home = ({setAuth},{isAuthenticated}) => {
 
       {/*****           CARDS MARKTPLATZ         **********/}
       
-      <PostsRow postElement={offerings}/>  
+      <PostsRow className="postRow" postElement={offerings}/>  
      <div className="buttonBackground " >
         <Button href="/events" className="button">Zum Marktplatz</Button>
       </div>
