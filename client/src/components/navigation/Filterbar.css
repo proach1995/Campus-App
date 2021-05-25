@@ -1,0 +1,61 @@
+
+ .filterMenue {
+    width: 300px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    transition: 450ms;
+    z-index: 10000000;
+  }
+
+
+input[type="range"].slider{
+    -webkit-appearance: none;/*Ein muss um den Slider zu verwenden*/
+    justify-content:center;
+   
+    background: linear-gradient(135deg, #46ca39, #e4ff5b, #46ca39 80%);/*Das in react implementieren*/
+    outline:none;
+    border-radius:12px;
+    height: 10px;
+    box-shadow: 2xp, 2px, 2px, 2px, black; 
+}
+
+
+/*Das geht aus irgendeinem grund nicht*/
+input[type="range"].slider::-webkit-slider-thumb{
+    opacity:1;
+    background:#018512;
+
+}
+
+input[type="range"].slider::-moz-range-thumb{
+    opacity:1;
+    background:#018512;
+    
+}
+
+Col.dropdownButton{
+    
+}
+
+.filterContainer{
+display:flex;
+flex-direction: column;
+justify-content:flex-start;
+align-items:center;
+margin-top: 3em;
+
+}
+
+.setCenter{
+    justify-content:center;
+    max-width: 100%;
+    width:20em;
+}
+
+col.textCol{
+
+}

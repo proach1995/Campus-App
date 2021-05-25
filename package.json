@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@material-ui/core": "^4.11.4",
     "bcrypt": "^5.0.1",
     "express-fileupload": "^1.2.1",
     "file-upload": "*",

@@ -5,6 +5,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Dropdown from "react-bootstrap/Dropdown";
 import DataServer from "../api/DataServer";
+import Button from "react-bootstrap/Button";
+import Filterbar from "../components/navigation/Filterbar"
 
 
 
@@ -12,6 +14,13 @@ import DataServer from "../api/DataServer";
 const Marktplatz = () => {
 
   const [offerings, setOfferings] = useState([]);
+  const [isActive, setIsActive] = useState(false);
+
+  const toggleFilter=(e)=>{
+    e.preventDefault();
+    console.log("Filter");
+    setIsActive(prevState => !prevState);
+  }
 
   const getOffers = async () => {
     try {
@@ -68,19 +77,12 @@ console.log(posts);
         <h1> Marktplatz </h1>
         <p>Hier finden sie alle Posts aus den Kategorien An- und Verkauf, Verleihen sowie Verschenken am Campus Zweibrücken.</p>
   
-            <Dropdown >
-              <Dropdown.Toggle className="color dropdown-btn"  id="dropdown-basic">
-              Filter
-              </Dropdown.Toggle>
-                <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">Angebote</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Gesuche</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Nach Preis</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Nach Datum</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
-       
-
+            <Button variant="success" onClick={(e)=>{toggleFilter(e)}}>Filter</Button>
+          
+        {isActive == true &&
+        <Filterbar toggleFilter={toggleFilter}/>
+        }
+            
         <div className="buttonBackground" >
           <h2>Alle Posts</h2>
         </div>

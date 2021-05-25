@@ -15,7 +15,7 @@ import { AppContext } from '../../context/AppContext';
 function Sidebar({ logout}) {
  
   const {logged, setLogged} = useContext(AppContext);
-  const {setUser} = useContext(AppContext);
+  const {user, setUser} = useContext(AppContext);
 
   let history = useHistory();
   // eslint-disable-next-line no-lone-blocks
@@ -45,6 +45,10 @@ function Sidebar({ logout}) {
       console.log("logged = ",logged);
     },[])
 
+    useEffect(()=>{
+
+      console.log("user sidebar = ", user);
+      },[user]);
     
   return (
     <>
