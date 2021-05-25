@@ -8,7 +8,7 @@ router.get("/:postid", async (req, res) => {
   console.log(req.params.postid + " is param");
     try {
       const postDetail = await db.query(
-        "Select * from posts where postId=$1", [req.params.postid]
+        "Select * from posts p inner join users u on p.userid = u.userid where postId=$1 order by p.postdate desc", [req.params.postid]
       );
       console.log("test");
   

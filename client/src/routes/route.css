@@ -204,3 +204,16 @@ width:60%;
     justify-content: center;
     align-items: center;
 }
+
+.errorBox {
+    margin-top: 3em;
+    background-color: rgb(216, 128, 128);
+}
+
+.errorMsg {
+    text-align: center;
+    color: white;
+}
+.errorHeading {
+    color: white;
+}

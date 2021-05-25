@@ -52,7 +52,6 @@ function Sidebar({ logout}) {
     }
   ];
 
-  //Mein Profil aus dem Array filtern wenn ausgeloggt, da sonst undefined und damit Error 
   console.log(SidebarData);
 
 
@@ -102,7 +101,9 @@ function Sidebar({ logout}) {
 
         <nav className={isActive ? 'nav-menu active' : 'nav-menu'}>
           <div className='nav-menu-items'>
-            <Figure style={{display: logged ? '' : 'none' }} className="sidebarProfilSection">
+            { logged && 
+               <> 
+               <Figure style={{display: logged ? '' : 'none' }} className="sidebarProfilSection">
               <Link onClick={toggleButton} to={logged ? "/user/" + user.userid : "unknown"}>
               <Figure.Image className="profilSectionImage"
                 width={120}
@@ -118,6 +119,8 @@ function Sidebar({ logout}) {
 
               </Figure.Caption>
             </Figure>
+               </>}
+            
             <div className="loginButtons" style={{display: logged ? 'none' : '' }}>
               <div className="centerLoginButtons">
 

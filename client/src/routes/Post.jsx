@@ -96,7 +96,7 @@ console.log(post);
       <h3 className="profilHeading">Anbieter</h3>
       <Row>
         <Col className="userSection">
-          <Link to="/">
+          <Link to={`/user/${post.userid}`}>
           <Figure.Image 
             width={50}
             height={40}
@@ -104,7 +104,7 @@ console.log(post);
             src="../pb.jpg" //{user.userimage}
             roundedCircle
           />
-          <p className="username">CoolerTyp95</p>
+          <p className="username">{post.username}</p>
           </Link>
         </Col>
       </Row>

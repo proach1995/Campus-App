@@ -47,7 +47,7 @@ const PostsRow = ({postElement}) => {
   setPostImages(postImagesHelper);
     },[postElement])
 
-
+    console.log(postElement[0]);
 
 
   {/* Array.from(data) comes from props.data and is an object -> has to be converted into array to use .map*/}  
@@ -61,7 +61,7 @@ const PostsRow = ({postElement}) => {
 
         <div key = {index}>
         <Col className="col-6 col-md-6 col-lg-3 card" >
-            <Link to={'/'}>
+            <Link to={`/post/${imageInfo.postid}`}>
               <Card className="  text-center " style={{ width:'100px', height:"100px" }}>
               <Card.Img src={imageInfo.imagePath}/> 
               <Card.Body>

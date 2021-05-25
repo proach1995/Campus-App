@@ -4,7 +4,7 @@ const db = require("../db/index");
 
 // User Id fetchen
 router.get("/:userid", async (req, res) => {
-  console.log(req.params.userid);
+  console.log(req.params.userid , " in getmethod");
     try {
       const userDetail = await db.query(
         "Select userId, userName, userEmail, userPrename, userLastname, userBirthdate, userImage, userDescription from users where userId=$1", [req.params.userid]
@@ -73,12 +73,19 @@ router.get("/:userid", async (req, res) => {
   
   
   //user löschen 
-  router.delete("/:postid", async (req, res) => {
+  router.delete("/:userid",  async (req, res) => {
     try {
-      console.log(req.params.postid + " is param in delete");
-  
-      const results = db.query("DELETE FROM users where userid = $1", [
-        req.params.postid,
+      console.log(req.params.userid + " is param in delete");
+
+      const deleteImages = db.query("DELETE FROM images i USING posts p where i.postid = p.postid AND p.userid ='$1'", [
+        req.params.userid,
+      ]);
+      console.log(deleteImages)
+      const deletePosts = db.query("DELETE FROM posts where userid = $1", [
+        req.params.userid,
+      ]);
+      const deleteUser = db.query("DELETE FROM users where userid = $1", [
+        req.params.userid,
       ]);
       res.status(204).json({
         status: "sucess",

@@ -20,11 +20,12 @@ module.exports = function(req, res, next) {
     }
     
   } else if (req.path === "/login") {
-    if (![useremail, userpassword].every(Boolean)) { //.every checkt, ob alle Items im Array bool sind
-      return res.json("Falsche Zugangsdaten");
-    } else if (!validEmail(useremail)) {
+    if (!validEmail(useremail)) {
       return res.json("Ungültige Email");
     }
+    if (![useremail, userpassword].every(Boolean)) { //.every checkt, ob alle Items im Array bool sind
+      return res.json("Bitte geben Sie gültige Zugangsdaten ein.");
+    } 
   }
 
   next();

@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import './route.css';
 import { AppContext } from "../context/AppContext";
 import { useHistory } from "react-router";
+import Jumbotron from 'react-bootstrap/Jumbotron';
 
 
 
@@ -15,6 +16,8 @@ const Login = ({setAuth}, props) => {
   const {user, setUser}      = useContext(AppContext);
 
   let history = useHistory();
+
+  const [errorMsg, setErrorMsg] = useState (null);
 
   {/* Inputwerte werden mit State definiert*/}
   const [inputs, setInputs] = useState({
@@ -48,26 +51,27 @@ const Login = ({setAuth}, props) => {
         }
       );
         
-      const parseRes = await response.json();
+      let parseRes = await response.json();
     
 
       if (parseRes.jwtToken) {
         localStorage.setItem("token", parseRes.jwtToken);
-        setAuth(true);// Muss weg
         setLogged(true);
-        setUser(parseRes.data.user);
-      
+        setUser(parseRes.data.user);    
         console.log("Erfolgreich eingeloggt")
         history.push("/");
       } else {
-        setAuth(false);
-        console.log(parseRes)
+        setLogged(false);
+        console.log(parseRes);
+        setErrorMsg(parseRes);
+
       }
     } catch (err) {
       console.error(err.message);
     }
   };
 
+  const showError = true;
 
     return (
       
@@ -78,6 +82,13 @@ const Login = ({setAuth}, props) => {
 
       
            <h1>Login</h1>
+
+          {!(errorMsg === null)  && 
+            <Jumbotron className="errorBox">
+            <h2 className="errorHeading">Ein Fehler ist aufgetaucht</h2>
+            <div className="errorMsg">{errorMsg}</div>
+          </Jumbotron>
+          }
               <Form onSubmit={onSubmitForm}>
                 <Form.Group controlId="Email">
                   <Form.Label>E-Mailadresse</Form.Label>
@@ -109,15 +120,16 @@ const Login = ({setAuth}, props) => {
                             </Button>   
                       </div>  
                     </div>
+
               </Form>
             <div className="register">
             <Button href="/register" className="button register-btn login-btn" variant="secondary" >
-                Jetzt Registrieren 
+                 Registrieren 
               </Button> 
             </div>
             
 
-
+        
                   
 
           </>
