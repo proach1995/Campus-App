@@ -18,6 +18,7 @@ const NavbarTop = ({isActive},{toggleButton}) => {
     e.preventDefault();
     console.log("navbar");
     console.log(e.target.name);
+    
     if(e.target.name =="marktplatz"){
       history.push("/marktplatz");
     }

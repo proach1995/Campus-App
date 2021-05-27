@@ -10,33 +10,28 @@ import './Filterbar.css';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
+import { FormGroup } from "@material-ui/core";
 
 
 //Funktion toggleFilter übergeben
 const Filterbar = ({toggleFilter}) =>{
 
-  const [ value, setValue ] = React.useState(50);
+  const [ choosePrice, setChoosePrice ] = useState(100);
 
     const searchHandler =(e) =>{
         //kommt noch
     }
 
-
-
 return(
     <>
     <div>
-
-        <nav className='nav-menu active'>
-  
-    <Container className="filterContainer">
-
-    <Form >
-    
-        {/*Suchleiste*/ }
-        <Row>
-            <InputGroup size="sm">
-          
+      <nav class="filterBar">
+      <Container className="filterContainer">
+        <Form >
+        
+        {/*input Textfeld*/}
+        <Form.Group className="mb-3">
+              <InputGroup size="sm">
                 <FormControl
                   placeholder="search..." onChange={(e)=>{searchHandler(e)}}
                 />
@@ -44,57 +39,77 @@ return(
                     <InputGroup.Text id="basic-addon2" className="textIcon"><i class="fas fa-search"></i></InputGroup.Text>
                   </InputGroup.Append>
                 </InputGroup>   
-        </Row>
-
-        {/*Dropdown für Kategorie und Preistyp*/ }
+        </Form.Group>
         <br></br>
-        <Form.Row >
-    <Col>
-    <Dropdown>
-        <Dropdown.Toggle variant="success" size="sm">
-    Festpreis 
-  </Dropdown.Toggle>
-
-  <Dropdown.Menu>
-    <Dropdown.Item>Festpreis</Dropdown.Item>
-    <Dropdown.Item>Verhandelbar</Dropdown.Item>
-    <Dropdown.Item>Leihen</Dropdown.Item>
-  </Dropdown.Menu>
-</Dropdown>
-</Col>
-
-<Col>
-<Dropdown>
-        <Dropdown.Toggle variant="success" size="sm">
-    Angebot 
-  </Dropdown.Toggle>
-
-    <Dropdown.Menu>
-        <Dropdown.Item>Angebot</Dropdown.Item>
-        <Dropdown.Item>Gesucht</Dropdown.Item>
-    </Dropdown.Menu>
-</Dropdown>
-</Col>
-</Form.Row>
-
-         {/*Slider üfür preis*/ }
-      
-        <Row>
+        {/*Dropboxen für Kategorie und Preistyp*/}
+        <Form.Group className="mb-3">
+        <Row >
           <Col>
-          <input type="range" class="slider" />
+            <Dropdown>
+                <Dropdown.Toggle variant="success" size="sm">
+                Festpreis 
+                </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item>Festpreis</Dropdown.Item>
+                <Dropdown.Item>Verhandelbar</Dropdown.Item>
+                <Dropdown.Item>Leihen</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </Col>
+
+          <Col>
+            <Dropdown>
+              <Dropdown.Toggle variant="success" size="sm">
+              Angebot 
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item>Angebot</Dropdown.Item>
+                <Dropdown.Item>Gesucht</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
           </Col>
         </Row>
-      
-         
+        </Form.Group>
+        <br></br>
+        {/*slider für Preis*/}
 
-            <div className="logout-btn-container">
-            <Button className="button logout-btn login-btn" variant="secondary" onClick={(e)=>{toggleFilter(e)}} >
+      <Form.Group className="mb-3">
+        <Row>
+          <Col>
+          <input type="range" class="slider" min="0" max="10000" onChange={(e)=>{setChoosePrice(e.target.value)}} />
+          </Col>
+        </Row>
+
+        <Row>
+          <Col className="sm-4">
+            <Form.Label>
+              Preis:
+            </Form.Label>
+          </Col>
+
+          <Col className="sm-8" >
+            <Form.Label >
+              {choosePrice}
+            </Form.Label>
+          </Col>
+        </Row>      
+      </Form.Group>
+
+          <Row>
+            <Col >
+              <Button className="button logout-btn login-btn" variant="secondary" onClick={(e)=>{toggleFilter(e)}} >
                       Abbruch
-            </Button>
-            </div>
-    </Form>
-    </Container>
-        </nav>
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+      </Container>
+
+        
+
+      </nav>
       
           
   

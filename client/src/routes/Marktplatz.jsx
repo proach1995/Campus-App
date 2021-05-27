@@ -18,7 +18,7 @@ const Marktplatz = () => {
 
   const toggleFilter=(e)=>{
     e.preventDefault();
-    console.log("Filter");
+    console.log("Filter: ", isActive);
     setIsActive(prevState => !prevState);
   }
 
