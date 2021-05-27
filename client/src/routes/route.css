@@ -101,6 +101,14 @@
     right: -2em;
 }
 
+.profilImage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+}
 .settings {
     position: absolute;
     right: 2em;
@@ -210,10 +218,22 @@ width:60%;
     background-color: rgb(216, 128, 128);
 }
 
-.errorMsg {
-    text-align: center;
-    color: white;
+.errorMsgBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
-.errorHeading {
-    color: white;
+
+.errorMsg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  position: relative;
+  top: 0.5em;
+}
+.errorIcon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

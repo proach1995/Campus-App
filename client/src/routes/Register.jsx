@@ -1,12 +1,26 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
+import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './route.css';
+import Jumbotron from 'react-bootstrap/Jumbotron';
+import Alert from 'react-bootstrap/Alert';
+import { AppContext } from "../context/AppContext";
+import { ImSad } from "react-icons/im"; 
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+
+
+
 
 
 
 const Register = ({setAuth}) => {
+
+  const {logged, setLogged } = useContext(AppContext);
+  const [errorMsg, setErrorMsg] = useState (null);
 
   // eslint-disable-next-line no-lone-blocks
   {/* Werte mit State in Input Objekt initialisieren*/}
@@ -65,14 +79,13 @@ const Register = ({setAuth}) => {
 
       if (parseRes.jwtToken) {
         localStorage.setItem("token", parseRes.jwtToken);
-        setAuth(true);
+        setLogged(true);
         console.log("Registrierung erfolgreich");
-        /* toast.success("Register Successfully"); */
-
-      } else {
-        setAuth(false);
+        window.location.href = '/';
+        } else {
+        setLogged(false);
         console.log(parseRes);
-      /*  toast.error(parseRes); */
+        setErrorMsg(parseRes);
       
       }
     } catch (err) {
@@ -97,6 +110,25 @@ const Register = ({setAuth}) => {
     return (
       <Container className="routeContainer">
           <h1>Registriere dich!</h1>
+
+          {!(errorMsg === null)  && 
+              <Alert variant="danger"  >
+                <Row className="errorMsgBox">
+                  <Col sm={3} className="errorIcon">
+                    <ImSad size={50} />
+                  </Col>
+                  <Col sm={9} className="errorMsg">
+                    <div>
+                      <Alert.Heading>Ein Fehler ist aufgetaucht</Alert.Heading>
+                        <p>
+                          {errorMsg}
+                        </p>
+                    </div>  
+                  </Col>
+                </Row>
+              </Alert>
+          }
+
        <Form noValidate validated={validated} onSubmit={onSubmitForm}>
           <Form.Row>
             <Form.Group  controlId="Useremail">

@@ -64,7 +64,23 @@ INSERT INTO images(postId, imagePath) values(
     10, 'Images/postImages/toster.jpg'
 );
 
+UPDATE users SET userName = '111111', userEmail = 'depy0100@stud.hs-kl.de', userPrename = '1313', userLastname = '13213', userbirthdate = '1995-10-13', userImage = './UserImage', userDescription = 'geiler typ', userpassword = 'hi' where userId = '29610f76-1f1e-4524-a2b4-b5892994f67c';
+{
+    "username": "uuuuuuuuuuuuuu",
+    "useremail": "depy9999@stud.hs-kl.de",
+    "userprename": "Dennis11",
+    "userlastname": "pyk11a",
+    "userbirthdate": "1995-09-17T22:00:00.000Z",
+    "userpassword": "1111",
+    "userimage": "./pb.jpg",
+    "userdescription": "Test131313131"
+
+}
+
 /*Falls ein Fehler auftritt, kann damit gelösch werden*/
 drop table images;
 drop table posts;
 drop table users;
+
+
+

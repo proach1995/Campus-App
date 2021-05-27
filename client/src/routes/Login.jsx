@@ -6,7 +6,11 @@ import Form from 'react-bootstrap/Form';
 import './route.css';
 import { AppContext } from "../context/AppContext";
 import { useHistory } from "react-router";
-import Jumbotron from 'react-bootstrap/Jumbotron';
+import { ImSad } from "react-icons/im"; 
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Alert from 'react-bootstrap/Alert';
+
 
 
 
@@ -71,7 +75,6 @@ const Login = ({setAuth}, props) => {
     }
   };
 
-  const showError = true;
 
     return (
       
@@ -83,11 +86,22 @@ const Login = ({setAuth}, props) => {
       
            <h1>Login</h1>
 
-          {!(errorMsg === null)  && 
-            <Jumbotron className="errorBox">
-            <h2 className="errorHeading">Ein Fehler ist aufgetaucht</h2>
-            <div className="errorMsg">{errorMsg}</div>
-          </Jumbotron>
+           {!(errorMsg === null)  && 
+              <Alert variant="danger"  >
+                <Row className="errorMsgBox">
+                  <Col sm={3} className="errorIcon">
+                    <ImSad size={50} />
+                  </Col>
+                  <Col sm={9} className="errorMsg">
+                    <div>
+                      <Alert.Heading>Ein Fehler ist aufgetaucht</Alert.Heading>
+                        <p>
+                          {errorMsg}
+                        </p>
+                    </div>  
+                  </Col>
+                </Row>
+              </Alert>
           }
               <Form onSubmit={onSubmitForm}>
                 <Form.Group controlId="Email">
@@ -102,7 +116,7 @@ const Login = ({setAuth}, props) => {
                 
                 </Form.Group>
 
-                <Form.Group controlId="Password">
+                <Form.Group >
                   <Form.Label>Passwort</Form.Label>
                   <Form.Control 
                     value={userpassword} 

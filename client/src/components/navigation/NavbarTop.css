@@ -27,7 +27,7 @@
     justify-content: center;
     align-items: center;
 }
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 700px) {
     .navbarSubline {
         top: 0.5em;
         z-index: 1000;
