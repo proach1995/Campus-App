@@ -7,6 +7,7 @@ export const AppContextProvider = (props) =>{
    
     const [user, setUser] = useState();
     const [logged, setLogged] = useState();
+    
 
     return(
         <AppContext.Provider value = {{

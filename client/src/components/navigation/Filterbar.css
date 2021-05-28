@@ -1,23 +1,79 @@
 
- nav.filterBar {
-    width: 300px;
+ nav.filterBar.active {
+    width: 20em;
     height: 100vh;
     display: flex;
     justify-content: center;
     position: fixed;
     top: 0;
     left:0;
-    transition: 450ms;
+    transition: 800ms linear;
     z-index: 10000000;
     background:#0c576e 80%; 
   }
 
-  button.button.logout-btn.login-btn{
-      position:static;
-      background-color:rgb(143, 0, 0)
+  nav.filterBar.inactive {
+    width: 20em;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left:-100%;
+    transition: 800ms linear;
+    z-index: 10000000;
+    background:#0c576e 80%; 
   }
 
+  @media screen and (max-width: 576px) {
+    nav.filterBar.active { 
+        width: 100vw;
+    }
+  }
 
+  .filterContainer{
+    display:flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items:center;
+    margin-top: 3em;
+    width:100%;
+    
+    }
+
+form{
+    width:80%
+}
+
+.dropdown{
+    width:80%
+}
+
+button.dropdown-toggle.btn.btn{
+    width:100%;
+}
+.col{
+    display:flex;
+    justify-content:center;
+}
+div.col-pricingLabelTitle{
+    display:flex;
+    justify-content:flex-start;
+    width:100%
+    
+}
+
+div.col-pricingLabelPrice{
+    display:flex;
+    justify-content:flex-end;
+    width:100%
+}
+
+.form-label{
+    font-size:1em;
+    font-weight:bold;
+
+}
 input[type="range"].slider{
     -webkit-appearance: none;/*Ein muss um den Slider zu verwenden*/
     justify-content:center;
@@ -26,12 +82,12 @@ input[type="range"].slider{
     outline:none;
     border-radius:12px;
     height: 0.7em;
-    width:15em;
+    width:100%;
   
 }
 
 
-/*Das geht aus irgendeinem grund nicht*/
+/*--------Das geht aus irgendeinem grund nicht-------------*/
 input[type="range"].slider::-webkit-slider-thumb{
     opacity:1;
     background:#018512;
@@ -43,20 +99,19 @@ input[type="range"].slider::-moz-range-thumb{
     background:#018512;
     
 }
+/*---------------------*/
 
-Col.dropdownButton{
-    
+button.button.logout-btn.login-btn{
+    position:static;
+    background-color:rgb(143, 0, 0);
+    width:80%;
 }
 
-.filterContainer{
-display:flex;
-flex-direction: column;
-justify-content:flex-start;
-align-items:center;
-margin-top: 3em;
-
+button.button.logout-btn.login-btn.ok{
+    position:static;
+    background-color:rgb(6, 128, 2);
+    width:80%;
 }
-
 .setCenter{
     justify-content:center;
     max-width: 100%;

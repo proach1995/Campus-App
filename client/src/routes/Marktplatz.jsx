@@ -80,7 +80,7 @@ console.log(posts);
             <Button variant="success" onClick={(e)=>{toggleFilter(e)}}>Filter</Button>
           
         {isActive == true &&
-        <Filterbar toggleFilter={toggleFilter}/>
+        <Filterbar toggleFilter={toggleFilter} isActive={isActive}/>
         }
             
         <div className="buttonBackground" >

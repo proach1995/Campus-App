@@ -14,18 +14,27 @@ import { FormGroup } from "@material-ui/core";
 
 
 //Funktion toggleFilter übergeben
-const Filterbar = ({toggleFilter}) =>{
+const Filterbar = ({toggleFilter, isActive}) =>{
 
   const [ choosePrice, setChoosePrice ] = useState(100);
+  
+  
+  
+ 
 
     const searchHandler =(e) =>{
         //kommt noch
     }
+    useEffect(()=>{
+      console.log("isActive=", isActive);
+    })
 
 return(
     <>
     <div>
-      <nav class="filterBar">
+      
+      <nav class={isActive?'filterBar active':'filterBar inactive'}>
+        
       <Container className="filterContainer">
         <Form >
         
@@ -44,7 +53,7 @@ return(
         {/*Dropboxen für Kategorie und Preistyp*/}
         <Form.Group className="mb-3">
         <Row >
-          <Col>
+          <Col >
             <Dropdown>
                 <Dropdown.Toggle variant="success" size="sm">
                 Festpreis 
@@ -83,13 +92,13 @@ return(
         </Row>
 
         <Row>
-          <Col className="sm-4">
+          <Col className="col-pricingLabelTitle">
             <Form.Label>
-              Preis:
+              Preis €:
             </Form.Label>
           </Col>
 
-          <Col className="sm-8" >
+          <Col className="col-pricingLabelPrice">
             <Form.Label >
               {choosePrice}
             </Form.Label>
@@ -99,20 +108,20 @@ return(
 
           <Row>
             <Col >
-              <Button className="button logout-btn login-btn" variant="secondary" onClick={(e)=>{toggleFilter(e)}} >
+              <Button className="button logout-btn login-btn" variant="secondary" size="sm" onClick={(e)=>{toggleFilter(e)}} >
                       Abbruch
+              </Button>
+            </Col>
+
+            <Col >
+              <Button className="button logout-btn login-btn ok" variant="success" size="sm" >
+                      OK
               </Button>
             </Col>
           </Row>
         </Form>
       </Container>
-
-        
-
-      </nav>
-      
-          
-  
+      </nav> 
     </div>
     </>
 )
