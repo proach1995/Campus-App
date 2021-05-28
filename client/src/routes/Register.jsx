@@ -78,6 +78,7 @@ const Register = ({setAuth}) => {
      }
       
     } catch (err) {
+      console.log("user schon da");
       console.error(err.message);
     }
     

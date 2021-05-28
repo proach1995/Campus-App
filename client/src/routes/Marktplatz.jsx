@@ -25,7 +25,7 @@ const Marktplatz = () => {
   const getOffers = async () => {
     try {
       //console.log("getPosts wird ausgeführt");
-      const resOfferings = await DataServer.post("/Home/Offerings", {jwt_token:localStorage.token})
+      const resOfferings = await DataServer.get("/Home/Offerings", {jwt_token:localStorage.token})
       
       //console.log("fetching from offer");
       //console.log(resOfferings.data);

@@ -319,7 +319,7 @@ const PostUpload = () => {
         </Form.Group>
 
       <Link to="/">
-        <Button className="button" variant="primary" type="submit" onClick={(e)=>{submitHandler(e)}}>
+        <Button href="/" className="button" variant="primary" type="submit" onClick={(e)=>{submitHandler(e)}}>
           Submit
         </Button>
       </Link>

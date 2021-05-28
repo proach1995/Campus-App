@@ -114,7 +114,7 @@ console.log("user Login = ", user);
               </Form>
             <div className="register">
             <Button href="/register" className="button register-btn login-btn" variant="secondary" >
-                Jetzt Registrieren 
+                Registrieren 
               </Button> 
             </div>
             
