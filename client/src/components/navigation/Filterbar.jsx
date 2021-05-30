@@ -36,7 +36,7 @@ return(
       <nav class={isActive?'filterBar active':'filterBar inactive'}>
         
       <Container className="filterContainer">
-        <Form >
+        <Form className="filterForm">
         
         {/*input Textfeld*/}
         <Form.Group className="mb-3">
@@ -53,8 +53,8 @@ return(
         {/*Dropboxen für Kategorie und Preistyp*/}
         <Form.Group className="mb-3">
         <Row >
-          <Col >
-            <Dropdown>
+          <Col className="col-Filter">
+            <Dropdown className="dropdownFilter">
                 <Dropdown.Toggle variant="success" size="sm">
                 Festpreis 
                 </Dropdown.Toggle>
@@ -67,8 +67,8 @@ return(
             </Dropdown>
           </Col>
 
-          <Col>
-            <Dropdown>
+          <Col  className="col-Filter">
+            <Dropdown className="dropdownFilter">
               <Dropdown.Toggle variant="success" size="sm">
               Angebot 
               </Dropdown.Toggle>
@@ -86,20 +86,20 @@ return(
 
       <Form.Group className="mb-3">
         <Row>
-          <Col>
+          <Col className="col-Filter">
           <input type="range" class="slider" min="0" max="10000" onChange={(e)=>{setChoosePrice(e.target.value)}} />
           </Col>
         </Row>
 
         <Row>
           <Col className="col-pricingLabelTitle">
-            <Form.Label>
+            <Form.Label className="preisLabel">
               Preis €:
             </Form.Label>
           </Col>
 
           <Col className="col-pricingLabelPrice">
-            <Form.Label >
+            <Form.Label className="preisLabel">
               {choosePrice}
             </Form.Label>
           </Col>
@@ -107,13 +107,13 @@ return(
       </Form.Group>
 
           <Row>
-            <Col >
+            <Col className="col-Filter">
               <Button className="button logout-btn login-btn" variant="secondary" size="sm" onClick={(e)=>{toggleFilter(e)}} >
                       Abbruch
               </Button>
             </Col>
 
-            <Col >
+            <Col className="col-Filter">
               <Button className="button logout-btn login-btn ok" variant="success" size="sm" >
                       OK
               </Button>

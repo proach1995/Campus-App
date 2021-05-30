@@ -28,7 +28,7 @@ const MeinProfil = () => {
   const [updateUser, setUpdateUser] = useState(null);
 
 
-  const [user, setUser] = useState(null);
+
   const [userPosts, setUserPosts] = useState([]);
   const [authorPosts, setAuthorPosts] = useState([]);
   const { userid } = useParams();
