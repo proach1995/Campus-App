@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import PostsRow from "../components/Content/PostsRow";
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Dropdown from "react-bootstrap/Dropdown";
 import DataServer from "../api/DataServer";
 import Button from "react-bootstrap/Button";
@@ -39,6 +37,7 @@ const Marktplatz = () => {
     //console.log("getPosts wird ausgeführt im UseEffekt")
     getOffers();
   }, []);
+  // eslint-disable-next-line no-lone-blocks
   {/*
   const [posts, setPosts] = useState(null);
 

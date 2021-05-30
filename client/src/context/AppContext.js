@@ -5,7 +5,7 @@ export const AppContext = createContext();
 export const AppContextProvider = (props) =>{
 
    
-    const [user, setUser] = useState();
+    const [user, setUser] = useState("Nicht eingeloggt initialwert");
     const [logged, setLogged] = useState();
     
 

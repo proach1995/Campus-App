@@ -26,8 +26,8 @@ const Home = ({setAuth},{isAuthenticated}) => {
       //console.log("getPosts wird ausgeführt");
       const resOfferings = await DataServer.get("/Home/Offerings", {jwt_token:localStorage.token})
       
-      //console.log("fetching from offer");
-      //console.log(resOfferings.data);
+      console.log("fetching from offer");
+      console.log(resOfferings.data);
       setOfferings(resOfferings.data.offeringList.offer);
     } catch (err) {
       console.error(err.message);
@@ -52,6 +52,7 @@ const Home = ({setAuth},{isAuthenticated}) => {
     getEvents();
     console.log("user =", user);
     console.log("Home logged =", logged);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 

@@ -54,11 +54,11 @@ router.post("/login", validInfo, async (req, res) => {
       useremail
     ]);
     //console.log("neuer try");
-    console.log(user.rows[0].userid);
+    console.log(user.body);
 
     //check 
     if (user.rows.length === 0) {
-      return res.status(401).json("Falsche E-Mailadresse");
+      return res.status(401).json("Diese E-Mailadresse wurde nicht gefunden.");
     }
     
 

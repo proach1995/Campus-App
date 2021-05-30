@@ -6,9 +6,14 @@ import Container from "react-bootstrap/Container";
 import { Link } from 'react-router-dom';
 import DataServer from "../api/DataServer";
 import { AppContext } from "../context/AppContext";
+import LoginRequired from "../components/Content/LoginRequired";
+
+
 
 
 const PostUpload = () => {
+
+  const {logged} = useContext(AppContext);
 
   const {user} = useContext(AppContext);
 
@@ -56,7 +61,7 @@ const PostUpload = () => {
   //Testen
   useEffect(()=>{
 
-    if(imageFiles.length==0 && init == 1 ){
+    if(imageFiles.length===0 && init === 1 ){
       setNoImage(true);
     }
     else{
@@ -64,6 +69,7 @@ const PostUpload = () => {
     }
     setInit(1);
     console.log("user upload = ", user);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[imageFiles])
 
     //Die funktion wird nur ausgeführt, wenn der Wert sich ändert
@@ -95,7 +101,7 @@ const PostUpload = () => {
     
     for(let obj of formComponents){
       
-      if(obj.inputId == formId && imageFilesArray[index] !=null){
+      if(obj.inputId === formId && imageFilesArray[index] !=null){
         imageFilesArray[index] = e.target.files[0];
         setImageFiles(imageFilesArray);
         gefunden = true;
@@ -104,7 +110,7 @@ const PostUpload = () => {
       index = index+1;
     }
     
-    if(gefunden == false){
+    if(gefunden === false){
     setComponentIndex(componentIndex+1);
     setFormComponents([...formComponents, {inputId:componentIndex}]);
     setImageFiles([...imageFiles, e.target.files[0]]);
@@ -130,7 +136,7 @@ const PostUpload = () => {
 
       for(let formObject of formComponents){
 
-        if(formObject.inputId == formId && index != formComponentsArray.length-1){
+        if(formObject.inputId === formId && index !== formComponentsArray.length-1){
           formComponentsArray.splice(index,1);
           imageFilesArray.splice(index, 1);
           
@@ -150,7 +156,7 @@ const PostUpload = () => {
     let errorFlag = false;
     //Errorcatching
     //Error No titel
-    if(postTitle==""){
+    if(postTitle===""){
       setNoTitel(true);
       errorFlag = true;
     }
@@ -167,7 +173,7 @@ const PostUpload = () => {
       setFalsePrice(false);
     }
 
-    if(imageFiles.length==0){
+    if(imageFiles.length===0){
       setNoImage(true);
       errorFlag = true;
     }
@@ -176,7 +182,7 @@ const PostUpload = () => {
     }
     	
     //Datenbank mit einbeziehen
-    if(errorFlag == false){
+    if(errorFlag === false){
     
       //Post erstellen
       const postResult = await DataServer.post("/Post/AddPost",{
@@ -219,113 +225,103 @@ const PostUpload = () => {
 
       <h1>Anzeige erstellen</h1>    
       
-      <Form>
-          <Form.Check inline label="Angebot"
-          type="radio"
-          id="radioAngebot"
-          onChange ={(e)=>{radioAngebotFunction(e)}}
-          checked={radioAngebot}
-          />
-
-          <Form.Check inline label="Gesucht"
-          type="radio"
-          id="radioGesucht"
-          onChange ={(e)=>{radioGesuchtFunction(e)}}
-          checked = {radioGesucht}/>
-         
-        {/**Kann soweit ergänzt werden, dass Button dan erscheint wenn bild hinzugefügt wurde */}
-          {formComponents.map(form=>(
-          <>
-          <div key={form.inputId}>
-          <Form.Row>
-            <Form.File id="productimage"
-              onChange={(e)=>{inputFieldHandler(e, form.inputId)}}
-            />
-            <Button id="cancelButton"
-                label ="Entfernen"
-                className="button"
-                variant="primary"
-                onClick={(e)=>{cancelButtonHandler(e, form.inputId)}}>
-                  Entfernen
-              </Button>
-              {noImage==true && <p style={{color:"red",
-              fontSize:"20px",
-              marginLeft:"20px",
-              fontWeight:"bold"}}>
-              Mindestens 1 Bild wählen</p>} 
-              </Form.Row>
-            </div>
-            
-            
-          </>
-          ))}
-
-        
-        <Form.Group  controlId="formGridEmail">
-
-        <Form.Row>
-          <Form.Label>Titel</Form.Label>
-          {noTitel == true &&
-           <p style={{color:"red",
-            fontSize:"20px",
-            marginLeft:"20px",
-            fontWeight:"bold"}}>
-            Titel hinzufügen!</p> }
-        </Form.Row>
-          <Form.Control type="email" placeholder="Titel" onChange={(e)=>{setPostTitle(e.target.value)}}/>
-          
-        
-        </Form.Group>
-       
-          
-        
-
-
-      <Form.Group controlId="formGridAddress1">
-      <Form.Label>Kategorie</Form.Label>
-          <Form.Control as="select" defaultValue="Kategorie" onChange ={(e)=>{setPostType(e.target.value)}}>
-            <option>Marktplatz</option>
-            <option>Events</option>
-          </Form.Control>
-      </Form.Group>
-
-      <Form.Row>
-        <Form.Group as={Col} controlId="formGridCity">
-
-          <Form.Row>
-          <Form.Label>Preis</Form.Label>
-          {falsePrice == true &&  <p style={{color:"red",
-            fontSize:"20px",
-            marginLeft:"20px",
-            fontWeight:"bold"}}>
-            Ungültiger Preis</p>}
-            </Form.Row>
-          <Form.Control type="number" onChange={(e)=>{setPostPrice(Number(e.target.value))}}/>
-        </Form.Group>
-
-        <Form.Group as={Col} controlId="formGridAddress1">
-          <Form.Label>Preisart</Form.Label>
-              <Form.Control as="select" defaultValue="Festpreis" onChange={(e) =>{setPostPriceType(e.target.value)}}>
-                <option value="Festpreis">Festpreis</option>
-                <option value="Verhandelbar">Verhandelbar</option>
-                <option value="Leihen">Leihen</option>
-              </Form.Control>
-        </Form.Group>
-        
-      </Form.Row>
-
-      <Form.Group  controlId="formGridEmail">
-          <Form.Label>Beschreibung</Form.Label>
-          <Form.Control type="email" placeholder="Beschreibung" onChange={(e)=>{setDescription(e.target.value)}}/>
-        </Form.Group>
-
-      <Link to="/">
-        <Button href="/" className="button" variant="primary" type="submit" onClick={(e)=>{submitHandler(e)}}>
-          Submit
-        </Button>
-      </Link>
+      <div>
+      {logged && 
+              <Form>
+                <Form.Check inline label="Angebot"
+                type="radio"
+                id="radioAngebot"
+                onChange ={(e)=>{radioAngebotFunction(e)}}
+                checked={radioAngebot}
+                />
       
-</Form>
+                <Form.Check inline label="Gesucht"
+                type="radio"
+                id="radioGesucht"
+                onChange ={(e)=>{radioGesuchtFunction(e)}}
+                checked = {radioGesucht}
+                />
+             
+                {/**Kann soweit ergänzt werden, dass Button dan erscheint wenn bild hinzugefügt wurde */}
+                {formComponents.map(form=>(
+                  <>
+                  <div key={form.inputId}>
+                    <Form.Row>
+                      <Form.File id="productimage"
+                        onChange={(e)=>{inputFieldHandler(e, form.inputId)}}
+                      /> 
+                      <div >
+                        <a onClick={(e)=>{cancelButtonHandler(e, form.inputId)}} className="cancelButton">Entfernen</a>
+                      </div>     
+                        {noImage===true && <p style={{color:"red",
+                        fontSize:"20px",
+                        marginLeft:"20px",
+                        fontWeight:"bold"}}>
+                        Mindestens 1 Bild wählen</p>} 
+                    </Form.Row>
+                  </div>
+                  </>
+                  ))}
+                 <Form.Group>
+                    <Form.Row>
+                      <Form.Label>Titel</Form.Label>
+                      {noTitel === true &&
+                      <p style={{color:"red",
+                        fontSize:"20px",
+                        marginLeft:"20px",
+                        fontWeight:"bold"}}>
+                        Titel hinzufügen!</p> }
+                    </Form.Row>
+                      <Form.Control type="text" placeholder="Titel" onChange={(e)=>{setPostTitle(e.target.value)}}/>
+                    </Form.Group>
+          <         Form.Group >
+                      <Form.Label>Kategorie</Form.Label>
+                          <Form.Control as="select" defaultValue="Kategorie" onChange ={(e)=>{setPostType(e.target.value)}}>
+                            <option>Marktplatz</option>
+                            <option>Events</option>
+                          </Form.Control>
+                    </Form.Group>
+                    <Form.Row>
+                      <Form.Group as={Col} >
+                        <Form.Row>
+                        <Form.Label>Preis</Form.Label>
+                        {falsePrice === true &&  <p style={{color:"red",
+                          fontSize:"20px",
+                          marginLeft:"20px",
+                          fontWeight:"bold"}}>
+                          Ungültiger Preis</p>}
+                          </Form.Row>
+                        <Form.Control type="number" onChange={(e)=>{setPostPrice(Number(e.target.value))}}/>
+                      </Form.Group>
+                      <Form.Group as={Col} >
+                        <Form.Label>Preisart</Form.Label>
+                            <Form.Control as="select" defaultValue="Festpreis" onChange={(e) =>{setPostPriceType(e.target.value)}}>
+                              <option value="Festpreis">Festpreis</option>
+                              <option value="Verhandelbar">Verhandelbar</option>
+                              <option value="Leihen">Leihen</option>
+                            </Form.Control>
+                      </Form.Group>
+                    </Form.Row>
+                    <Form.Group  >
+                        <Form.Label>Beschreibung</Form.Label>
+                        <Form.Control as="textarea" rows={10} placeholder="Beschreibung" onChange={(e)=>{setDescription(e.target.value)}}/>
+                      </Form.Group>
+                    <Link to="/">
+                      <Button className="button" variant="primary" type="submit" onClick={(e)=>{submitHandler(e)}}>
+                        Submit
+                      </Button>
+                    </Link>
+              </Form> 
+            }
+      </div>
+      <div>
+        {!logged && 
+        
+          <LoginRequired/>
+          
+        
+        }
+      </div>
 
 </Container>
   )
