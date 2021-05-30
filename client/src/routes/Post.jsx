@@ -140,7 +140,7 @@ console.log(post);
               </p>
         </Col>
       </Row>
-
+  
       <h3 className="contentHeading">Anbieter</h3>
       <Row className="contentcontact">
         <Row>
