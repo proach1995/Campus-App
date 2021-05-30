@@ -6,6 +6,10 @@ import Form from 'react-bootstrap/Form';
 import './route.css';
 import { AppContext } from "../context/AppContext";
 import { useHistory } from "react-router";
+import Cookies from "js-cookie";
+
+//uss installiert werden: npm install js-cookie --save
+
 
 
 
@@ -57,6 +61,8 @@ const Login = ({setAuth}, props) => {
         setLogged(true);
         setUser(parseRes.data.user);
         console.log("Erfolgreich eingeloggt")
+        console.log(parseRes);
+        Cookies.set("userId", parseRes.data.user.userid);
         history.push("/");
       } else {
         setAuth(false);

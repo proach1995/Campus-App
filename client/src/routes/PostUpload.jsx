@@ -50,6 +50,7 @@ const PostUpload = () => {
   const [falsePrice, setFalsePrice] = useState(false);
   const [noImage, setNoImage] = useState(false);
 
+
   //Hilfsflags
   const [init, setInit] = useState(0);
   //Testen

@@ -2,14 +2,15 @@ const router = require("express").Router();
 const authorize = require("../Middleware/authorize");
 const db = require("../db/index");
 
-// User Id fetchen
+// User  fetchen
 router.get("/:userid", async (req, res) => {
+  console.log("getUser");
   console.log(req.params.userid);
     try {
       const userDetail = await db.query(
-        "Select userId, userName, userEmail, userPrename, userLastname, userBirthdate, userImage, userDescription from users where userId=$1", [req.params.userid]
+        "Select * from users where userId=$1", [req.params.userid]
       );
-      console.log(userDetail + " in router");
+      console.log(userDetail, " in router");
   
       const userPosts = await db.query (
         "Select * from posts where userId = $1", [req.params.userid]

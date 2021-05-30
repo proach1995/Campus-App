@@ -7,13 +7,16 @@ import Figure from 'react-bootstrap/Figure';
 import { HamburgerSpring } from 'react-animated-burgers';
 import Button from 'react-bootstrap/Button';
 import { AppContext } from '../../context/AppContext';
+import DataServer from '../../api/DataServer';
+import Cookies from 'js-cookie';
+
 
 
 
 
 
 function Sidebar({ logout}) {
- 
+    
   const {logged, setLogged} = useContext(AppContext);
   const {user, setUser} = useContext(AppContext);
 
@@ -25,31 +28,37 @@ function Sidebar({ logout}) {
      [],
   );
 
+  const refreshHandler = async()=>{
+  
+    const userData = await DataServer.get("User/"+Cookies.get("userId"));
+    console.log("egal", userData);
+    setUser(userData.data.userDetail.user);
+    setLogged(true);
+  }
 
 
 
     const logoutHandler =(e) =>{
-
       logout(e);
       setLogged(false);
       setUser(null);
-      
-     
-
+      Cookies.remove("userId");
       //History muss in einem componenten benutzt werden und nicht in der App
       history.push("/login");
     }
 
     useEffect(()=>{
-
-      console.log("logged = ",logged);
-    },[])
+      
+      if(localStorage.getItem("token") !=null && logged ==null){
+        console.log("Refresh");
+        refreshHandler();
+      }
+      //console.log("user", user);
+    },[logged]);
 
     useEffect(()=>{
-
-      console.log("user sidebar = ", user);
-      },[user]);
-    
+      console.log("sidebar user=",user);
+    },[user])
   return (
     <>
     <div>

@@ -36,7 +36,6 @@ const App = () => {
           method: "POST",
           headers: { jwt_token: localStorage.token }
         });
-  
         const parseRes = await res.json();
         console.log("parseRes = ", parseRes);
   
@@ -45,6 +44,7 @@ const App = () => {
         console.error(err.message);
       }
     };
+
   
     {/* Bei jedem Rendern wird neu verifiziert.
     2. Rendern wichtig für Fetch, da sonst rendern bevor die Daten gefetcht sind*/}
@@ -89,7 +89,7 @@ const App = () => {
       checkAuthenticated();
       //getProfile();
 
-      console.log("authenticated", isAuthenticated);
+      console.log("App");
     }, []);
 
 
