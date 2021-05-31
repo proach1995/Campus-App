@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useContext} from "react";
+import { useHistory } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -12,6 +13,7 @@ import { AppContext } from "../context/AppContext";
 
 const Register = () => {
 
+  let history = useHistory();
   const {logged, setLogged} = useContext(AppContext);
   // eslint-disable-next-line no-lone-blocks
   {/* Werte mit State in Input Objekt initialisieren*/}
@@ -44,6 +46,7 @@ const Register = () => {
   }
 
   const onSubmitForm = async e => {
+    e.preventDefault();
     console.log("onSubmitForm in Register ausgeführt");
     
     if(!validEmail(useremail)){
@@ -73,8 +76,8 @@ const Register = () => {
       } else {
         setLogged(false);
         console.log(parseRes);
-      
       }
+      history.push("/home");
     } catch (err) {
       console.error(err.message);
     }
