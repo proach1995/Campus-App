@@ -1,13 +1,18 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './route.css';
+import DataServer from "../api/DataServer";
+import { AppContext } from "../context/AppContext";
 
 
 
-const Register = ({setAuth}) => {
 
+
+const Register = () => {
+
+  const {logged, setLogged} = useContext(AppContext);
   // eslint-disable-next-line no-lone-blocks
   {/* Werte mit State in Input Objekt initialisieren*/}
   const [inputs, setInputs] = useState({
@@ -46,29 +51,27 @@ const Register = ({setAuth}) => {
     }
     else{
     
-    try {
-      const body = { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate };
-      
-      console.log("test");
-      const response = await fetch(
-        "http://localhost:3001/Database/Marktplatz/authentication/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json"
-          },
-          body: JSON.stringify(body)
-        }
-      );
+    try {      
+      const response = await DataServer.post("/authentication/register", {
+        useremail: useremail,
+        userpassword: userpassword,
+        username: username,
+        userlastname: userlastname,
+        userprename: userprename,
+        userdescription: userdescription,
+        userbirthdate: userbirthdate,
+      })
+
+
       const parseRes = await response.json();
 
       if (parseRes.jwtToken) {
         localStorage.setItem("token", parseRes.jwtToken);
-        setAuth(true);
+        setLogged(true);
         console.log("Registrierung erfolgreich");
 
       } else {
-        setAuth(false);
+        setLogged(false);
         console.log(parseRes);
       
       }
@@ -231,7 +234,7 @@ const Register = ({setAuth}) => {
 
  
     <div className="buttonBackground" >
-        <Button type="submit" className="button">Registrieren</Button>
+        <Button href="/" type="submit" className="button">Registrieren</Button>
         
     </div>
     

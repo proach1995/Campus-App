@@ -33,7 +33,8 @@ const PostsRow = ({postElement}) => {
       if(postIdMemory !==item.postid){
         innerIndex = innerIndex+1;
         postIdMemory = item.postid;
-        postImagesHelper.push({imagePath:item.imagepath, postTitle:item.posttitle, postPrice:item.postprice});
+        console.log(item.postid);
+        postImagesHelper.push({imagePath:item.imagepath, postTitle:item.posttitle, postPrice:item.postprice, postId:item.postid});
       }
     })
 
@@ -41,7 +42,7 @@ const PostsRow = ({postElement}) => {
  // console.log("Konrollaugabe");
   postImagesHelper.map((post) =>{
       console.log(post.imagePath);
-      console.log(post.postprice)
+      console.log(post.postId);
 
     });
 
@@ -66,7 +67,7 @@ const PostsRow = ({postElement}) => {
 
         <div key = {index}>
         <Col className="col-6 col-md-6 col-lg-3 card" >
-            <Link to={`/post/${imageInfo.postid}`}>
+            <Link to= {"/post/" + imageInfo.postId}>
               <Card className=" text-center " style={{ width:'100px', height:"100px" }}>
               <Card.Img src={imageInfo.imagePath}> 
               </Card.Img> 
