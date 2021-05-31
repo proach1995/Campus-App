@@ -10,6 +10,7 @@ import DataServer from "../api/DataServer";
 import Carousel from 'react-bootstrap/Carousel';
 import Dropdown from "react-bootstrap/Dropdown";
 import * as AiIcons from 'react-icons/ai';
+import './route.css';
 
 
 
@@ -21,15 +22,15 @@ import * as AiIcons from 'react-icons/ai';
 const Post = () => {
 
   const { postid } = useParams();
-  const [post, setPost] = useState(null);
+  const [post, setPost] = useState([]);
   console.log("postid: " + postid);
 
 
 
-  useEffect(() => {
+  
     const fetchPost= async () => {
       try {
-        const response = await DataServer.get(`/Post/${postid}`);
+        const response = await DataServer.get("/Post/${postid}", {jwt_token:localStorage.token});
         console.log(response.data.postDetail.post);
 
         setPost(response.data.postDetail.post);
@@ -39,8 +40,12 @@ const Post = () => {
       }
     };
 
-    fetchPost();
-  }, []);
+    useEffect(() => {
+      //console.log("getPosts wird ausgeführt im UseEffekt")
+      fetchPost();
+    }, []);
+
+   
 
 
 
