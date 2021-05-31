@@ -8,7 +8,7 @@ router.get("/:postid", async (req, res) => {
   console.log(req.params.postid + " is param");
     try {
       const postDetail = await db.query(
-        "Select * from posts where postId=$1", [req.params.postid]
+        "Select * from posts p inner join users u on p.userid = u.userid where postId=$1 order by p.postdate desc", [req.params.postid]
       );
       console.log("test");
   
@@ -42,7 +42,7 @@ router.get("/:postid", async (req, res) => {
   })
 
   // Alle Marktplatz Posts fetchen
-  router.get("/Marktplatz", authorize, async (req, res) => {
+  router.get("/Marktplatz", async (req, res) => {
     try {   
       //console.log("Home wird ausgeführt");
       const resEvents = await db.query("select * from posts p inner join images i on"+
@@ -64,7 +64,7 @@ router.get("/:postid", async (req, res) => {
 
   
 // Alle Event Posts fetchen
-  router.get("/Events", authorize, async (req, res) => {
+  router.get("/Events", async (req, res) => {
     console.log("events wird ausgeführt");
     try {   
       //console.log("Home wird ausgeführt");

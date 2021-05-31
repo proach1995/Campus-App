@@ -4,7 +4,7 @@ const db = require("../db/index");
 
 // User Id fetchen
 router.get("/:userid", async (req, res) => {
-  console.log(req.params.userid);
+  console.log(req.params.userid , " in getmethod");
     try {
       const userDetail = await db.query(
         "Select userId, userName, userEmail, userPrename, userLastname, userBirthdate, userImage, userDescription from users where userId=$1", [req.params.userid]
@@ -12,7 +12,9 @@ router.get("/:userid", async (req, res) => {
       console.log(userDetail + " in router");
   
       const userPosts = await db.query (
-        "Select * from posts where userId = $1", [req.params.userid]
+        "select * from posts p inner join images i on"+
+                                " p.postid =i.postid where p.userid=$1"+
+                                " order by p.postdate desc ", [req.params.userid]
       )
       res.status(200).json({
         status: "success",
@@ -49,7 +51,51 @@ router.get("/:userid", async (req, res) => {
 
   //user updaten
 
-  //user löschen
+  router.put("/:userid", async (req, res) => {
+    try {
+      console.log(req.params.userid + " is param in put");
+      console.log(req.body);
+      /*const results = await db.query(
+        "UPDATE users SET userName = $1, userEmail = $2, userPrename = $3, userLastname = §4, userDescription = §5, userImage = $6, userBirthdate = $7 where userid = $8 returning *",
+        [req.body.username, req.body.useremail, req.body.userprename, req.body.userlastname, req.body.userdescription, req.body.userimage, req.body.birthdate, req.params.userid]
+      ); */
+  
+      res.status(200).json({
+        status: "succes",
+        /*data: {
+          post: results.rows[0],
+        }, */
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  });
+  
+  
+  //user löschen 
+  router.delete("/:userid",  async (req, res) => {
+    try {
+      console.log(req.params.userid + " is param in delete");
 
-  //
+      const deleteImages = db.query("DELETE FROM images i USING posts p where i.postid = p.postid AND p.userid ='$1'", [
+        req.params.userid,
+      ]);
+      console.log(deleteImages)
+      const deletePosts = db.query("DELETE FROM posts where userid = $1", [
+        req.params.userid,
+      ]);
+      const deleteUser = db.query("DELETE FROM users where userid = $1", [
+        req.params.userid,
+      ]);
+      res.status(204).json({
+        status: "sucess",
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+
+
+
   module.exports = router;

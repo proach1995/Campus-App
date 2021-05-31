@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import { Link, Redirect } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -9,6 +8,7 @@ import './route.css';
 
 const Register = ({setAuth}) => {
 
+  // eslint-disable-next-line no-lone-blocks
   {/* Werte mit State in Input Objekt initialisieren*/}
   const [inputs, setInputs] = useState({
     useremail: "",
@@ -114,10 +114,10 @@ const Register = ({setAuth}) => {
               <Form.Text id="passwordHelpBlock" muted>
               Es muss sich um eine offizielle E-Mailadresse der Hochschule Kaiserslautern handeln.
             </Form.Text>
-            {validated == false ?
+            {validated === false ?
             <Form.Control.Feedback type="invalid">Gib die richtige E-mail ein</Form.Control.Feedback>
           :
-          <Form.Control.Feedback>Looks Good</Form.Control.Feedback>
+          <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
           }
             
             </Form.Group>
@@ -149,7 +149,7 @@ const Register = ({setAuth}) => {
                 value={userlastname}
                 onChange={e => onChange(e)}
                 />
-                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
                <Form.Control.Feedback type="invalid">
               Du musst ein Nachnamen eingeben
             </Form.Control.Feedback>
@@ -163,7 +163,7 @@ const Register = ({setAuth}) => {
                 value={userprename}
                 onChange={e => onChange(e)}
                 />
-               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+               <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
                <Form.Control.Feedback type="invalid">
               Du musst ein Vornamen eingeben
             </Form.Control.Feedback>
@@ -177,7 +177,7 @@ const Register = ({setAuth}) => {
                 value={username}
                 onChange={e => onChange(e)}
                 />
-                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
                <Form.Control.Feedback type="invalid">
               Du musst ein Usernamen eingeben
             </Form.Control.Feedback>
@@ -191,7 +191,7 @@ const Register = ({setAuth}) => {
                 value={userbirthdate}
                 onChange={e => onChange(e)}
                 />
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
                <Form.Control.Feedback type="invalid">
               Du musst ein Geburtsdatum eingeben
             </Form.Control.Feedback>
@@ -223,10 +223,10 @@ const Register = ({setAuth}) => {
                 name="dataprivacy"
                 > 
                 </Form.Check> 
-                <a className="link" href="./Cookiepolicy"> siehe hier</a>
+                <a className="link" href="./Cookiepolicy"> siehe hier.</a>
               
               </Form.Row>
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
               <Form.Control.Feedback type="invalid">
              Du musst die Datenschutzbestimmungen akzeptieren
            </Form.Control.Feedback>

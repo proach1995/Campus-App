@@ -1,12 +1,23 @@
 /* eslint-disable no-lone-blocks */
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './route.css';
+import { AppContext } from "../context/AppContext";
+import { useHistory } from "react-router";
+import Jumbotron from 'react-bootstrap/Jumbotron';
 
 
-const Login = ({setAuth}) => {
+
+const Login = ({setAuth}, props) => {
+
+  const {logged, setLogged } = useContext(AppContext);
+  const {user, setUser}      = useContext(AppContext);
+
+  let history = useHistory();
+
+  const [errorMsg, setErrorMsg] = useState (null);
 
   {/* Inputwerte werden mit State definiert*/}
   const [inputs, setInputs] = useState({
@@ -28,12 +39,9 @@ const Login = ({setAuth}) => {
 
     try {
       const body = { useremail, userpassword };
-      
-      {/* Hier muss Axios fetch rein. Frage: Wie macht man 
-      einen Axios post request? */}
-      console.log("Dennis: step1");
+
       const response = await fetch(
-        "http://localhost:3001/Database/Marktplatz/authentication/login",
+        "http://localhost:3001/Database/Marktplatz/Authentication/login",
         {
           method: "POST",
           headers: {
@@ -43,21 +51,27 @@ const Login = ({setAuth}) => {
         }
       );
         
-      const parseRes = await response.json();
+      let parseRes = await response.json();
+    
 
       if (parseRes.jwtToken) {
         localStorage.setItem("token", parseRes.jwtToken);
-        setAuth(true);
+        setLogged(true);
+        setUser(parseRes.data.user);    
         console.log("Erfolgreich eingeloggt")
+        history.push("/");
       } else {
-        setAuth(false);
-        console.log(parseRes)
+        setLogged(false);
+        console.log(parseRes);
+        setErrorMsg(parseRes);
+
       }
     } catch (err) {
       console.error(err.message);
     }
   };
 
+  const showError = true;
 
     return (
       
@@ -68,6 +82,13 @@ const Login = ({setAuth}) => {
 
       
            <h1>Login</h1>
+
+          {!(errorMsg === null)  && 
+            <Jumbotron className="errorBox">
+            <h2 className="errorHeading">Ein Fehler ist aufgetaucht</h2>
+            <div className="errorMsg">{errorMsg}</div>
+          </Jumbotron>
+          }
               <Form onSubmit={onSubmitForm}>
                 <Form.Group controlId="Email">
                   <Form.Label>E-Mailadresse</Form.Label>
@@ -99,15 +120,16 @@ const Login = ({setAuth}) => {
                             </Button>   
                       </div>  
                     </div>
+
               </Form>
             <div className="register">
             <Button href="/register" className="button register-btn login-btn" variant="secondary" >
-                Registrieren 
+                 Registrieren 
               </Button> 
             </div>
             
 
-
+        
                   
 
           </>

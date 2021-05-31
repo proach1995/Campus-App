@@ -49,7 +49,7 @@ CREATE TABLE images(
 );
 
 INSERT INTO users(userName, userEmail,userPassword, userPrename, userLastname, userBirthdate, userImage, userDescription) values(
-    'uludag', 'depy0001@stud.hs-kl.de','Passwort1234','Dennis', 'pyka', TO_DATE('18/09/1995', 'DD.MM.YYYY'),'./pb.jpg','Test' 
+    'uludag', 'depy0002@stud.hs-kl.de','Passwort1234','Dennis', 'pyka', TO_DATE('18/09/1995', 'DD.MM.YYYY'),'./pb.jpg','Test' 
 );
 
 INSERT INTO posts( userId, postTitle, postCategory, postType, postPriceType, postPrice, postDescription) values(
@@ -61,11 +61,10 @@ INSERT INTO posts(userId, postTitle, postCategory, postTradeType, postCriterion,
 );
 
 INSERT INTO images(postId, imagePath) values(
-    1, 'Images/postImages/toster.jpg'
+    10, 'Images/postImages/toster.jpg'
 );
 
 /*Falls ein Fehler auftritt, kann damit gelösch werden*/
 drop table images;
 drop table posts;
-drop table registry;
 drop table users;

@@ -4,9 +4,6 @@ import Container from "react-bootstrap/Container";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Figure from 'react-bootstrap/Figure';
-import PostsRow from "../components/Content/PostsRow";
-import Tabs from 'react-bootstrap/Tabs';
-import Tab from 'react-bootstrap/Tab';
 import Button from 'react-bootstrap/Button';
 import Image from "react-bootstrap/esm/Image";
 import DataServer from "../api/DataServer";
@@ -145,7 +142,7 @@ console.log(post);
       <Row className="contentcontact">
         <Row>
         <Col className="userSection">
-          <Link to="/">
+          <Link to={`/user/${post.userid}`}>
           <Figure.Image 
             width={50}
             height={40}
@@ -153,7 +150,7 @@ console.log(post);
             src="../pb.jpg" //{user.userimage}
             roundedCircle
           />
-          <p className="username">CoolerTyp95</p>
+          <p className="username">{post.username}</p>
           </Link>
         </Col>
         </Row>
