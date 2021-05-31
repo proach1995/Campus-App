@@ -13,10 +13,10 @@ import { AppContext } from "../context/AppContext";
 
 
 
-const Home = ({setAuth},{isAuthenticated}) => {
+const Home = () => {
 
-  const {logged, setLogged} = useContext(AppContext);
-  const {user, setUser} = useContext(AppContext);
+  const {logged, } = useContext(AppContext);
+  const {user} = useContext(AppContext);
   //In den States werden die Angebote und Events gespeichert
   const [offerings, setOfferings] = useState([]);
   const [events, setEvents] = useState([]);
@@ -56,7 +56,6 @@ const Home = ({setAuth},{isAuthenticated}) => {
   }, []);
 
 
- 
   
   return (
     <div>

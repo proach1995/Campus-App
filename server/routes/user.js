@@ -48,23 +48,23 @@ router.get("/:userid", async (req, res) => {
         }           
   })
 
-
+//Authorize nochmal mit aufnhemen
   //user updaten
-
-  router.put("/:userid", async (req, res) => {
+//https://stackoverflow.com/questions/55674323/error-when-trying-to-insert-row-to-table-because-of-uuid-foreign-key-with-sequel
+  router.put("/:userid",authorize, async (req, res) => {
     try {
       console.log(req.params.userid + " is param in put");
-      console.log(req.body);
-      /*const results = await db.query(
-        "UPDATE users SET userName = $1, userEmail = $2, userPrename = $3, userLastname = §4, userDescription = §5, userImage = $6, userBirthdate = $7 where userid = $8 returning *",
-        [req.body.username, req.body.useremail, req.body.userprename, req.body.userlastname, req.body.userdescription, req.body.userimage, req.body.birthdate, req.params.userid]
-      ); */
-  
+      console.log(req.body.userlastname);
+      const results = await db.query(
+        "UPDATE users SET username = $1, useremail = $2, userprename = $3, userlastname = $4, userbirthdate = $5, userimage = $6, userdescription =$7, userpassword = $8 where userid = $9 returning *;",
+        [req.body.username, req.body.useremail, req.body.userprename, req.body.userlastname, req.body.userbirthdate, req.body.userimage, req.body.userdescription, req.body.userpassword, req.params.userid]
+      ); 
+        console.log("db anfrage ausgeführt");
       res.status(200).json({
         status: "succes",
-        /*data: {
+        data: {
           post: results.rows[0],
-        }, */
+        }, 
       });
     } catch (err) {
       console.log(err);
@@ -73,7 +73,7 @@ router.get("/:userid", async (req, res) => {
   
   
   //user löschen 
-  router.delete("/:userid",  async (req, res) => {
+  router.delete("/:userid", authorize,  async (req, res) => {
     try {
       console.log(req.params.userid + " is param in delete");
 
