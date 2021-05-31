@@ -234,10 +234,3 @@ width:60%;
     top: 4em;
     color: white;
 }
-svg {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 10vw;
-    fill: #eaeaea;
-}
