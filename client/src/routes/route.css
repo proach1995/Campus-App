@@ -53,6 +53,12 @@
     justify-content: space-around;
 }
 
+.profilImage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .profilSectionWrapper {
     display: flex;
     flex-direction: column;
@@ -176,4 +182,55 @@ width:60%;
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+
+.cancelButton {
+    height: 2em;
+    background-color: red;
+    border-radius: 50px;
+    padding: 0.25em;
+    color: white !important;
+    font-size: 15px;
+}
+
+.jumboButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 2em;
+}
+
+.jumbotron {
+    margin-top: 3em;
+}
+
+.postRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.errorBox {
+    margin-top: 3em;
+    background-color: rgb(216, 128, 128);
+}
+
+.errorMsg {
+    text-align: center;
+    color: white;
+}
+.errorHeading {
+    color: white;
+}
+
+.priceTag {
+    background-color: #185363 ;
+    max-width: 90%;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    position: absolute;
+    right: 0px;
+    top: 4em;
+    color: white;
 }

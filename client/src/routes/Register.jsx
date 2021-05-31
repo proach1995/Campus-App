@@ -1,14 +1,19 @@
-import React, {useState, useEffect} from "react";
-import { Link, Redirect } from "react-router-dom";
+import React, {useState, useEffect, useContext} from "react";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './route.css';
+import DataServer from "../api/DataServer";
+import { AppContext } from "../context/AppContext";
 
 
 
-const Register = ({setAuth}) => {
 
+
+const Register = () => {
+
+  const {logged, setLogged} = useContext(AppContext);
+  // eslint-disable-next-line no-lone-blocks
   {/* Werte mit State in Input Objekt initialisieren*/}
   const [inputs, setInputs] = useState({
     useremail: "",
@@ -39,7 +44,6 @@ const Register = ({setAuth}) => {
   }
 
   const onSubmitForm = async e => {
-    e.preventDefault();
     console.log("onSubmitForm in Register ausgeführt");
     
     if(!validEmail(useremail)){
@@ -47,32 +51,28 @@ const Register = ({setAuth}) => {
     }
     else{
     
-    try {
-      const body = { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate };
-      
-      console.log("test");
-      const response = await fetch(
-        "http://localhost:3001/Database/Marktplatz/authentication/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json"
-          },
-          body: JSON.stringify(body)
-        }
-      );
+    try {      
+      const response = await DataServer.post("/authentication/register", {
+        useremail: useremail,
+        userpassword: userpassword,
+        username: username,
+        userlastname: userlastname,
+        userprename: userprename,
+        userdescription: userdescription,
+        userbirthdate: userbirthdate,
+      })
+
+
       const parseRes = await response.json();
 
       if (parseRes.jwtToken) {
         localStorage.setItem("token", parseRes.jwtToken);
-        setAuth(true);
+        setLogged(true);
         console.log("Registrierung erfolgreich");
-        /* toast.success("Register Successfully"); */
 
       } else {
-        setAuth(false);
+        setLogged(false);
         console.log(parseRes);
-      /*  toast.error(parseRes); */
       
       }
     } catch (err) {
@@ -115,10 +115,10 @@ const Register = ({setAuth}) => {
               <Form.Text id="passwordHelpBlock" muted>
               Es muss sich um eine offizielle E-Mailadresse der Hochschule Kaiserslautern handeln.
             </Form.Text>
-            {validated == false ?
+            {validated === false ?
             <Form.Control.Feedback type="invalid">Gib die richtige E-mail ein</Form.Control.Feedback>
           :
-          <Form.Control.Feedback>Looks Good</Form.Control.Feedback>
+          <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
           }
             
             </Form.Group>
@@ -150,7 +150,7 @@ const Register = ({setAuth}) => {
                 value={userlastname}
                 onChange={e => onChange(e)}
                 />
-                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
                <Form.Control.Feedback type="invalid">
               Du musst ein Nachnamen eingeben
             </Form.Control.Feedback>
@@ -164,7 +164,7 @@ const Register = ({setAuth}) => {
                 value={userprename}
                 onChange={e => onChange(e)}
                 />
-               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+               <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
                <Form.Control.Feedback type="invalid">
               Du musst ein Vornamen eingeben
             </Form.Control.Feedback>
@@ -178,7 +178,7 @@ const Register = ({setAuth}) => {
                 value={username}
                 onChange={e => onChange(e)}
                 />
-                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
                <Form.Control.Feedback type="invalid">
               Du musst ein Usernamen eingeben
             </Form.Control.Feedback>
@@ -192,7 +192,7 @@ const Register = ({setAuth}) => {
                 value={userbirthdate}
                 onChange={e => onChange(e)}
                 />
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
                <Form.Control.Feedback type="invalid">
               Du musst ein Geburtsdatum eingeben
             </Form.Control.Feedback>
@@ -224,10 +224,10 @@ const Register = ({setAuth}) => {
                 name="dataprivacy"
                 > 
                 </Form.Check> 
-                <a className="link" href="./Cookiepolicy"> siehe hier</a>
+                <a className="link" href="./Cookiepolicy"> siehe hier.</a>
               
               </Form.Row>
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
               <Form.Control.Feedback type="invalid">
              Du musst die Datenschutzbestimmungen akzeptieren
            </Form.Control.Feedback>
@@ -235,7 +235,7 @@ const Register = ({setAuth}) => {
 
  
     <div className="buttonBackground" >
-        <Button type="submit" className="button">Registrieren</Button>
+        <Button href="/" type="submit" className="button">Registrieren</Button>
         
     </div>
     

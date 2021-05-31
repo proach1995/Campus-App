@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -6,14 +6,17 @@ import Button from 'react-bootstrap/Button';
 import './route.css';
 import PostsRow from "../components/Content/PostsRow";
 import DataServer from "../api/DataServer";
+import { AppContext } from "../context/AppContext";
 
 
 
 
 
 
-const Home = ({setAuth},{isAuthenticated}) => {
+const Home = () => {
 
+  const {logged, } = useContext(AppContext);
+  const {user} = useContext(AppContext);
   //In den States werden die Angebote und Events gespeichert
   const [offerings, setOfferings] = useState([]);
   const [events, setEvents] = useState([]);
@@ -23,8 +26,8 @@ const Home = ({setAuth},{isAuthenticated}) => {
       //console.log("getPosts wird ausgeführt");
       const resOfferings = await DataServer.get("/Home/Offerings", {jwt_token:localStorage.token})
       
-      //console.log("fetching from offer");
-      //console.log(resOfferings.data);
+      console.log("fetching from offer");
+      console.log(resOfferings.data);
       setOfferings(resOfferings.data.offeringList.offer);
     } catch (err) {
       console.error(err.message);
@@ -47,10 +50,12 @@ const Home = ({setAuth},{isAuthenticated}) => {
     //console.log("getPosts wird ausgeführt im UseEffekt")
     getOffers();
     getEvents();
+    console.log("user =", user);
+    console.log("Home logged =", logged);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
- 
   
   return (
     <div>
