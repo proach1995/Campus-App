@@ -48,7 +48,7 @@ const Post = () => {
 
 
 console.log(post);
-
+ 
 
 
 
