@@ -33,14 +33,16 @@ const PostsRow = ({postElement}) => {
       if(postIdMemory !==item.postid){
         innerIndex = innerIndex+1;
         postIdMemory = item.postid;
-        postImagesHelper.push({imagePath:item.imagepath, postTitle:item.posttitle});
+        postImagesHelper.push({imagePath:item.imagepath, postTitle:item.posttitle, postPrice:item.postprice});
       }
     })
 
   //Kontrollausgabe
  // console.log("Konrollaugabe");
   postImagesHelper.map((post) =>{
-      //console.log(post.imagePath)
+      console.log(post.imagePath);
+      console.log(post.postprice)
+
     });
 
  // console.log(postImagesHelper);
@@ -48,6 +50,9 @@ const PostsRow = ({postElement}) => {
     },[postElement])
 
     console.log(postElement[0]);
+    console.log(postImagesHelper[0]);
+
+
 
 
   {/* Array.from(data) comes from props.data and is an object -> has to be converted into array to use .map*/}  
@@ -62,8 +67,12 @@ const PostsRow = ({postElement}) => {
         <div key = {index}>
         <Col className="col-6 col-md-6 col-lg-3 card" >
             <Link to={`/post/${imageInfo.postid}`}>
-              <Card className="  text-center " style={{ width:'100px', height:"100px" }}>
-              <Card.Img src={imageInfo.imagePath}/> 
+              <Card className=" text-center " style={{ width:'100px', height:"100px" }}>
+              <Card.Img src={imageInfo.imagePath}> 
+              </Card.Img> 
+              <div className="priceTag">
+                {imageInfo.postPrice}&nbsp;€ 
+                </div>
               <Card.Body>
                   <Card.Title>{imageInfo.postTitle}</Card.Title>
                 </Card.Body>

@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import DataServer from "../api/DataServer";
 import { AppContext } from "../context/AppContext";
 import LoginRequired from "../components/Content/LoginRequired";
+import Spinner from 'react-bootstrap/Spinner'
 
 
 
@@ -224,6 +225,11 @@ const PostUpload = () => {
 
       <h1>Anzeige erstellen</h1>    
       
+      <div>
+      {logged === null &&
+        <Spinner animation="border" />
+      }  
+      </div>
       <div>
       {logged && 
               <Form>

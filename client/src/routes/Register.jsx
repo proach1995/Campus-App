@@ -39,7 +39,6 @@ const Register = ({setAuth}) => {
   }
 
   const onSubmitForm = async e => {
-    e.preventDefault();
     console.log("onSubmitForm in Register ausgeführt");
     
     if(!validEmail(useremail)){
@@ -67,12 +66,10 @@ const Register = ({setAuth}) => {
         localStorage.setItem("token", parseRes.jwtToken);
         setAuth(true);
         console.log("Registrierung erfolgreich");
-        /* toast.success("Register Successfully"); */
 
       } else {
         setAuth(false);
         console.log(parseRes);
-      /*  toast.error(parseRes); */
       
       }
     } catch (err) {

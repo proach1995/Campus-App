@@ -53,6 +53,12 @@
     justify-content: space-around;
 }
 
+.profilImage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .profilSectionWrapper {
     display: flex;
     flex-direction: column;
@@ -216,4 +222,22 @@ width:60%;
 }
 .errorHeading {
     color: white;
+}
+
+.priceTag {
+    background-color: #185363 ;
+    max-width: 90%;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    position: absolute;
+    right: 0px;
+    top: 4em;
+    color: white;
+}
+svg {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 10vw;
+    fill: #eaeaea;
 }

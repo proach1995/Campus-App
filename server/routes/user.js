@@ -51,7 +51,7 @@ router.get("/:userid", async (req, res) => {
 //Authorize nochmal mit aufnhemen
   //user updaten
 //https://stackoverflow.com/questions/55674323/error-when-trying-to-insert-row-to-table-because-of-uuid-foreign-key-with-sequel
-  router.put("/:userid", async (req, res) => {
+  router.put("/:userid",authorize, async (req, res) => {
     try {
       console.log(req.params.userid + " is param in put");
       console.log(req.body.userlastname);
