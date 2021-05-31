@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from 'react-bootstrap/Row';
@@ -11,6 +11,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import Dropdown from "react-bootstrap/Dropdown";
 import * as AiIcons from 'react-icons/ai';
 import './route.css';
+import PostsRow from "../components/Content/PostsRow";
 
 
 
@@ -22,16 +23,17 @@ import './route.css';
 const Post = () => {
 
   const { postid } = useParams();
-  const [post, setPost] = useState([]);
+  const [post, setPost] = useState(true);
   console.log("postid: " + postid);
 
 
 
-  
+  useEffect(() => {
     const fetchPost= async () => {
       try {
-        const response = await DataServer.get("/Post/${postid}", {jwt_token:localStorage.token});
+        const response = await DataServer.get(`/Post/${postid}`, {jwt_token:localStorage.token});
         console.log(response.data.postDetail.post);
+        console.log(response);
 
         setPost(response.data.postDetail.post);
       } catch (err) {
@@ -40,12 +42,8 @@ const Post = () => {
       }
     };
 
-    useEffect(() => {
-      //console.log("getPosts wird ausgeführt im UseEffekt")
-      fetchPost();
-    }, []);
-
-   
+    fetchPost();
+  }, []);
 
 
 
@@ -154,7 +152,6 @@ console.log(post);
             alt="171x180"
             src="../pb.jpg" //{user.userimage}
             roundedCircle
-            
           />
           <p className="username">{post.username}</p>
           </Link>

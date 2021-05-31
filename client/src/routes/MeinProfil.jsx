@@ -12,7 +12,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import * as AiIcons from 'react-icons/ai';
 import { AppContext } from "../context/AppContext";
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form'
+import Form from 'react-bootstrap/Form';
 
 
 
