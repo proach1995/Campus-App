@@ -154,6 +154,7 @@ console.log(post);
             alt="171x180"
             src="../pb.jpg" //{user.userimage}
             roundedCircle
+            
           />
           <p className="username">{post.username}</p>
           </Link>

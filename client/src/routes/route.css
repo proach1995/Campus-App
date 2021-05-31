@@ -164,6 +164,8 @@
     justify-content: center;
 }
 
+
+
 .contentHeading {
     color:#234565;
     text-align: center;
@@ -177,7 +179,7 @@ justify-content: right;
 width:100%;
 margin-left:0.5%;
 padding-top:0.5em ;
-background-color:rgb(245, 245, 245) ;
+background-color:rgb(255, 255, 255) ;
 
 
 
@@ -207,7 +209,7 @@ background-color:rgb(245, 245, 245) ;
     justify-content: right;
     width:100%;
     margin-left:0.5%;
-    background-color:rgb(245, 245, 245) ;
+    background-color:rgb(255, 255, 255) ;
     
     
     
