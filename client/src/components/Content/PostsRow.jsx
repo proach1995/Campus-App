@@ -25,6 +25,7 @@ const PostsRow = ({postElement}) => {
     let innerIndex = 0;
    {/* console.log("filter");
     console.log(postElement); */}
+    console.log("postRow:", postElement);
     
     postElement.map((item) =>{
 

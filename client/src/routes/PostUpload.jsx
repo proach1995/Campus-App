@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import DataServer from "../api/DataServer";
 import { AppContext } from "../context/AppContext";
 import LoginRequired from "../components/Content/LoginRequired";
@@ -16,6 +16,7 @@ const PostUpload = () => {
   const {logged} = useContext(AppContext);
 
   const {user} = useContext(AppContext);
+  let history = useHistory();
 
   //const {id} = useParams(); wird später benötigt
   //radio
@@ -151,7 +152,7 @@ const PostUpload = () => {
 }
 
   const submitHandler = async (e)=>{
-    e.preventDefault();
+    //e.preventDefault();
     
     let errorFlag = false;
     //Errorcatching
@@ -217,6 +218,8 @@ const PostUpload = () => {
                                 postResult.data.data.post[0].postid,
                                  formData, {headers}//Header ist ein muss
 );
+history.push("/");
+history.push("/postupload");
   }
 
 }

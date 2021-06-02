@@ -42,20 +42,23 @@
     }
 
 form.filterForm{
-    width:80%
+    width:98%
 }
 
 .dropdown.dropdownFilter{
-    width:80%
+    width:80%;
 }
 
 button.dropdown-toggle.btn.btn{
     width:100%;
+    background-color: #007466;
+    border-color: #007466;
 }
 .col.col-Filter{
     display:flex;
     justify-content:center;
 }
+
 div.col-pricingLabelTitle{
     display:flex;
     justify-content:flex-start;
@@ -72,6 +75,19 @@ div.col-pricingLabelPrice{
 .form-label.preisLabel{
     font-size:1em;
     color:white
+
+}
+
+label.dropdownLabel.form-label{
+    font-size:1em;
+    color:white
+
+}
+
+.form-label.datumLabel{
+    font-size:1.2em;
+    color:white;
+    font-weight:bold;
 
 }
 
@@ -113,4 +129,5 @@ button.button.logout-btn.login-btn.ok{
     background-color:rgb(6, 128, 2);
     width:80%;
 }
+
 

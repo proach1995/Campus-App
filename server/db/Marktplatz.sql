@@ -49,18 +49,7 @@ CREATE TABLE images(
 );
 
 INSERT INTO users(userName, userEmail,userPassword, userPrename, userLastname, userBirthdate, userImage, userDescription) values(
-    'uludag', 'depy0002@stud.hs-kl.de','Passwort1234','Dennis', 'pyka', TO_DATE('18/09/1995', 'DD.MM.YYYY'),'./pb.jpg','Test' 
-);
-
-INSERT INTO posts( userId, postTitle, postCategory, postType, postPriceType, postPrice, postDescription) values(
-     '535ec009-2e3b-4fe0-94b9-3b979753ab6f', 'Freunde gesucht', 'Events', 'Verkauf', 'Angebot', 200, 'Einsam und allein'
-);
-
-INSERT INTO posts(userId, postTitle, postCategory, postTradeType, postCriterion, postPrice, postDescription values(
-    1, 'Toster', 'Marktplatz', 'Verkauf', 'Angebot', 200, 'Toster zum testen'
-);
-
-INSERT INTO images(postId, imagePath) values(
+    'uludag', 'depy0002@stud.hs-kl.de',8h) values(
     10, 'Images/postImages/toster.jpg'
 );
 
