@@ -109,10 +109,11 @@ const [inputs, setInputs] = useState({
   userbirthdate: "",
 
 });
+
+console.log(inputs);
 /* Werte werden im Objekt inputs gespeichert um sie mit ...props zu übergeben*/
 const { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate } = inputs;
 const [validated, setValidated] = useState(false);
-  
 /* Spricht in der e.target Funktion erst den Namen an und übergibt dann den Wert, d.h. Name muss identisch sein
 mit dem Namen im Input field*/
 const onChange = e => {
@@ -120,7 +121,7 @@ const onChange = e => {
   setInputs({ ...inputs, [e.target.name]: e.target.value });
 
 }
-  
+
 function validEmail(useremail) {
   return /^[a-zA-Z]{4}\d{4}@stud.hs-kl.de/.test(useremail);
 }
@@ -148,7 +149,7 @@ const submitUpdateHandler = async (e, userId)=>{
     try {
       //const body = { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate };
       
-      //console.log("test");
+      console.log("test12");
       const response = await DataServer.put(`/user/${userid}`, {
         jwt_token:localStorage.token,
         useremail: useremail,
