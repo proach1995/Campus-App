@@ -234,7 +234,7 @@ const Register = () => {
 
  
     <div className="buttonBackground" >
-        <Button href="/" type="submit" className="button">Registrieren</Button>
+        <Button   type="submit" className="button">Registrieren</Button>
         
     </div>
     

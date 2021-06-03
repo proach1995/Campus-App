@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 
 
 
-const Einstellungen = () => {
+const PageNotFound = () => {
   return (
     <Container className="routeContainer">
         <div>das ist text</div>
@@ -12,4 +12,4 @@ const Einstellungen = () => {
   );
 };
 
-export default Einstellungen;
+export default PageNotFound;

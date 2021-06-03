@@ -9,7 +9,7 @@ import Events from "./routes/Events";
 import MeinProfil from "./routes/MeinProfil";
 import Sidebar from "./components/navigation/Sidebar";
 import NavbarTop from "./components/navigation/NavbarTop";
-import Einstellungen from "./routes/Einstellungen";
+import PageNotFound from "./routes/PageNotFound";
 import Login from "./routes/Login";
 import Register from "./routes/Register";
 import Post from "./routes/Post";
@@ -138,7 +138,7 @@ const App = () => {
             <Route
               exact
               path="/einstellungen"
-              component={Einstellungen}
+              component={PageNotFound}
             />
             <Route
               exact
