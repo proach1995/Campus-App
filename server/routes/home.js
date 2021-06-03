@@ -24,7 +24,7 @@ router.post("/Offerings", async (req, res) => {
       console.log("filterType")
       console.log( req.body.postPriceType);
       resOfferings = await db.query("select * from posts p inner join images i on"+
-                                    " p.postid =i.postid where p.posttitle like $1 and p.postcategory"+
+                                    " p.postid =i.postid where p.posttitle ilike $1 and p.postcategory"+
                                     " like $2 and p.postpricetype like $3 and p.postprice <= $4"+
                                     " and p.postdate between $5 and $6",
                                     [req.body.title, req.body.postCategory, req.body.postPriceType, req.body.choosedPrice,

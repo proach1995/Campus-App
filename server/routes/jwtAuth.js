@@ -10,11 +10,12 @@ const authorize = require("../middleware/authorize");
 //route is selected based on sended http request
 //Post funktion gibt token zurück und saved Eingaben in DB
 //validInfo checks if Input Mail is really an mail
-router.post("/register", validInfo, async (req, res) => {
+router.post("/Register", validInfo, async (req, res) => {
   console.log("register wird ausgeführt");
   //deconstruct  http request
-  const { useremail, username, userpassword, userprename, userlastname, userbirthdate } = req.body;
-
+  const { useremail, username, userpassword, userprename, userlastname, userbirthdate, userimage } = req.body;
+  
+  /*
   try {
     const user = await pool.query("SELECT * FROM users WHERE userEmail = $1", [
       useremail
@@ -36,10 +37,12 @@ router.post("/register", validInfo, async (req, res) => {
     const jwtToken = jwtGenerator(newUser.rows[0].userid);
     // try block checks if user exists, encrypts & saves pw and returns generated token
     return res.json({ jwtToken });
+    
   } catch (err) {
     console.error(err.message);
     res.status(500).send("server error in jwtAuth/register");
   }
+  */
 });
 
 router.post("/login", validInfo, async (req, res) => {

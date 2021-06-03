@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './route.css';
 import { AppContext } from "../context/AppContext";
+import DataServer from "../api/DataServer";
 
 
 
@@ -24,17 +25,23 @@ const Register = ({setAuth}) => {
     userprename: "",
     userdescription: "",
     userbirthdate: "",
+    userimage: "default.jpg",
 
   });
   /* Werte werden im Objekt inputs gespeichert um sie mit ...props zu übergeben*/
-  const { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate } = inputs;
+  const { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate, userimage } = inputs;
   const [validated, setValidated] = useState(false);
     
   /* Spricht in der e.target Funktion erst den Namen an und übergibt dann den Wert, d.h. Name muss identisch sein
   mit dem Namen im Input field*/
   const onChange = e => {
     e.preventDefault();
+    if(e.target.name !="userimage"){
     setInputs({ ...inputs, [e.target.name]: e.target.value });
+    }
+    else{
+      setInputs({ ...inputs, [e.target.name]: e.target.files[0]});
+    }
     console.log("onChange in Register ausgeführt");
     console.log("onChange2 in Register ausgeführt");
 
@@ -54,19 +61,14 @@ const Register = ({setAuth}) => {
     else{
     
     try {
-      const body = { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate };
+      const body = { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate, userimage };
       
-      console.log("test");
-      const response = await fetch(
-        "http://localhost:3001/Database/Marktplatz/authentication/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json"
-          },
-          body: JSON.stringify(body)
-        }
-      );
+      const formData = new FormData();
+  
+      formData.append("imageFile", userimage)
+      
+      const response = await DataServer.post("Authentication/Register", body, formData, {'content-type': 'multipart/form-data'});
+                                            
       const parseRes = await response.json();
 
       if (parseRes.jwtToken) {
@@ -79,6 +81,7 @@ const Register = ({setAuth}) => {
         console.log(parseRes);
       
       }
+      
     } catch (err) {
       console.log("user schon da");
       console.error(err.message);
@@ -216,6 +219,7 @@ const Register = ({setAuth}) => {
                 id="UserImage" 
                 label="Profilbild" 
                 name="userimage"
+                onChange={(e)=>{onChange(e)}}
               />
             </Form.Group>
           <Form.Group id="formGridCheckbox">

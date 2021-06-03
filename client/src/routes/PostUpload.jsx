@@ -16,7 +16,6 @@ const PostUpload = () => {
   const {logged} = useContext(AppContext);
 
   const {user} = useContext(AppContext);
-  let history = useHistory();
 
   //const {id} = useParams(); wird später benötigt
   //radio
@@ -69,7 +68,7 @@ const PostUpload = () => {
       setNoImage(false);
     }
     setInit(1);
-    console.log("user upload = ", user);
+    //console.log("user upload = ", imageFiles[0]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[imageFiles])
 
@@ -218,8 +217,7 @@ const PostUpload = () => {
                                 postResult.data.data.post[0].postid,
                                  formData, {headers}//Header ist ein muss
 );
-history.push("/");
-history.push("/postupload");
+
   }
 
 }
