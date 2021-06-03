@@ -86,7 +86,7 @@ router.get("/:postid", async (req, res) => {
   });
 
   //Post hinzufügen
-router.post("/AddPost", async (req, res)=>{
+router.post("/AddPost", authorize, async (req, res)=>{
     console.log(req.body);
     try{
         const result = await db.query("INSERT INTO posts(userId, postTitle, postCategory,"+
@@ -109,12 +109,12 @@ router.post("/AddPost", async (req, res)=>{
   })
 
 //Post updaten
-router.put("/:postid", async (req, res) => {
+router.put("/:postid", authorize, async (req, res) => {
   try {
     console.log(req.params.postid + " is param in put");
     console.log(req.body);
     const results = await db.query(
-      "UPDATE posts SET userId = $1, postTitle = $2, postCategory = $3, postType = §4, postPriceType = §5, postPrice = $6, postDescription = $7 where postid = $8 returning *",
+      "UPDATE posts SET userId = $1, postTitle = $2, postCategory = $3, postType = $4, postPriceType = $5, postPrice = $6, postDescription = $7 where postid = $8 returning *",
       [req.body.userId, req.body.postTitle, req.body.postCategory, req.body.postType, req.body.postPriceType, req.body.postPrice, req.body.postDescription, req.params.postid]
     );
 
@@ -131,7 +131,7 @@ router.put("/:postid", async (req, res) => {
 
 
 //Post löschen --> Funktioniert
-router.delete("/:postid", async (req, res) => {
+router.delete("/:postid", authorize,  async (req, res) => {
   try {
     console.log(req.params.postid + " is param in delete");
 
