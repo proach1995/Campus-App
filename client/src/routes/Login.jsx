@@ -8,10 +8,10 @@ import { AppContext } from "../context/AppContext";
 import { useHistory } from "react-router";
 import Cookies from "js-cookie";
 
-//uss installiert werden: npm install js-cookie --save
+//muss installiert werden: npm install js-cookie --save
 import Jumbotron from 'react-bootstrap/Jumbotron';
 
-const Login = ({setAuth}, props) => {
+const Login = () => {
 
   const {logged, setLogged } = useContext(AppContext);
   const {user, setUser}      = useContext(AppContext);

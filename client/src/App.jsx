@@ -1,5 +1,5 @@
 /* eslint-disable no-lone-blocks */
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Home from "./routes/Home";
 import Footer from './components/navigation/Footer';
@@ -21,6 +21,8 @@ import NotFound from "./routes/NotFound";
 
 const App = () => {
 
+
+  
   
 
   return (
@@ -84,6 +86,5 @@ const App = () => {
       
   );
 };
-
 
 export default App;

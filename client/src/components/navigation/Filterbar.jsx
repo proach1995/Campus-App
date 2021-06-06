@@ -12,7 +12,6 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 
 
-
 //Funktion toggleFilter übergeben
 const Filterbar = ({toggleFilter, isActive, getFilteredOffers}) =>{
 
