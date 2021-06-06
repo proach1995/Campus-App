@@ -31,14 +31,15 @@ const NavbarTop = ({isActive},{toggleButton}) => {
   return (
     <>
 
-  <Navbar className="navbarStyling" variant="light">  
+  <Navbar className="navbarStyling" variant="light"> 
+  
     <a href="/" className="branding">Campus<span className="brandingFat">APP</span></a>
     {/*https://react-bootstrap.github.io/layout/grid/#grid-props 
       Positioning with offset , sm und md
     
     */}
-    
-  </Navbar>
+  
+  
   <Navbar className="navbarSubline">
     <Row >
       <Col>
@@ -66,7 +67,7 @@ const NavbarTop = ({isActive},{toggleButton}) => {
       </Col>
     </Row>
   </Navbar>
-
+  </Navbar>
 </>
   );
 };
