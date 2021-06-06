@@ -15,7 +15,7 @@ export const AppContextProvider = (props) =>{
                                     userpassword:"",
                                     userbirthdate:""
                                 });
-    const [logged, setLogged] = useState(false);
+    const [logged, setLogged] = useState();
     
 
     return(
