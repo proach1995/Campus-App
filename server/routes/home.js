@@ -16,8 +16,6 @@ router.post("/Offerings", async (req, res) => {
                                 " p.postid =i.postid where p.posttype='Marktplatz'"+
                                 " order by p.postdate desc limit 6");
       }
-    //console.log("LALALALAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
-    //console.log(resOfferings);
 
     if(req.body.offerType=="filtered"){
 

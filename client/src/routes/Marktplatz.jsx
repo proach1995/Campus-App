@@ -44,7 +44,7 @@ const Marktplatz = () => {
   }
 
   useEffect(() => {
-    //console.log("getPosts wird ausgeführt im UseEffekt")
+    console.log("getPosts wird ausgeführt im UseEffekt")
     getOffers();
   }, []);
   // eslint-disable-next-line no-lone-blocks

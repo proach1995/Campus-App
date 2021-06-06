@@ -25,7 +25,8 @@ const MeinProfil = () => {
   const [author, setAuthor] = useState(null);
   let [userIsAuthor, setUserIsAuthor] = useState(false);
 
-  const [updateUser, setUpdateUser] = useState(null);
+
+
 
 
 
@@ -33,6 +34,12 @@ const MeinProfil = () => {
   const [authorPosts, setAuthorPosts] = useState([]);
   const { userid } = useParams();
   console.log("userid: " + userid);
+
+
+
+
+/**********  GET *****************/
+
 
 
   useEffect(() => {
@@ -73,6 +80,9 @@ useEffect(() => {
 }, [author])
 
 
+/**********  DELETE *****************/
+
+
 const deleteHandler = async (e, userId)=>{
   e.stopPropagation();
   const deleteUser= async () => {
@@ -87,18 +97,82 @@ const deleteHandler = async (e, userId)=>{
   };
   deleteUser();
 }
+/**********  UPDATE *****************/
+const [updateUser, setUpdateUser] = useState(null);
+const [updateUserData, setUpdateUserData] = useState(null);
 
+const [inputs, setInputs] = useState({
+  useremail: "",
+  userpassword: "",
+  username: "",
+  userlastname: "",
+  userprename: "",
+  userdescription: "",
+  userbirthdate: "",
 
-const updateUserHandler = async (e, userId)=>{
-  e.stopPropagation();
-  setUpdateUser(true);
-  setUserIsAuthor(false);
+});
+/* Werte werden im Objekt inputs gespeichert um sie mit ...props zu übergeben*/
+const { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate } = inputs;
+const [validated, setValidated] = useState(false);
+  
+/* Spricht in der e.target Funktion erst den Namen an und übergibt dann den Wert, d.h. Name muss identisch sein
+mit dem Namen im Input field*/
+const onChange = e => {
+  e.preventDefault();
+  setInputs({ ...inputs, [e.target.name]: e.target.value });
+
 }
+  
+function validEmail(useremail) {
+  return /^[a-zA-Z]{4}\d{4}@stud.hs-kl.de/.test(useremail);
+}
+
+
+const updateUserHandler = async (e, userId)=>{ // Wird im Dropdown der default eingeloggt Seite geöffnet
+  e.stopPropagation();
+  setUpdateUser(true); // Zum Rendern des HTML Teils
+  setUserIsAuthor(false); // Zum Rendern des HTML Teils
+}
+
+
 
 const submitUpdateHandler = async (e, userId)=>{
   e.stopPropagation();
-  setUpdateUser(false);
-  setUserIsAuthor(true);
+  setUpdateUser(false); // Zum Rendern des HTML Teils
+  setUserIsAuthor(true); // Zum Rendern des HTML Teils
+  console.log("submitUpdateHandler in Profil ausgeführt");
+    
+    if(!validEmail(useremail)){
+      console.log("WARNUNG hinzufügen");
+    }
+    else{
+    
+    try {
+      //const body = { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate };
+      
+      //console.log("test");
+      const response = await DataServer.put(`/user/${userid}`, {
+        jwt_token:localStorage.token,
+        useremail: useremail,
+        userpassword: userpassword,
+        username: username,
+        userlastname: userlastname,
+        userprename: userprename,
+        userdescription: userdescription,
+        userbirthdate: userbirthdate,
+
+        //body: JSON.stringify(body)   //body in Body übergeben
+      })
+      
+      const parseRes = await response.json(); 
+
+      
+    } catch (err) {
+      console.error(err.message);
+    }
+    
+  }
+
 
 }
 
@@ -189,7 +263,7 @@ const submitUpdateHandler = async (e, userId)=>{
     <> 
       <Row className="profile">
         <Col sm={6} className=" profilSectionWrapper" >
-          <Figure>
+          <Figure className="profilImage">
                 <Figure.Image 
                   width={160}
                   height={150}
@@ -197,61 +271,117 @@ const submitUpdateHandler = async (e, userId)=>{
                   src="../pb.jpg" //{user.userimage}
                   roundedCircle
                 />
-                <Figure.Caption className="profilCaption">
+                <Figure.Caption className="">
                   <Form.File id="formcheck-api-custom" custom>
                     <Form.File.Input isValid />
-                    <Form.File.Label data-browse="Button text">
-                      Custom file input
+                    <Form.File.Label data-browse="Hochladen">
+                      Bild hier einfügen
                     </Form.File.Label>
-                    <Form.Control.Feedback type="valid">You did it!</Form.Control.Feedback>
+                    <Form.Control.Feedback type="valid">Erfolgreich hochgeladen!</Form.Control.Feedback>
                   </Form.File>
                 </Figure.Caption>
               </Figure>
         </Col>
         <Col sm={6} className=" profilSectionWrapper"> 
           <div>
-            <Form.Group >
+          <Form.Group  controlId="Useremail">
+              <Form.Label>E-Mail Adresse</Form.Label>
+              <Form.Control 
+                className="is-invalid"
+                type="email" 
+                name="useremail"
+                placeholder={author.useremail} 
+                value={useremail}
+                onChange={e => onChange(e)}
+              />
+            </Form.Group>
+
+            <Form.Group controlId="username">
               <Form.Label>Username</Form.Label>
-              <Form.Control type="text" placeholder={author.username} />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
+              <Form.Control 
+                required
+                placeholder={user.username} 
+                name="username"
+                value={username}
+                onChange={e => onChange(e)}
+                />
+                <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
+               <Form.Control.Feedback type="invalid">
+              Du musst ein Usernamen eingeben
+            </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group >
-              <Form.Label>E-Mail</Form.Label>
-              <Form.Control type="e-mail" placeholder={author.useremail} />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
+
+            <Form.Group controlId="UserLastname">
+              <Form.Label>Nachname</Form.Label>
+              <Form.Control 
+                required
+                placeholder={user.userlastname} 
+                name="userlastname"
+                value={userlastname}
+                onChange={e => onChange(e)}
+                />
+                <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
+               <Form.Control.Feedback type="invalid">
+              Du musst ein Nachnamen eingeben
+            </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group >
+
+            <Form.Group controlId="UserPrename">
+              <Form.Label>Vorname</Form.Label>
+              <Form.Control 
+                placeholder={user.userprename}
+                name="userprename"
+                value={userprename}
+                onChange={e => onChange(e)}
+                />
+               <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
+               <Form.Control.Feedback type="invalid">
+              Du musst ein Vornamen eingeben
+            </Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group controlId="userBirthdate">
               <Form.Label>Geburtsdatum</Form.Label>
               <Form.Control
-                required
                 type="date"
                 name="userbirthdate"
                 placeholder ={user.userbirthdate}
-                value={user.userbirthdate}
+                value={userbirthdate}    
+                onChange={e => onChange(e)}
+
                 />
               <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
                <Form.Control.Feedback type="invalid">
               Du musst ein Geburtsdatum eingeben
             </Form.Control.Feedback>
             </Form.Group>
-          <p>{author.userprename}&nbsp;{author.userlastname}</p>
+
           </div>
         </Col>
       </Row>
+
+
       <Row>
         <Col className="profiledescription">
         <h2 className="profilHeading">Profilbeschreibung</h2>
-        <p>{author.userdescription}</p>
+          <Form.Group controlId="UserDescription">
+                <Form.Label>Über Mich</Form.Label>
+                <Form.Control 
+                as="textarea" 
+                rows={3} 
+                name="userdescription"
+                placeholder={user.userdescription}
+                value={userdescription}
+                onChange={e => onChange(e)}
+                />
+              </Form.Group>
         </Col>  
       </Row>
-      <Button onClick={(e)=>{submitUpdateHandler(e)}}>
+      <div className="buttonBackground" >
+      <Button className="button" onClick={(e)=>{submitUpdateHandler(e)}}>
         Speichern
-
       </Button>
+      </div>
       
     </>
     )}   

@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useContext} from "react";
+import { useHistory } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -7,14 +8,10 @@ import { AppContext } from "../context/AppContext";
 import DataServer from "../api/DataServer";
 
 
+const Register = () => {
 
-
-
-const Register = ({setAuth}) => {
-
+  let history = useHistory();
   const {logged, setLogged} = useContext(AppContext);
-  
-
   // eslint-disable-next-line no-lone-blocks
   {/* Werte mit State in Input Objekt initialisieren*/}
   const [inputs, setInputs] = useState({
@@ -60,6 +57,7 @@ const Register = ({setAuth}) => {
     }
     else{
     
+      /*
     try {
       const body = { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate, userimage };
       console.log(userimage.name==null);
@@ -70,9 +68,23 @@ const Register = ({setAuth}) => {
       //Da Bild und body nicht gleichzeitig gesendet werden können, wird der User zuerst eingefügt
       //und dan im 2. Request das Bild geupdtatet
       //Zusätzlich Prüfung ob standart bild oder eigenes Bild benutzt wird
-      const response = await DataServer.post("Authentication/Register", body);
+      
+      //const response = await DataServer.post("Authentication/Register", body);
       
       console.log("Registry", response);
+      */
+    try {      
+      const response = await DataServer.post("/authentication/register", {
+        useremail: useremail,
+        userpassword: userpassword,
+        username: username,
+        userlastname: userlastname,
+        userprename: userprename,
+        userdescription: userdescription,
+        userbirthdate: userbirthdate,
+      })
+
+
       const parseRes = await response.json();
 
       if (parseRes.jwtToken) {
@@ -83,9 +95,8 @@ const Register = ({setAuth}) => {
       } else {
         setLogged(false);
         console.log(parseRes);
-      
       }
-      
+      history.push("/home");
     } catch (err) {
       console.log("user schon da");
       console.error(err.message);
@@ -247,7 +258,7 @@ const Register = ({setAuth}) => {
 
  
     <div className="buttonBackground" >
-        <Button type="submit" className="button">Registrieren</Button>
+        <Button   type="submit" className="button">Registrieren</Button>
         
     </div>
     
