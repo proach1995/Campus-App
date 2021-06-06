@@ -9,88 +9,32 @@ import Events from "./routes/Events";
 import MeinProfil from "./routes/MeinProfil";
 import Sidebar from "./components/navigation/Sidebar";
 import NavbarTop from "./components/navigation/NavbarTop";
-import Einstellungen from "./routes/Einstellungen";
 import Login from "./routes/Login";
 import Register from "./routes/Register";
 import Post from "./routes/Post";
 import CookiePolicy from "./routes/CookiePolicy";
-import Banner from "./routes/Banner"
-import { AppContextProvider } from "./context/AppContext"
+import Banner from "./routes/Banner";
+import { AppContextProvider } from "./context/AppContext";
+import NotFound from "./routes/NotFound";
 
 
 
 const App = () => {
 
 
-  
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  {/* Mit jedem App render wird lokaler Token an Server gesendet, Server verifiziert und gibt Bool zurück
-  setIsAuthenticated wird dann angepasst
-   *********** Fetch könnte noch auf Axios angepasst werden**********
-  */}
-    const checkAuthenticated = async () => {
-      try {
-        const res = await fetch("http://localhost:3001/Database/Marktplatz/Authentication/Verify", {
-          method: "POST",
-          headers: { jwt_token: localStorage.token }
-        });
-  
-        const parseRes = await res.json();
-        console.log("parseRes = ", parseRes);
-  
-      setIsAuthenticated(parseRes);
-      } catch (err) {
-        console.error(err.message);
-      }
-    };
-  
-    {/* Bei jedem Rendern wird neu verifiziert.
-    2. Rendern wichtig für Fetch, da sonst rendern bevor die Daten gefetcht sind*/}
-
-    {/*logout Funktion wird an die Child Komponenten weitergegeben*/}
-
-    {/*const [name, setName] = useState(""); */}
-    
-    /*Kommt später
-    const getProfile = async () => {
-      try {
-        //const headers = { jwt_token: localStorage.token }
-        const res = await DataServer.post("/Home", { jwt_token: localStorage.token });
-
-        const parseData = await res.json();
-        setName(parseData.username);
-      } catch (err) {
-        console.error(err.message);
-      }
-    };
-    */
-  
-    const setAuth = boolPara => {
-      setIsAuthenticated(boolPara);
-    };
-
     {/* muss eine Callbackfunktion sein*/}
     const logout = async (e) => {
       e.preventDefault();
       try {
         localStorage.removeItem("token");
-        setAuth(false);
+        //setLogged(false);
         console.log("Sicher ausgeloggt");
-        {/*toast.success("Logout successfully"); */}
 
       } catch (err) {
         console.error(err.message);
       }
     };
   
-    useEffect(() => {
-      checkAuthenticated();
-      //getProfile();
-
-      console.log("authenticated", isAuthenticated);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
 
   return (
       <div className="">
@@ -124,11 +68,6 @@ const App = () => {
               exact
               path="/postupload"
               component={PostUpload}
-              render={props =>
-              
-                <PostUpload isAuthenticated={isAuthenticated}
-                /> 
-            }
             />
             <Route
               exact
@@ -137,27 +76,16 @@ const App = () => {
             />
             <Route
               exact
-              path="/einstellungen"
-              component={Einstellungen}
-            />
-            <Route
-              exact
               path="/login"
-              render={props =>
-              
-                  <Login {...props} setAuth={setAuth} /> 
-              }
-
+              component={Login}
             />
             <Route
               exact
               path="/register"
-              render={props =>
-          
-                  <Register {...props} setAuth={setAuth} />
-                
-              }
+              component={Register}          
             />
+            <Route path="/404" component={NotFound} />
+              <Redirect to="/" />
           </Switch>
         </Router>
         </AppContextProvider>

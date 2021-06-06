@@ -5,6 +5,7 @@ const db = require("../db/index");
 router.get("/Offerings", async (req, res) => {
   try {   
     //console.log("Home wird ausgeführt");
+    // Die DB Query ist falsch
     const resOfferings = await db.query("select * from posts p inner join images i on"+
                                 " p.postid =i.postid where p.posttype='Marktplatz'"+
                                 " order by p.postdate desc limit 6");
