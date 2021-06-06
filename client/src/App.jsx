@@ -71,7 +71,7 @@ const App = () => {
 
     {/* muss eine Callbackfunktion sein*/}
     const logout = async (e) => {
-      e.preventDefault();
+      //e.preventDefault();
       try {
         localStorage.removeItem("token");
         setAuth(false);

@@ -151,7 +151,7 @@ const PostUpload = () => {
 }
 
   const submitHandler = async (e)=>{
-    //e.preventDefault();
+    e.preventDefault();
     
     let errorFlag = false;
     //Errorcatching

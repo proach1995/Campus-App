@@ -25,7 +25,7 @@ const Register = ({setAuth}) => {
     userprename: "",
     userdescription: "",
     userbirthdate: "",
-    userimage: "default.jpg",
+    userimage: "Images/profileImages/default.jpg",
 
   });
   /* Werte werden im Objekt inputs gespeichert um sie mit ...props zu übergeben*/
@@ -62,13 +62,17 @@ const Register = ({setAuth}) => {
     
     try {
       const body = { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate, userimage };
-      
+      console.log(userimage.name==null);
       const formData = new FormData();
   
       formData.append("imageFile", userimage)
       
-      const response = await DataServer.post("Authentication/Register", body, formData, {'content-type': 'multipart/form-data'});
-                                            
+      //Da Bild und body nicht gleichzeitig gesendet werden können, wird der User zuerst eingefügt
+      //und dan im 2. Request das Bild geupdtatet
+      //Zusätzlich Prüfung ob standart bild oder eigenes Bild benutzt wird
+      const response = await DataServer.post("Authentication/Register", body);
+      
+      console.log("Registry", response);
       const parseRes = await response.json();
 
       if (parseRes.jwtToken) {

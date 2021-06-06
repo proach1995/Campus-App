@@ -11,9 +11,6 @@ import Cookies from "js-cookie";
 //uss installiert werden: npm install js-cookie --save
 import Jumbotron from 'react-bootstrap/Jumbotron';
 
-
-
-
 const Login = ({setAuth}, props) => {
 
   const {logged, setLogged } = useContext(AppContext);
@@ -61,7 +58,7 @@ const Login = ({setAuth}, props) => {
       if (parseRes.jwtToken) {
         localStorage.setItem("token", parseRes.jwtToken);
         setLogged(true);
-        setUser(parseRes.data.user);    
+        setUser(parseRes.data.user); 
         console.log("Erfolgreich eingeloggt")
         console.log(parseRes);
         Cookies.set("userId", parseRes.data.user.userid);

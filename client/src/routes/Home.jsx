@@ -27,7 +27,7 @@ const Home = ({setAuth},{isAuthenticated}) => {
       const resOfferings = await DataServer.post("/Home/Offerings", {jwt_token:localStorage.token,
                                                                     offerType:"latest"})
       
-      console.log("fetching from offerAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa");
+      
       console.log(resOfferings.data);
       setOfferings(resOfferings.data.offeringList.offer);
     } catch (err) {

@@ -15,6 +15,7 @@ router.post("/Register", validInfo, async (req, res) => {
   //deconstruct  http request
   const { useremail, username, userpassword, userprename, userlastname, userbirthdate, userimage } = req.body;
   
+
   
   try {
     const user = await pool.query("SELECT * FROM users WHERE userEmail = $1", [
@@ -42,6 +43,7 @@ router.post("/Register", validInfo, async (req, res) => {
     console.error(err.message);
     res.status(500).send("server error in jwtAuth/register");
   }
+  
   
 });
 

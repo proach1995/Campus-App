@@ -20,7 +20,7 @@ import { IoEarthOutline } from "react-icons/io5";
 
 
 
-function Sidebar({ logout}) {
+function Sidebar() {
     
   const {logged, setLogged} = useContext(AppContext);
   const {user, setUser} = useContext(AppContext);
@@ -78,10 +78,19 @@ function Sidebar({ logout}) {
 
 
     const logoutHandler =(e) =>{
-      logout(e);
       setLogged(false);
-      setUser(null);
+      user.userid="";
+      user.userprename="";
+      user.userdescription="";
+      user.useremail="";
+      user.userimage="";
+      user.userlastname="";
+      user.username ="";
+      user.userpassword="";
+      user.userbirthdate="";
+
       Cookies.remove("userId");
+      localStorage.removeItem("token");
       //History muss in einem componenten benutzt werden und nicht in der App
       history.push("/login");
     }
@@ -98,6 +107,11 @@ function Sidebar({ logout}) {
     useEffect(()=>{
       console.log("sidebar user=",user);
     },[user])
+
+    useEffect(()=>{
+      console.log("sidebar neutral log=",logged);
+    },[])
+
 
   return (
     <>
