@@ -152,7 +152,8 @@ const PostUpload = () => {
 }
 
   const submitHandler = async (e)=>{
-    e.preventDefault();
+    //e.preventDefault();
+
     
     let errorFlag = false;
     //Errorcatching
@@ -187,6 +188,7 @@ const PostUpload = () => {
     
       //Post erstellen
       const postResult = await DataServer.post("/Post/AddPost",{
+        jwt_token:localStorage.token,
         postTitle: postTitle,
         userId: user.userid,
         postCategory: postCategory,
@@ -220,6 +222,7 @@ const PostUpload = () => {
 );
 
   }
+  window.open("/");
 
 }
   return(

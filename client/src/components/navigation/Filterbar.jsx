@@ -10,7 +10,6 @@ import './Filterbar.css';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
-import { FormGroup } from "@material-ui/core";
 
 
 //Funktion toggleFilter übergeben

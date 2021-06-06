@@ -68,7 +68,7 @@ function Sidebar() {
   );
 
   const refreshHandler = async()=>{
-  
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAA");
     const userData = await DataServer.get("User/"+Cookies.get("userId"));
     console.log("egal", userData);
     setUser(userData.data.userDetail.user);
