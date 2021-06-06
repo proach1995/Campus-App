@@ -225,7 +225,6 @@ const submitUpdateHandler = async (e, postId)=>{
               </Dropdown.Toggle>
                 <Dropdown.Menu>
                 <Dropdown.Item onClick={(e)=>{updatePostHandler(e)}}>Daten bearbeiten</Dropdown.Item>
-              <Dropdown.Item href="/">Passwort zurücksetzen</Dropdown.Item>
               <Dropdown.Divider className="delete" />
               <Dropdown.Item onClick={(e)=>{deleteHandler(e)}} className="delete" href="/">Post löschen</Dropdown.Item>
                 </Dropdown.Menu>
@@ -372,7 +371,6 @@ const submitUpdateHandler = async (e, postId)=>{
               </Dropdown.Toggle>
                 <Dropdown.Menu>
                 <Dropdown.Item onClick={(e)=>{updatePostHandler(e)}}>Daten bearbeiten</Dropdown.Item>
-              <Dropdown.Item href="/">Passwort zurücksetzen</Dropdown.Item>
               <Dropdown.Divider className="delete" />
               <Dropdown.Item onClick={(e)=>{deleteHandler(e)}} className="delete" href="/">Profil löschen</Dropdown.Item>
                 </Dropdown.Menu>
@@ -490,20 +488,6 @@ const submitUpdateHandler = async (e, postId)=>{
               <p>{post.postcategory}</p>
               <p>{post.postdate}</p>
               <p>{post.posttype}</p>
-            </Col>
-            <Col>
-            <Dropdown className="postSettings">
-              <Dropdown.Toggle className="settingsbtn color dropdown-btn "  id="dropdown-basic">
-              <AiIcons.AiOutlineSetting className="icon" />
-              </Dropdown.Toggle>
-                <Dropdown.Menu>
-                <Dropdown.Item onClick={(e)=>{updatePostHandler(e)}}>Daten bearbeiten</Dropdown.Item>
-              <Dropdown.Item href="/">Passwort zurücksetzen</Dropdown.Item>
-              <Dropdown.Divider className="delete" />
-              <Dropdown.Item onClick={(e)=>{deleteHandler(e)}} className="delete" href="/">Profil löschen</Dropdown.Item>
-                </Dropdown.Menu>
-        </Dropdown>
-    
             </Col>
           </Row>
           
