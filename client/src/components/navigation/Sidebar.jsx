@@ -56,7 +56,7 @@ function Sidebar() {
     }
   ];
 
-  console.log(SidebarData);
+  //console.log(SidebarData);
 
 
   let history = useHistory();
@@ -68,7 +68,7 @@ function Sidebar() {
   );
 
   const refreshHandler = async()=>{
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAAA");
+   
     const userData = await DataServer.get("User/"+Cookies.get("userId"));
     console.log("egal", userData);
     setUser(userData.data.userDetail.user);
@@ -109,7 +109,7 @@ function Sidebar() {
     },[user])
 
     useEffect(()=>{
-      console.log("sidebar neutral log=",logged);
+      console.log("userimage",user.userimage);
     },[])
 
 
@@ -138,7 +138,7 @@ function Sidebar() {
                 width={120}
                 height={130}
                 alt="171x180"
-                src="../pb.jpg"
+                src={user.userimage}
                 roundedCircle
               />             
               </Link>

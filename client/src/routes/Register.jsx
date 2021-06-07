@@ -57,53 +57,45 @@ const Register = () => {
     }
     else{
     
-      /*
-    try {
-      const body = { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate, userimage };
-      console.log(userimage.name==null);
-      const formData = new FormData();
-  
-      formData.append("imageFile", userimage)
       
-      //Da Bild und body nicht gleichzeitig gesendet werden können, wird der User zuerst eingefügt
-      //und dan im 2. Request das Bild geupdtatet
-      //Zusätzlich Prüfung ob standart bild oder eigenes Bild benutzt wird
+      try {
+
+        const formData = new FormData();
+        
+        //Okay aus zeitgründen machen wir es "DOOF"  
+        formData.append("userimage", userimage)
+        formData.append("userlastname", userlastname);
+        formData.append("useremail", useremail);
+        formData.append("userpassword", userpassword);
+        formData.append("username", username);
+        formData.append("userprename", userprename);
+        formData.append("userdescription", userdescription);
+        formData.append("userbirthdate", userbirthdate);
       
-      //const response = await DataServer.post("Authentication/Register", body);
-      
-      console.log("Registry", response);
-      */
-    try {      
-      const response = await DataServer.post("/authentication/register", {
-        useremail: useremail,
-        userpassword: userpassword,
-        username: username,
-        userlastname: userlastname,
-        userprename: userprename,
-        userdescription: userdescription,
-        userbirthdate: userbirthdate,
-      })
+        const response = await DataServer.post("Authentication/Register", formData);
 
 
-      const parseRes = await response.json();
-
-      if (parseRes.jwtToken) {
-        localStorage.setItem("token", parseRes.jwtToken);
+      if (response.data.jwtToken) {
+        localStorage.setItem("token", response.data.jwtToken);
         setLogged(true);
         console.log("Registrierung erfolgreich");
 
       } else {
         setLogged(false);
-        console.log(parseRes);
       }
-      history.push("/home");
+      
+
+      history.push("/");
     } catch (err) {
       console.log("user schon da");
       console.error(err.message);
     }
     
+    
+    
   }
-}
+  }
+
 
 
     useEffect(()=>{

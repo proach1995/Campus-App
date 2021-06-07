@@ -8,9 +8,6 @@ import {Link} from 'react-router-dom';
 
 
 const PostsRow = ({postElement}) => {
-
-  console.log("data");
-  console.log(postElement);
   
   var postImagesHelper = [];
   const [postImages, setPostImages] = useState([]);
@@ -38,19 +35,21 @@ const PostsRow = ({postElement}) => {
     })
 
   //Kontrollausgabe
- // console.log("Konrollaugabe");
+  /*
+  console.log("Konrollaugabe");
   postImagesHelper.map((post) =>{
       console.log(post.imagePath);
       console.log(post.postId);
 
     });
+  */
 
  // console.log(postImagesHelper);
   setPostImages(postImagesHelper);
     },[postElement])
 
-    console.log(postElement[0]);
-    console.log(postImagesHelper[0]);
+    //console.log(postElement[0]);
+    //console.log(postImagesHelper[0]);
 
 
 
