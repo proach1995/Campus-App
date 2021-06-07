@@ -22,7 +22,7 @@
     position: absolute;
     top: 4em;
     z-index: 999;
-    width: 100%;
+    left:20%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,6 +33,7 @@
         z-index: 1000;
         background-color: transparent;
         position: fixed;
+        
     }
 }
 
@@ -45,12 +46,12 @@
       right: 10px;
       top: 4px;
       z-index: 10001;
-      ;
+      
   }
 
   .dropdown-btn {
       color: white;
-      background-color: #007466;
+      background: #007466;
       border-color: #007466;
       
   }
@@ -59,7 +60,7 @@
     font-size: 24px;
     letter-spacing: -0.1em;
     z-index: 1001;
-    
+
 }
 .navbar a {
     z-index: 10001;
