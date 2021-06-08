@@ -117,7 +117,6 @@ console.log("user Login = ", user);
                     placeholder="Passwort" 
                   />
                 </Form.Group> 
-                <Form.Check  type="checkbox" label="eingeloggt bleiben" />
                     <div className="buttonBackground" >
                       <div className="centerLoginButtons">
                           <Button type="submit" className="button login-btn" variant="primary" >

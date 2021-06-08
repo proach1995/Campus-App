@@ -68,7 +68,6 @@ function Sidebar() {
   );
 
   const refreshHandler = async()=>{
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAAA");
     const userData = await DataServer.get("User/"+Cookies.get("userId"));
     console.log("egal", userData);
     setUser(userData.data.userDetail.user);
@@ -184,13 +183,13 @@ function Sidebar() {
               })}
             </ul> 
             </div>
-            <Link to="/">
             <div className="logout-btn-container">
+            <Link to="/">
             <Button  onClick={(e) => logoutHandler(e)} style={{display: logged ? '' : 'none' }} className="button logout-btn login-btn" variant="secondary" >
                       Logout
             </Button>
-            </div>
             </Link>
+            </div>
 
           </div>
         </nav>
