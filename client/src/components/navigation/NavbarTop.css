@@ -22,11 +22,12 @@
     position: absolute;
     top: 4em;
     z-index: 999;
-    left:20%;
+    left:25%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left:10%;
+    padding-left:15%;
+    margin-right:10%;
 }
 @media screen and (min-width: 576px) {
     .navbarSubline {
@@ -34,10 +35,17 @@
         z-index: 1000;
         background-color: transparent;
         position: fixed;
-        
+               
     }
 }
 
+@media (max-width: 566px) {
+    .navbarSubline {
+        margin-right:10%;
+        left:0%;
+        width:100%;
+    }
+}
 
 /* Need to add transition overlay for sidebar for bigger viewports */
 
