@@ -22,10 +22,11 @@
     position: absolute;
     top: 4em;
     z-index: 999;
-    width: 100%;
+    left:20%;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-left:10%;
 }
 @media screen and (min-width: 576px) {
     .navbarSubline {
@@ -33,6 +34,7 @@
         z-index: 1000;
         background-color: transparent;
         position: fixed;
+        
     }
 }
 
@@ -45,7 +47,7 @@
       right: 10px;
       top: 4px;
       z-index: 10001;
-      ;
+      
   }
 
   .dropdown-btn {

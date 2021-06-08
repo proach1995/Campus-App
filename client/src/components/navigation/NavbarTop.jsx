@@ -5,7 +5,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import './NavbarTop.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {useHistory } from 'react-router-dom';
+import {useHistory, Link } from 'react-router-dom';
 
 
 
@@ -32,7 +32,7 @@ const NavbarTop = ({isActive},{toggleButton}) => {
     <>
 
   <Navbar className="navbarStyling" variant="light">  
-    <a href="/" className="branding">Campus<span className="brandingFat">APP</span></a>
+    <Link to="/" className="branding">Campus<span className="brandingFat">APP</span></Link>
     {/*https://react-bootstrap.github.io/layout/grid/#grid-props 
       Positioning with offset , sm und md
     

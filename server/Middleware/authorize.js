@@ -18,7 +18,7 @@ module.exports = function (req, res, next) {
      console.log (req.header);
   }
   
-  console.log(token +" in authorization ");
+  console.log(token , " in authorization ");
   // Wenn kein Token im Browser gespeichert, dann kein Token im Header, dann const token = undefiened, dann !undefiend = true
   if (!token) {
     return res.status(403).json({ msg: "Zugang verwehrt" });

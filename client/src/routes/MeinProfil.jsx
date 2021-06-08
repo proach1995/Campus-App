@@ -29,6 +29,8 @@ const MeinProfil = () => {
 
 
 
+
+  const [userPosts, setUserPosts] = useState([]);
   const [authorPosts, setAuthorPosts] = useState([]);
   const { userid } = useParams();
   console.log("userid: " + userid);

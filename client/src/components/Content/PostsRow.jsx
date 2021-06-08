@@ -23,8 +23,7 @@ const PostsRow = ({postElement}) => {
   //1 Post mit mehreren Bildern muss genauso abgespeichert werden
     let postIdMemory = 0;
     let innerIndex = 0;
-   {/* console.log("filter");
-    console.log(postElement); */}
+    console.log("postRow:", postElement);
     
     postElement.map((item) =>{
 

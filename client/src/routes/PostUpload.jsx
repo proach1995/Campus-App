@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import DataServer from "../api/DataServer";
 import { AppContext } from "../context/AppContext";
 import LoginRequired from "../components/Content/LoginRequired";
@@ -56,6 +56,7 @@ const PostUpload = () => {
   const [falsePrice, setFalsePrice] = useState(false);
   const [noImage, setNoImage] = useState(false);
 
+
   //Hilfsflags
   const [init, setInit] = useState(0);
   //Testen
@@ -68,7 +69,7 @@ const PostUpload = () => {
       setNoImage(false);
     }
     setInit(1);
-    console.log("user upload = ", user);
+    //console.log("user upload = ", imageFiles[0]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[imageFiles])
 
@@ -151,7 +152,8 @@ const PostUpload = () => {
 }
 
   const submitHandler = async (e)=>{
-    e.preventDefault();
+    //e.preventDefault();
+
     
     let errorFlag = false;
     //Errorcatching
@@ -186,6 +188,7 @@ const PostUpload = () => {
     
       //Post erstellen
       const postResult = await DataServer.post("/Post/AddPost",{
+        jwt_token:localStorage.token,
         postTitle: postTitle,
         userId: user.userid,
         postCategory: postCategory,
@@ -217,7 +220,9 @@ const PostUpload = () => {
                                 postResult.data.data.post[0].postid,
                                  formData, {headers}//Header ist ein muss
 );
+
   }
+  window.open("/");
 
 }
   return(
@@ -267,7 +272,7 @@ const PostUpload = () => {
                   </div>
                   </>
                   ))}
-                 <Form.Group  >
+                 <Form.Group>
                     <Form.Row>
                       <Form.Label>Titel</Form.Label>
                       {noTitel === true &&

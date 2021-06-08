@@ -23,10 +23,11 @@ const Home = () => {
 
   const getOffers = async () => {
     try {
-      //console.log("getPosts wird ausgeführt");
-      const resOfferings = await DataServer.get("/Home/Offerings", {jwt_token:localStorage.token})
+      console.log("getPosts wird ausgeführt");
+      const resOfferings = await DataServer.post("/Home/Offerings", {jwt_token:localStorage.token,
+                                                                    offerType:"latest"})
       
-      console.log("fetching from offer");
+      
       console.log(resOfferings.data);
       setOfferings(resOfferings.data.offeringList.offer);
     } catch (err) {

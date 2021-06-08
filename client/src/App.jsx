@@ -22,25 +22,14 @@ import NotFound from "./routes/NotFound";
 const App = () => {
 
 
-    {/* muss eine Callbackfunktion sein*/}
-    const logout = async (e) => {
-      e.preventDefault();
-      try {
-        localStorage.removeItem("token");
-        //setLogged(false);
-        console.log("Sicher ausgeloggt");
-
-      } catch (err) {
-        console.error(err.message);
-      }
-    };
+  
   
 
   return (
       <div className="">
     <AppContextProvider>
     <Router>
-      <Sidebar logout={logout}/>
+      <Sidebar/>
       <NavbarTop/>
           <Switch>
             <Route exact path="/" component={Home} />

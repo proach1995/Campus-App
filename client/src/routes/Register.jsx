@@ -4,11 +4,8 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './route.css';
-import DataServer from "../api/DataServer";
 import { AppContext } from "../context/AppContext";
-
-
-
+import DataServer from "../api/DataServer";
 
 
 const Register = () => {
@@ -25,17 +22,23 @@ const Register = () => {
     userprename: "",
     userdescription: "",
     userbirthdate: "",
+    userimage: "Images/profileImages/default.jpg",
 
   });
   /* Werte werden im Objekt inputs gespeichert um sie mit ...props zu übergeben*/
-  const { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate } = inputs;
+  const { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate, userimage } = inputs;
   const [validated, setValidated] = useState(false);
     
   /* Spricht in der e.target Funktion erst den Namen an und übergibt dann den Wert, d.h. Name muss identisch sein
   mit dem Namen im Input field*/
   const onChange = e => {
     e.preventDefault();
+    if(e.target.name !="userimage"){
     setInputs({ ...inputs, [e.target.name]: e.target.value });
+    }
+    else{
+      setInputs({ ...inputs, [e.target.name]: e.target.files[0]});
+    }
     console.log("onChange in Register ausgeführt");
     console.log("onChange2 in Register ausgeführt");
 
@@ -54,6 +57,22 @@ const Register = () => {
     }
     else{
     
+      /*
+    try {
+      const body = { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate, userimage };
+      console.log(userimage.name==null);
+      const formData = new FormData();
+  
+      formData.append("imageFile", userimage)
+      
+      //Da Bild und body nicht gleichzeitig gesendet werden können, wird der User zuerst eingefügt
+      //und dan im 2. Request das Bild geupdtatet
+      //Zusätzlich Prüfung ob standart bild oder eigenes Bild benutzt wird
+      
+      //const response = await DataServer.post("Authentication/Register", body);
+      
+      console.log("Registry", response);
+      */
     try {      
       const response = await DataServer.post("/authentication/register", {
         useremail: useremail,
@@ -214,6 +233,7 @@ const Register = () => {
                 id="UserImage" 
                 label="Profilbild" 
                 name="userimage"
+                onChange={(e)=>{onChange(e)}}
               />
             </Form.Group>
           <Form.Group id="formGridCheckbox">
