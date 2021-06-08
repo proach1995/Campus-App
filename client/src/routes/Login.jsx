@@ -129,7 +129,7 @@ console.log("user Login = ", user);
             <div className="register">
             <Button href="/register" className="button register-btn login-btn" variant="secondary" >
               </Button> 
-        
+            </div>
                   
 
           </>
