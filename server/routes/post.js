@@ -27,8 +27,8 @@ router.get("/:postid", async (req, res) => {
   });
 
 
-  // Alle Posts fetchen
-  router.get("/allposts", authorize, async (req, res) =>{
+  /* Alle Posts fetchen
+  //router.get("/allposts", authorize, async (req, res) =>{
     //console.log("treffer");
     try{
       const posts = await db.query("select * from posts");
@@ -44,7 +44,7 @@ router.get("/:postid", async (req, res) => {
       console.log(err);
     }
   })
-
+*/
   // Alle Marktplatz Posts fetchen
   router.get("/Marktplatz", async (req, res) => {
     try {   
