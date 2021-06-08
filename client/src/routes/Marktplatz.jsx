@@ -23,7 +23,7 @@ const Marktplatz = () => {
   const getOffers = async () => {
     try {
       //console.log("getPosts wird ausgeführt");
-      const resOfferings = await DataServer.post("/Home/Offerings", {jwt_token:localStorage.token,
+      const resOfferings = await DataServer.post("Marktplatz", {jwt_token:localStorage.token,
                                                                       offerType:"latest"});
       
       //console.log("fetching from offer");
@@ -37,7 +37,7 @@ const Marktplatz = () => {
   const getFilteredOffers = async(jsonFile) =>{
     jsonFile = ({...jsonFile,jwt_token:localStorage.token });
     console.log(jsonFile);
-    const resOfferings = await DataServer.post("/Home/Offerings", jsonFile)
+    const resOfferings = await DataServer.post("/Marktplatz", jsonFile)
     console.log("filtered", resOfferings);
     setOfferings(resOfferings.data.offeringList.offer);
 
@@ -88,7 +88,7 @@ console.log(posts);
   
             <Button variant="success" onClick={(e)=>{toggleFilter(e)}}>Filter</Button>
           
-        {isActive == true &&
+        {isActive === true &&
         <Filterbar toggleFilter={toggleFilter} isActive={isActive}
                     getFilteredOffers={getFilteredOffers}/>
         }
