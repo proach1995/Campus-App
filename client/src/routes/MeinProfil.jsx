@@ -26,8 +26,18 @@ const MeinProfil = () => {
   let [userIsAuthor, setUserIsAuthor] = useState(false);
 
 
-
-
+  const [inputs, setInputs] = useState({
+    useremail: "",
+    userpassword: "",
+    username: "",
+    userlastname: "",
+    userprename: "",
+    userdescription: "",
+    userbirthdate: "",
+  
+  });
+  /* Werte werden an einzelne Objekte übergeben*/
+  const { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate } = inputs;
 
 
   const [userPosts, setUserPosts] = useState([]);
@@ -46,9 +56,21 @@ const MeinProfil = () => {
   const fetchAuthor= async () => {
     try {
       const response = await DataServer.get(`/User/${userid}`);
-      console.log(response.data.userDetail);
+      console.log("Userfetch");
+      console.log(response.data.userDetail.user);
       setAuthor(response.data.userDetail.user);
+      
       setAuthorPosts(response.data.userDetail.posts);
+      setInputs({ 
+      useremail: response.data.userDetail.user.useremail,
+      userpassword: response.data.userDetail.user.userpassword,
+      username: response.data.userDetail.user.username,
+      userlastname: response.data.userDetail.user.userlastname,
+      userprename: response.data.userDetail.user.userprename,
+      userdescription: response.data.userDetail.user.userdescription,
+      userbirthdate: response.data.userDetail.user.userbirthdate,
+     });
+
     } catch (err) {
       console.log(err);
       console.log("Fetchuser hat nicht funktioniert");
@@ -99,20 +121,8 @@ const deleteHandler = async (e, userId)=>{
 }
 /**********  UPDATE *****************/
 const [updateUser, setUpdateUser] = useState(null);
-const [updateUserData, setUpdateUserData] = useState(null);
 
-const [inputs, setInputs] = useState({
-  useremail: "",
-  userpassword: "",
-  username: "",
-  userlastname: "",
-  userprename: "",
-  userdescription: "",
-  userbirthdate: "",
 
-});
-/* Werte werden im Objekt inputs gespeichert um sie mit ...props zu übergeben*/
-const { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate } = inputs;
 const [validated, setValidated] = useState(false);
   
 /* Spricht in der e.target Funktion erst den Namen an und übergibt dann den Wert, d.h. Name muss identisch sein
@@ -148,7 +158,6 @@ const submitUpdateHandler = async (e, userId)=>{
     else{
     
     try {
-      //const body = { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate };
       
       //console.log("test");
       const response = await DataServer.put(`/user/${userid}`, {
@@ -161,7 +170,6 @@ const submitUpdateHandler = async (e, userId)=>{
         userdescription: userdescription,
         userbirthdate: userbirthdate,
 
-        //body: JSON.stringify(body)   //body in Body übergeben
       })
       
       const parseRes = await response.json(); 
@@ -172,7 +180,6 @@ const submitUpdateHandler = async (e, userId)=>{
     }
     
   }
-
 
 }
 
@@ -233,13 +240,13 @@ const submitUpdateHandler = async (e, userId)=>{
       </Row>
       <Row>
         <Col>
-            <Tabs defaultActiveKey="profile" id="">
+            <Tabs defaultActiveKey="home" id="">
                 <Tab eventKey="home" title="Meine Posts">
                  <PostsRow postElement={authorPosts} /> 
                 </Tab>
-                <Tab eventKey="profile" title="Bewertungen">
+              {/*  <Tab eventKey="profile" title="Bewertungen">
                     <div>Hier könnten ihre Bewertungen stehen</div>
-                </Tab>      
+              </Tab>     */} 
             </Tabs>  
         </Col>
       </Row> 
@@ -289,7 +296,6 @@ const submitUpdateHandler = async (e, userId)=>{
               <Form.Control 
                 type="email" 
                 name="useremail"
-                placeholder={author.useremail} 
                 value={useremail}
                 onChange={e => onChange(e)}
               />
@@ -299,7 +305,6 @@ const submitUpdateHandler = async (e, userId)=>{
               <Form.Label>Username</Form.Label>
               <Form.Control 
                 required
-                placeholder={user.username} 
                 name="username"
                 value={username}
                 onChange={e => onChange(e)}
@@ -314,7 +319,6 @@ const submitUpdateHandler = async (e, userId)=>{
               <Form.Label>Nachname</Form.Label>
               <Form.Control 
                 required
-                placeholder={user.userlastname} 
                 name="userlastname"
                 value={userlastname}
                 onChange={e => onChange(e)}
@@ -328,7 +332,6 @@ const submitUpdateHandler = async (e, userId)=>{
             <Form.Group controlId="UserPrename">
               <Form.Label>Vorname</Form.Label>
               <Form.Control 
-                placeholder={user.userprename}
                 name="userprename"
                 value={userprename}
                 onChange={e => onChange(e)}
@@ -344,7 +347,6 @@ const submitUpdateHandler = async (e, userId)=>{
               <Form.Control
                 type="date"
                 name="userbirthdate"
-                placeholder ={user.userbirthdate}
                 value={userbirthdate}    
                 onChange={e => onChange(e)}
 
@@ -369,7 +371,6 @@ const submitUpdateHandler = async (e, userId)=>{
                 as="textarea" 
                 rows={3} 
                 name="userdescription"
-                placeholder={user.userdescription}
                 value={userdescription}
                 onChange={e => onChange(e)}
                 />
@@ -432,13 +433,13 @@ const submitUpdateHandler = async (e, userId)=>{
       </Row>
       <Row>
         <Col>
-            <Tabs defaultActiveKey="profile" id="">
+            <Tabs defaultActiveKey="home" id="">
                 <Tab eventKey="home" title="Alle Posts">
                  <PostsRow postElement={authorPosts} /> 
                 </Tab>
-                <Tab eventKey="profile" title="Bewertungen">
+               {/*} <Tab eventKey="profile" title="Bewertungen">
                     <div>Leider hat sie noch kein Nutzer bewertet</div>
-                </Tab>      
+               </Tab>     */} 
             </Tabs>  
         </Col>
       </Row> 
