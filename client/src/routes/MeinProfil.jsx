@@ -287,7 +287,6 @@ const submitUpdateHandler = async (e, userId)=>{
           <Form.Group  controlId="Useremail">
               <Form.Label>E-Mail Adresse</Form.Label>
               <Form.Control 
-                className="is-invalid"
                 type="email" 
                 name="useremail"
                 placeholder={author.useremail} 
