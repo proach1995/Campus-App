@@ -179,7 +179,7 @@ const submitUpdateHandler = async (e, userId)=>{
     }
     
   }
-
+window.location.reload();
 }
 
 

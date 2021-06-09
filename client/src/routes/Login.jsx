@@ -7,6 +7,8 @@ import './route.css';
 import { AppContext } from "../context/AppContext";
 import { useHistory } from "react-router";
 import Cookies from "js-cookie";
+import DataServer from "../api/DataServer";
+
 
 //muss installiert werden: npm install js-cookie --save
 import Jumbotron from 'react-bootstrap/Jumbotron';
@@ -39,6 +41,12 @@ const Login = () => {
     console.log("onSubmitForm in Register ausgeführt");
 
     try {
+      /*
+      const response = await DataServer.post("/Authentication/login", {
+        useremail: useremail,
+        userpassword: userpassword,
+      })
+      */
       const body = { useremail, userpassword };
 
       const response = await fetch(
