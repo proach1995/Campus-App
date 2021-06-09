@@ -29,6 +29,10 @@ app.use("/Database/Marktplatz/Post", require("./routes/post"));
 
 app.use("/Database/Marktplatz/User", require("./routes/user"));
 
+app.use("/Database/Marktplatz/Marktplatz", require("./routes/marktplatz"));
+
+app.use("/Database/Marktplatz/Events", require("./routes/events"));
+
 app.use("/Database/Marktplatz/Upload", require("./routes/fileupload"));
 
 

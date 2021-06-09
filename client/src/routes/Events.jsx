@@ -14,7 +14,7 @@ const Events = () => {
   const getEvents = async () => {
     try {
       //console.log("getPosts wird ausgeführt");
-      const resEvents = await DataServer.get("/Home/Events", {jwt_token:localStorage.token})
+      const resEvents = await DataServer.get("/Events", {jwt_token:localStorage.token})
       console.log("fetching from events");
       console.log(resEvents.data);
       setEvents(resEvents.data.eventList.event);

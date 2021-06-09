@@ -16,6 +16,7 @@ router.get("/:userid", async (req, res) => {
                                 " p.postid =i.postid where p.userid=$1"+
                                 " order by p.postdate desc ", [req.params.userid]
       )
+      console.log(userPosts);
       res.status(200).json({
         status: "success",
         userDetail:{

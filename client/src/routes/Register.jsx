@@ -117,7 +117,6 @@ const Register = () => {
             <Form.Group  controlId="Useremail">
               <Form.Label>E-Mail Adresse</Form.Label>
               <Form.Control 
-                className="is-invalid"
                 required
                 type="email" 
                 name="useremail"

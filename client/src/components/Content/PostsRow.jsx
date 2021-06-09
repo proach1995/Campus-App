@@ -67,7 +67,7 @@ const PostsRow = ({postElement}) => {
         <Col className="col-6 col-md-6 col-lg-3 card" >
             <Link to= {"/post/" + imageInfo.postId}>
               <Card className=" text-center " style={{ width:'100px', height:"100px" }}>
-              <Card.Img src={imageInfo.imagePath}> 
+              <Card.Img style={{width:'100px', height:"100px"}}src={imageInfo.imagePath}> 
               </Card.Img> 
               <div className="priceTag">
                 {imageInfo.postPrice}&nbsp;€ 

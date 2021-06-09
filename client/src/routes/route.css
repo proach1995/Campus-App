@@ -150,6 +150,7 @@
 .userSection {
     
     display: flex;
+    padding-left: 1.5rem;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
@@ -169,16 +170,58 @@
     justify-content: center;
 }
 
+
+
+.contentHeading {
+    color:#234565;
+    text-align: center;
+    margin-top:2rem;
+    margin-bottom: 2rem;
+}
+
 .contentSection {
-width:60%;
+display: flex;
+justify-content: right;
+width:100%;
+margin-left:0.5%;
+padding-top:0.5em ;
+background-color:rgb(255, 255, 255) ;
+
+
+
 
 }
 
 .postHeader {
-    text-align: left;
+    text-align: center;
+    margin-bottom: 1em;
 }
 
-.register {
+.imageCarousel {
+    height:200px;
+    width:200px;
+}
+
+.postSettings {
+    position: absolute;
+    right: 0em;
+    top: 0em;
+    z-index: 100;
+}
+
+.contentcontact {
+    flex-direction:column;
+    display: flex;
+    justify-content: right;
+    width:100%;
+    margin-left:0.5%;
+    background-color:rgb(255, 255, 255) ;
+    
+    
+    
+}
+
+.contentbtn {
     display: flex;
     flex-direction: row;
     justify-content: center;
