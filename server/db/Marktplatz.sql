@@ -21,6 +21,7 @@ CREATE TABLE users(
     userBirthdate date  not null,
     userImage varchar(100) ,
     userDescription varchar(500),
+    datarequirements boolean,
     primary key (userId)
 );
 

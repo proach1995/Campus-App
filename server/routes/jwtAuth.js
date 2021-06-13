@@ -35,28 +35,39 @@ router.post("/Register", validInfo, async (req, res) => {
     
     if(req.files== null){
       newUser = await pool.query(
-      "INSERT INTO users (userName, userEmail, userPassword, userPrename, userLastname, userbirthdate, userimage) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-      [req.body.username, req.body.useremail, bcryptPassword, req.body.userprename, req.body.userlastname, req.body.userbirthdate, req.body.userimage]
-    );
+                                "INSERT INTO users (userName, userEmail,"+
+                                " userPassword, userPrename, userLastname,"+
+                                " userbirthdate, userimage, datarequirements)"+
+                                " VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+                                [req.body.username, req.body.useremail,
+                                bcryptPassword, req.body.userprename, req.body.userlastname,
+                                req.body.userbirthdate, req.body.userimage, req.body.datarequirements]
+      );
       }
 
     else{
       let countedUsers = await pool.query("select count(*) from users");
       let imageFile = req.files.userimage; 
         newUser = await pool.query(
-        "INSERT INTO users (userName, userEmail, userPassword, userPrename, userLastname, userbirthdate, userimage) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-        [req.body.username, req.body.useremail, bcryptPassword, req.body.userprename,
-        req.body.userlastname, req.body.userbirthdate, "Images/profileImages/"+countedUsers.rows[0].count+imageFile.name]);
-
-       
+                                  "INSERT INTO users (userName, userEmail,"+
+                                  " userPassword, userPrename, userLastname,"+
+                                  " userbirthdate, userimage, datarequirements)"+
+                                  " VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+                                  [req.body.username, req.body.useremail,
+                                  bcryptPassword, req.body.userprename, req.body.userlastname,
+                                  req.body.userbirthdate, req.body.userimage, req.body.datarequirements]);
         
-        imageFile.mv("../client/public/Images/profileImages/"+countedUsers.rows[0].count+imageFile.name);
+      imageFile.mv("../client/public/Images/profileImages/"+countedUsers.rows[0].count+imageFile.name);
     }
+
     //generate token 
     const jwtToken = jwtGenerator(newUser.rows[0].userid);
+    
     // try block checks if user exists, encrypts & saves pw and returns generated token
-   
-    return res.json({ jwtToken });
+    return res.json({ jwtToken,
+                      data:{
+                            user:newUser.rows
+                      }});
     
   } catch (err) {
     console.error(err.message);

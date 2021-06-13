@@ -1,6 +1,6 @@
 /* eslint-disable no-lone-blocks */
 import React, {useState, useEffect} from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from "react-router-dom";
 import Home from "./routes/Home";
 import Footer from './components/navigation/Footer';
 import PostUpload from "./routes/PostUpload";
@@ -21,18 +21,27 @@ import NotFound from "./routes/NotFound";
 
 const App = () => {
 
+  const [searchedOffers, setSearchedOffers] = useState();
+  const [searchedEvents, setSearchedEvents] = useState();
 
-  
-  
+
+  //Funktion um mit der searchbar die gefundenen Elemente zu übergeben
+  const setResults = (offers, events) =>{
+    setSearchedOffers(offers);
+    setSearchedEvents(events);
+  }
 
   return (
       <div className="">
     <AppContextProvider>
     <Router>
       <Sidebar/>
-      <NavbarTop/>
+      <NavbarTop setResults={setResults}/>
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/"
+             render={(props) =>(
+              <Home {...props} searchedOffers={searchedOffers} searchedEvents={searchedEvents} />
+             )} />
             <Route
               exact
               path="/marktplatz"

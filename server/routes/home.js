@@ -3,12 +3,24 @@ const authorize = require("../Middleware/authorize");
 const db = require("../db/index");
 
 router.post("/Offerings", async (req, res) => {
-  try {   
+  try { 
+    let resOfferings = null;  
     console.log("Home wird ausgeführt");
-    const resOfferings = await db.query("select * from posts p inner join images i on"+
+    if(req.body.type=="latest"){
+     resOfferings = await db.query("select * from posts p inner join images i on"+
                                 " p.postid =i.postid where p.posttype='Marktplatz'"+
                                 " order by p.postdate desc limit 6");
+    }
 
+     if(req.body.type=="searchbar"){
+        resOfferings = await db.query("select * from posts p inner join images i on"+
+                                      " p.postid =i.postid where p.posttitle ilike $1"+
+                                      " and p.posttype='Marktplatz'",
+                                      [req.body.title]);
+                                      console.log(resOfferings)
+      console.log(req.body.title);
+      }
+      
      res.status(200).json({
       status: "success",
       offeringList :{
@@ -23,13 +35,22 @@ router.post("/Offerings", async (req, res) => {
 });
 
 
-router.get("/Events", async (req, res) => {
+router.post("/Events", async (req, res) => {
   try {   
-    //console.log("Home wird ausgeführt");
-    const resEvents = await db.query("select * from posts p inner join images i on"+
+    console.log("Events")
+    let resEvents = null;
+    if(req.body.type=="latest"){
+      resEvents = await db.query("select * from posts p inner join images i on"+
                                 " p.postid =i.postid where p.posttype='Events'"+
                                 " order by p.postdate desc limit 6");
-    //console.log(resEvents);
+    }
+
+  if(req.body.type=="searchbar"){
+    resEvents = await db.query("select * from posts p inner join images i on"+
+                              " p.postid =i.postid where p.posttitle ilike $1"+
+                              " and p.posttype='Events'",
+                              [req.body.title]);
+                                }
     res.status(200).json({
       status: "success",
       eventList :{

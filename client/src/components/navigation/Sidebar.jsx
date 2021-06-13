@@ -101,7 +101,7 @@ function Sidebar() {
         console.log("Refresh");
         refreshHandler();
       }
-      //console.log("user", user);
+      console.log("sidebarUser", user);
     },[logged]);
 
     useEffect(()=>{

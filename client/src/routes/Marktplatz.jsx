@@ -48,36 +48,7 @@ const Marktplatz = () => {
     getOffers();
   }, []);
   // eslint-disable-next-line no-lone-blocks
-  {/*
-  const [posts, setPosts] = useState(null);
-
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await DataServer.get("/Post/Marktplatz");
-        console.log(response + "in fetch posts marktplatz");
-
-        setPosts(response.data.postlist.post);
-      } catch (err) {
-        console.log(err);
-        console.log("FetchPosts in Marktplatz hat nicht funktioniert");
-      }
-    };
-
-    fetchPosts();
-  }, []);
-
-
-
-console.log(posts);
-
-*/}
-
   
-
-
-
 
   return (
     <Container className="routeContainer">
