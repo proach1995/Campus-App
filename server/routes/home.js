@@ -13,12 +13,13 @@ router.post("/Offerings", async (req, res) => {
     }
 
      if(req.body.type=="searchbar"){
+       console.log("searched");
         resOfferings = await db.query("select * from posts p inner join images i on"+
                                       " p.postid =i.postid where p.posttitle ilike $1"+
                                       " and p.posttype='Marktplatz'",
                                       [req.body.title]);
                                       console.log(resOfferings)
-      console.log(req.body.title);
+      console.log(resOfferings);
       }
       
      res.status(200).json({

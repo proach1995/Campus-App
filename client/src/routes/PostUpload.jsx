@@ -15,9 +15,9 @@ import Spinner from 'react-bootstrap/Spinner'
 const PostUpload = () => {
 
   const {logged} = useContext(AppContext);
-
   const {user} = useContext(AppContext);
 
+  let history = useHistory();
   //const {id} = useParams(); wird später benötigt
   //radio
   const [radioAngebot, setRadioAngebot] = useState(true);
@@ -222,7 +222,7 @@ const PostUpload = () => {
 );
 
   }
-  window.open("/");
+  history.push("/");
 
 }
   return(

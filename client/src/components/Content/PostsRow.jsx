@@ -20,8 +20,9 @@ const PostsRow = ({postElement}) => {
   //1 Post mit mehreren Bildern muss genauso abgespeichert werden
     let postIdMemory = 0;
     let innerIndex = 0;
+
     console.log("postRow:", postElement);
-    
+    if(postElement != null){
     postElement.map((item) =>{
 
       //Check ob die ID ein 2.mal vorkommt
@@ -46,7 +47,11 @@ const PostsRow = ({postElement}) => {
 
  // console.log(postImagesHelper);
   setPostImages(postImagesHelper);
-    console.log("filtered",postImagesHelper);
+    }
+    else{
+      console.log("Etwas stimmt nicht");
+    }
+
     },[postElement])
 
     //console.log(postElement[0]);

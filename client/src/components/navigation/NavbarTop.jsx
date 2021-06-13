@@ -60,6 +60,12 @@ const NavbarTop = ({setResults}) => {
     searchPosts(title);
   },[searchedTitel] )
   
+  //Für ein Refresh oder sonst was, muss der anfangswert gegeben werden
+  useEffect(()=>{
+
+    setResults(null, null);
+    console.log("navbar");
+  },[])
 
   return (
     <>

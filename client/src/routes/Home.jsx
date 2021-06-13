@@ -22,8 +22,6 @@ const Home = ({searchedOffers, searchedEvents}) => {
   const [offerings, setOfferings] = useState([]);
   const [events, setEvents] = useState([]);
 
-  console.log(searchedOffers)
-
   const getOffers = async () => {
     try {
       console.log("getPosts wird ausgeführt");
@@ -48,8 +46,18 @@ const Home = ({searchedOffers, searchedEvents}) => {
     }
   };
 
+  /*
   useEffect(()=>{
 
+    getOffers();
+    getEvents();
+    console.log("search Effect", searchedOffers == null)
+  },[])*/
+
+
+  useEffect(()=>{
+
+    
     if(searchedOffers==null){
     getOffers();
     getEvents();
