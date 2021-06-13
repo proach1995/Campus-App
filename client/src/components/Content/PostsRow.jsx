@@ -15,7 +15,7 @@ const PostsRow = ({postElement}) => {
 
 
     useEffect(()=>{
-
+      console.log("postElements", postElement);
   //Genauso wie oben können bilder Selektiert und gemappt werden
   //1 Post mit mehreren Bildern muss genauso abgespeichert werden
     let postIdMemory = 0;
@@ -46,6 +46,7 @@ const PostsRow = ({postElement}) => {
 
  // console.log(postImagesHelper);
   setPostImages(postImagesHelper);
+    console.log("filtered",postImagesHelper);
     },[postElement])
 
     //console.log(postElement[0]);

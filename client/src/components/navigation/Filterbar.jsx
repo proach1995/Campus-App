@@ -93,6 +93,7 @@ const Filterbar = ({toggleFilter, isActive, getFilteredOffers}) =>{
       else{
         jsonFile = ({...jsonFile, dateEnd:dateEnd});
       }
+      
       getFilteredOffers(jsonFile);
       toggleFilter(e);
     }

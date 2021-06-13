@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
       if(req.body.offerType=="latest"){
       resOfferings = await db.query("select * from posts p inner join images i on"+
                                 " p.postid =i.postid where p.posttype='Marktplatz'"+
-                                " order by p.postdate desc ");
+                                " order by p.postid, p.postdate desc ");
       }
 
     if(req.body.offerType=="filtered"){
@@ -27,7 +27,6 @@ router.post("/", async (req, res) => {
                                     " and p.postdate between $5 and $6",
                                     [req.body.title, req.body.postCategory, req.body.postPriceType, req.body.choosedPrice,
                                     req.body.dateBegin, req.body.dateEnd]);
-    console.log(resOfferings);
     }
     
     //console.log(resOfferings);

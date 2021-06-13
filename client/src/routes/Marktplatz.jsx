@@ -26,8 +26,6 @@ const Marktplatz = () => {
       const resOfferings = await DataServer.post("Marktplatz", {jwt_token:localStorage.token,
                                                                       offerType:"latest"});
       
-      //console.log("fetching from offer");
-      //console.log(resOfferings.data);
       setOfferings(resOfferings.data.offeringList.offer);
     } catch (err) {
       console.error(err.message);
@@ -38,7 +36,6 @@ const Marktplatz = () => {
     jsonFile = ({...jsonFile,jwt_token:localStorage.token });
     console.log(jsonFile);
     const resOfferings = await DataServer.post("/Marktplatz", jsonFile)
-    console.log("filtered", resOfferings);
     setOfferings(resOfferings.data.offeringList.offer);
 
   }
