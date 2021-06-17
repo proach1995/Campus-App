@@ -133,6 +133,7 @@ mit dem Namen im Input field*/
 const onChange = e => {
   e.preventDefault();
   setInputs({ ...inputs, [e.target.name]: e.target.value });
+  console.log("onChange", inputs);
 
 }
 
