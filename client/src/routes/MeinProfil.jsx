@@ -233,8 +233,8 @@ const submitUpdateHandler = async (e, userId)=>{
         </Col>
         <Col sm={6} className=" profilSectionWrapper"> 
           <div>
-          <p><strong>Username:</strong> <br/>{author.username}</p>
-          <p><strong>E-Mail:</strong> <br/>{author.useremail}</p>
+          <p><strong>Username:</strong> <br/>{user.username}</p>
+          <p><strong>E-Mail:</strong> <br/>{user.useremail}</p>
           <p><strong>Geburtsdatum:</strong> <br/>{moment(user.userbirthdate).format("L")}</p>
           </div>
         </Col>
