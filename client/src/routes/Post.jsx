@@ -14,7 +14,7 @@ import './route.css';
 import PostsRow from "../components/Content/PostsRow";
 import { AppContext } from "../context/AppContext";
 import Form from 'react-bootstrap/Form';
-
+import moment from 'moment';
 
 
 
@@ -486,7 +486,7 @@ const submitUpdateHandler = async (e, postId)=>{
             <Col>
               <p>{post.postprice}€</p>
               <p>{post.postcategory}</p>
-              <p>{post.postdate}</p>
+              <p>{moment(post.postdate).format("L")}</p>
               <p>{post.posttype}</p>
             </Col>
           </Row>
