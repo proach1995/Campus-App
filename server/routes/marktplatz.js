@@ -6,7 +6,7 @@ const db = require("../db/index");
 router.post("/", async (req, res) => {
   try {   
     console.log("Marktplatz wird ausgeführt");
-    //console.log(req.body.offerType)
+    console.log(req.body.offerType)
    
     
       console.log("get latest posts");
