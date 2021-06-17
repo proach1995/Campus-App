@@ -19,11 +19,24 @@ import Form from 'react-bootstrap/Form';
 
 const MeinProfil = () => {
 
+  const { userid } = useParams();
+
   const {logged, setLogged} = useContext(AppContext);
   const {user, setUser} = useContext(AppContext);
 
+  //Seite vom User oder Seite vom author
   const [author, setAuthor] = useState(null);
   let [userIsAuthor, setUserIsAuthor] = useState(false);
+  
+  //Userposts bzw. femde Posts
+  const [userPosts, setUserPosts] = useState([]);
+  const [authorPosts, setAuthorPosts] = useState([]);
+
+  //Update
+  const [updateUser, setUpdateUser] = useState(null);
+
+
+  const [validated, setValidated] = useState(false);
 
 
   const [inputs, setInputs] = useState({
@@ -40,19 +53,13 @@ const MeinProfil = () => {
   const { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate } = inputs;
 
 
-  const [userPosts, setUserPosts] = useState([]);
-  const [authorPosts, setAuthorPosts] = useState([]);
-  const { userid } = useParams();
-  console.log("userid: " + userid);
-
-
 
 
 /**********  GET *****************/
 
 
-
   useEffect(() => {
+  
   const fetchAuthor= async () => {
     try {
       const response = await DataServer.get(`/User/${userid}`);
@@ -77,11 +84,17 @@ const MeinProfil = () => {
     }
   };
 
+  if(user.userid != userid){
   fetchAuthor();
+  setUserIsAuthor(false);
+  }
+  else{
+    setUserIsAuthor(true);
+  }
 }, []);
 
 
-
+/*
 useEffect(() => {
   const IsUserCheck = async () => {
     console.log(user.userid + " = " + userid);
@@ -94,12 +107,7 @@ useEffect(() => {
   IsUserCheck();
   console.log(userIsAuthor);
 }, [authorPosts])
-
-
-useEffect(() => {
-  console.log( authorPosts);
-  console.log(userIsAuthor);
-}, [author])
+*/
 
 
 /**********  DELETE *****************/
@@ -120,10 +128,6 @@ const deleteHandler = async (e, userId)=>{
   deleteUser();
 }
 /**********  UPDATE *****************/
-const [updateUser, setUpdateUser] = useState(null);
-
-
-const [validated, setValidated] = useState(false);
 /* Spricht in der e.target Funktion erst den Namen an und übergibt dann den Wert, d.h. Name muss identisch sein
 mit dem Namen im Input field*/
 const onChange = e => {
@@ -141,6 +145,7 @@ const updateUserHandler = async (e, userId)=>{ // Wird im Dropdown der default e
   e.stopPropagation();
   setUpdateUser(true); // Zum Rendern des HTML Teils
   setUserIsAuthor(false); // Zum Rendern des HTML Teils
+  
 }
 
 
@@ -150,15 +155,16 @@ const submitUpdateHandler = async (e, userId)=>{
   setUpdateUser(false); // Zum Rendern des HTML Teils
   setUserIsAuthor(true); // Zum Rendern des HTML Teils
   console.log("submitUpdateHandler in Profil ausgeführt");
-    
-    if(!validEmail(useremail)){
+  
+    if(!validEmail(useremail) && useremail !=""){
       console.log("WARNUNG hinzufügen");
     }
     else{
     
     try {
       
-      console.log("test12");
+      console.log(userprename);
+      /*
       const response = await DataServer.put(`/user/${userid}`, {
         jwt_token:localStorage.token,
         useremail: useremail,
@@ -170,8 +176,9 @@ const submitUpdateHandler = async (e, userId)=>{
         userbirthdate: userbirthdate,
 
       })
+      */
       
-      const parseRes = await response.json(); 
+      //console.log(response);
 
       
     } catch (err) {
@@ -179,7 +186,7 @@ const submitUpdateHandler = async (e, userId)=>{
     }
     
   }
-window.location.reload();
+//window.location.reload();
 }
 
 
@@ -206,8 +213,6 @@ window.location.reload();
           </Dropdown.Menu>
     </Dropdown>
         
-    {author!==null && ( 
-    <> 
       <Row className="profile">
         <Col sm={6} className=" profilSectionWrapper" >
           <Figure>
@@ -215,18 +220,18 @@ window.location.reload();
                   width={160}
                   height={150}
                   alt="171x180"
-                  src="../pb.jpg" //{user.userimage}
+                  src={"../"+user.userimage}
                   roundedCircle
                 />
                 <Figure.Caption className="profilCaption">
-                <p>{author.userprename}&nbsp;{author.userlastname}</p>
+                <p>{user.userprename}&nbsp;{user.userlastname}</p>
                 </Figure.Caption>
               </Figure>
         </Col>
         <Col sm={6} className=" profilSectionWrapper"> 
           <div>
-          <p><strong>Username:</strong> <br/>{author.username}</p>
-          <p><strong>E-Mail:</strong> <br/>{author.useremail}</p>
+          <p><strong>Username:</strong> <br/>{user.username}</p>
+          <p><strong>E-Mail:</strong> <br/>{user.useremail}</p>
           <p><strong>Geburtsdatum:</strong> <br/>{user.userbirthdate}</p>
           </div>
         </Col>
@@ -234,7 +239,7 @@ window.location.reload();
       <Row>
         <Col className="profiledescription">
         <h2 className="profilHeading">Profilbeschreibung</h2>
-        <p>{author.userdescription}</p>
+        <p>{user.userdescription}</p>
         </Col>  
       </Row>
       <Row>
@@ -249,8 +254,7 @@ window.location.reload();
             </Tabs>  
         </Col>
       </Row> 
-    </>
-    )}   
+  
     </Container>
 
   </>
@@ -264,9 +268,6 @@ window.location.reload();
     <Container className="routeContainer">
         <h1 className="header">Ihr Profil bearbeiten</h1> 
 
-        
-    {author!==null && ( 
-    <> 
       <Row className="profile">
         <Col sm={6} className=" profilSectionWrapper" >
           <Figure className="profilImage">
@@ -274,7 +275,7 @@ window.location.reload();
                   width={160}
                   height={150}
                   alt="171x180"
-                  src="../pb.jpg" //{user.userimage}
+                  src={"../"+user.userimage}
                   roundedCircle
                 />
                 <Figure.Caption className="">
@@ -381,9 +382,7 @@ window.location.reload();
         Speichern
       </Button>
       </div>
-      
-    </>
-    )}   
+        
     </Container>
 
   </>
@@ -393,12 +392,10 @@ window.location.reload();
 
 
   {/* Profil eines fremden Nutzers anzeigen */}
-  {!userIsAuthor && !updateUser &&
-    <>
+  {!userIsAuthor && !updateUser && author != null &&
+  <>
     <Container className="routeContainer">
-        
-    {author!==null && (
-    <> 
+ 
             <h1 className="header">Das Profil von {author.username}</h1> 
 
       <Row className="profile">
@@ -442,16 +439,15 @@ window.location.reload();
             </Tabs>  
         </Col>
       </Row> 
-  </>
- )}   
+ 
     </Container>
-    </>
-  
+  </>
+ 
 }
 </>
    
-    
-  )
+)
+
 }
 
 export default MeinProfil;

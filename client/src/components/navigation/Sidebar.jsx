@@ -105,7 +105,7 @@ function Sidebar() {
     },[logged]);
 
     useEffect(()=>{
-      console.log("sidebar user=",user);
+      console.log("sidebar user=",user.userimage);
     },[user])
 
     useEffect(()=>{
