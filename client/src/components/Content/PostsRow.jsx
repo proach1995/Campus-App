@@ -8,9 +8,6 @@ import {Link} from 'react-router-dom';
 
 
 const PostsRow = ({postElement}) => {
-
-  console.log("data");
-  console.log(postElement);
   
   var postImagesHelper = [];
   const [postImages, setPostImages] = useState([]);
@@ -18,14 +15,14 @@ const PostsRow = ({postElement}) => {
 
 
     useEffect(()=>{
-
+      console.log("postElements", postElement);
   //Genauso wie oben können bilder Selektiert und gemappt werden
   //1 Post mit mehreren Bildern muss genauso abgespeichert werden
     let postIdMemory = 0;
     let innerIndex = 0;
-   {/* console.log("filter");
-    console.log(postElement); */}
-    
+
+    console.log("postRow:", postElement);
+    if(postElement != null){
     postElement.map((item) =>{
 
       //Check ob die ID ein 2.mal vorkommt
@@ -39,19 +36,26 @@ const PostsRow = ({postElement}) => {
     })
 
   //Kontrollausgabe
- // console.log("Konrollaugabe");
+  /*
+  console.log("Konrollaugabe");
   postImagesHelper.map((post) =>{
       console.log(post.imagePath);
       console.log(post.postId);
 
     });
+  */
 
  // console.log(postImagesHelper);
   setPostImages(postImagesHelper);
+    }
+    else{
+      console.log("Etwas stimmt nicht");
+    }
+
     },[postElement])
 
-    console.log(postElement[0]);
-    console.log(postImagesHelper[0]);
+    //console.log(postElement[0]);
+    //console.log(postImagesHelper[0]);
 
 
 
@@ -69,7 +73,7 @@ const PostsRow = ({postElement}) => {
         <Col className="col-6 col-md-6 col-lg-3 card" >
             <Link to= {"/post/" + imageInfo.postId}>
               <Card className=" text-center " style={{ width:'100px', height:"100px" }}>
-              <Card.Img src={imageInfo.imagePath}> 
+              <Card.Img style={{width:'100px', height:"100px"}}src={imageInfo.imagePath}> 
               </Card.Img> 
               <div className="priceTag">
                 {imageInfo.postPrice}&nbsp;€ 

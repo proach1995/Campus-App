@@ -1,16 +1,19 @@
 /* eslint-disable no-lone-blocks */
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './route.css';
 import { AppContext } from "../context/AppContext";
 import { useHistory } from "react-router";
+import Cookies from "js-cookie";
+import DataServer from "../api/DataServer";
+
+
+//muss installiert werden: npm install js-cookie --save
 import Jumbotron from 'react-bootstrap/Jumbotron';
 
-
-
-const Login = ({setAuth}, props) => {
+const Login = () => {
 
   const {logged, setLogged } = useContext(AppContext);
   const {user, setUser}      = useContext(AppContext);
@@ -38,6 +41,12 @@ const Login = ({setAuth}, props) => {
     console.log("onSubmitForm in Register ausgeführt");
 
     try {
+      /*
+      const response = await DataServer.post("/Authentication/login", {
+        useremail: useremail,
+        userpassword: userpassword,
+      })
+      */
       const body = { useremail, userpassword };
 
       const response = await fetch(
@@ -57,8 +66,10 @@ const Login = ({setAuth}, props) => {
       if (parseRes.jwtToken) {
         localStorage.setItem("token", parseRes.jwtToken);
         setLogged(true);
-        setUser(parseRes.data.user);    
+        setUser(parseRes.data.user); 
         console.log("Erfolgreich eingeloggt")
+        console.log(parseRes);
+        Cookies.set("userId", parseRes.data.user.userid);
         history.push("/");
       } else {
         setLogged(false);
@@ -71,8 +82,10 @@ const Login = ({setAuth}, props) => {
     }
   };
 
-  const showError = true;
+  useEffect(()=>{
 
+console.log("user Login = ", user);
+},[user]);
     return (
       
 
@@ -112,7 +125,6 @@ const Login = ({setAuth}, props) => {
                     placeholder="Passwort" 
                   />
                 </Form.Group> 
-                <Form.Check  type="checkbox" label="eingeloggt bleiben" />
                     <div className="buttonBackground" >
                       <div className="centerLoginButtons">
                           <Button type="submit" className="button login-btn" variant="primary" >
@@ -124,12 +136,8 @@ const Login = ({setAuth}, props) => {
               </Form>
             <div className="register">
             <Button href="/register" className="button register-btn login-btn" variant="secondary" >
-                 Registrieren 
               </Button> 
             </div>
-            
-
-        
                   
 
           </>

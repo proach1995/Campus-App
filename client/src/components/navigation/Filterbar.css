@@ -1,0 +1,133 @@
+
+ nav.filterBar.active {
+    width: 20em;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left:0;
+    transition: 800ms linear;
+    z-index: 10000000;
+    background:#0c576e 80%; 
+  }
+
+  nav.filterBar.inactive {
+    width: 20em;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left:-100%;
+    transition: 800ms linear;
+    z-index: 10000000;
+    background:#0c576e 80%; 
+  }
+
+  @media screen and (max-width: 576px) {
+    nav.filterBar.active { 
+        width: 100vw;
+    }
+  }
+
+  .filterContainer{
+    display:flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items:center;
+    margin-top: 3em;
+    width:100%;
+    
+    }
+
+form.filterForm{
+    width:98%
+}
+
+.dropdown.dropdownFilter{
+    width:80%;
+}
+
+button.dropdown-toggle.btn.btn{
+    width:100%;
+    background-color: #007466;
+    border-color: #007466;
+}
+.col.col-Filter{
+    display:flex;
+    justify-content:center;
+}
+
+div.col-pricingLabelTitle{
+    display:flex;
+    justify-content:flex-start;
+    width:100%
+    
+}
+
+div.col-pricingLabelPrice{
+    display:flex;
+    justify-content:flex-end;
+    width:100%
+}
+
+.form-label.preisLabel{
+    font-size:1em;
+    color:white
+
+}
+
+label.dropdownLabel.form-label{
+    font-size:1em;
+    color:white
+
+}
+
+.form-label.datumLabel{
+    font-size:1.2em;
+    color:white;
+    font-weight:bold;
+
+}
+
+input[type="range"].slider{
+    -webkit-appearance: none;/*Ein muss um den Slider zu verwenden*/
+    justify-content:center;
+   
+    
+    outline:none;
+    border-radius:12px;
+    height: 2px;
+    width:90%;
+  
+}
+
+
+/*--------Das geht aus irgendeinem grund nicht-------------*/
+input[type="range"].slider::-webkit-slider-thumb{
+    opacity:1;
+    background:#018512;
+
+}
+
+input[type="range"].slider::-moz-range-thumb{
+    opacity:1;
+    background:#018512;
+    
+}
+/*---------------------*/
+
+button.button.logout-btn.login-btn{
+    position:static;
+    background-color:rgb(143, 0, 0);
+    width:80%;
+}
+
+button.button.logout-btn.login-btn.ok{
+    position:static;
+    background-color:rgb(6, 128, 2);
+    width:80%;
+}
+
+

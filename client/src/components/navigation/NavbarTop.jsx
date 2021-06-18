@@ -5,34 +5,73 @@ import Dropdown from "react-bootstrap/Dropdown";
 import './NavbarTop.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {useHistory } from 'react-router-dom';
+import {useHistory, Link } from 'react-router-dom';
+import { useState } from "react";
+import { useEffect } from "react";
+import DataServer from "../../api/DataServer";
 
 
 
-const NavbarTop = ({isActive},{toggleButton}) => {
+const NavbarTop = ({setResults}) => {
 
   let history = useHistory();
+  const [searchedTitel, setSearchedTitel] = useState("");
   
   const menuHandler =(e)=>{
     e.preventDefault();
     console.log("navbar");
     console.log(e.target.name);
+    
     if(e.target.name ==="marktplatz"){
       history.push("/marktplatz");
     }
+    
     if(e.target.name ==="events"){
       history.push("/events");
     }
+    
     if(e.target.name ==="postUpload"){
       history.push("/postupload");
     }
   }
 
+  const searchPosts = async(title)=>{
+    const resOfferings = await DataServer.post("/Home/Offerings", {
+      jwt_token:localStorage.token,
+      type:"searchbar",
+      title:title});
+
+      const resEvents = await DataServer.post("/Home/Events", {
+        jwt_token:localStorage.token,
+        type:"searchbar",
+        title:title})
+      
+      setResults(resOfferings.data.offeringList.offer, resEvents.data.eventList.event)
+     
+  }
+      
+  useEffect(()=>{
+    
+    let title = "%"+searchedTitel+"%";
+    if(searchedTitel ==""){
+      title ="%";
+    }
+
+    searchPosts(title);
+  },[searchedTitel] )
+  
+  //Für ein Refresh oder sonst was, muss der anfangswert gegeben werden
+  useEffect(()=>{
+
+    setResults(null, null);
+    console.log("navbar");
+  },[])
+
   return (
     <>
 
   <Navbar className="navbarStyling" variant="light">  
-    <a href="/" className="branding">Campus<span className="brandingFat">APP</span></a>
+    <Link to="/" className="branding">Campus<span className="brandingFat">APP</span></Link>
     {/*https://react-bootstrap.github.io/layout/grid/#grid-props 
       Positioning with offset , sm und md
     
@@ -62,6 +101,7 @@ const NavbarTop = ({isActive},{toggleButton}) => {
           className="mb-2"
           id="inlineFormInput"
           placeholder="Search"
+          onChange={(e)=>{setSearchedTitel(e.target.value);}}
         />
       </Col>
     </Row>

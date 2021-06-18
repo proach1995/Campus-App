@@ -13,21 +13,20 @@ import { AppContext } from "../context/AppContext";
 
 
 
-const Home = () => {
+const Home = ({searchedOffers, searchedEvents}) => {
 
-  const {logged, } = useContext(AppContext);
+  const {logged } = useContext(AppContext);
   const {user} = useContext(AppContext);
+  
   //In den States werden die Angebote und Events gespeichert
   const [offerings, setOfferings] = useState([]);
   const [events, setEvents] = useState([]);
 
   const getOffers = async () => {
     try {
-      //console.log("getPosts wird ausgeführt");
-      const resOfferings = await DataServer.get("/Home/Offerings", {jwt_token:localStorage.token})
-      
-      console.log("fetching from offer");
-      console.log(resOfferings.data);
+      console.log("getPosts wird ausgeführt");
+      const resOfferings = await DataServer.post("/Home/Offerings", {jwt_token:localStorage.token,
+                                                                    type:"latest"})
       setOfferings(resOfferings.data.offeringList.offer);
     } catch (err) {
       console.error(err.message);
@@ -37,7 +36,8 @@ const Home = () => {
   const getEvents = async () => {
     try {
       //console.log("getPosts wird ausgeführt");
-      const resEvents = await DataServer.get("/Home/Events", {jwt_token:localStorage.token})
+      const resEvents = await DataServer.post("/Home/Events", {jwt_token:localStorage.token,
+                                                              type:"latest"})
       console.log("fetching from events");
       console.log(resEvents.data);
       setEvents(resEvents.data.eventList.event);
@@ -46,15 +46,27 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    //console.log("getPosts wird ausgeführt im UseEffekt")
+  /*
+  useEffect(()=>{
+
     getOffers();
     getEvents();
-    console.log("user =", user);
-    console.log("Home logged =", logged);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    console.log("search Effect", searchedOffers == null)
+  },[])*/
 
+
+  useEffect(()=>{
+
+    
+    if(searchedOffers==null){
+    getOffers();
+    getEvents();
+    }
+    else{
+      setOfferings(searchedOffers);
+      setEvents(searchedEvents);
+    }
+  },[searchedOffers])
 
   
   return (

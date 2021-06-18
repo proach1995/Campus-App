@@ -21,6 +21,7 @@ CREATE TABLE users(
     userBirthdate date  not null,
     userImage varchar(100) ,
     userDescription varchar(500),
+    datarequirements boolean,
     primary key (userId)
 );
 
@@ -53,7 +54,7 @@ INSERT INTO users(userName, userEmail,userPassword, userPrename, userLastname, u
 );
 
 INSERT INTO posts( userId, postTitle, postCategory, postType, postPriceType, postPrice, postDescription) values(
-     '535ec009-2e3b-4fe0-94b9-3b979753ab6f', 'Freunde gesucht', 'Events', 'Verkauf', 'Angebot', 200, 'Einsam und allein'
+     '84b97daf-84a2-49fd-9891-54452ae3575c', 'Freunde gesucht', 'Events', 'Marktplatz', 'Festpreis', 200, 'Einsam und allein'
 );
 
 INSERT INTO posts(userId, postTitle, postCategory, postTradeType, postCriterion, postPrice, postDescription values(

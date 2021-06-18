@@ -2,20 +2,21 @@ const router = require("express").Router();
 const authorize = require("../Middleware/authorize");
 const db = require("../db/index");
 
-// User Id fetchen
+// User  fetchen
 router.get("/:userid", async (req, res) => {
   console.log(req.params.userid , " in getmethod");
     try {
       const userDetail = await db.query(
-        "Select userId, userName, userEmail, userPrename, userLastname, userBirthdate, userImage, userDescription from users where userId=$1", [req.params.userid]
+        "Select * from users where userId=$1", [req.params.userid]
       );
-      console.log(userDetail + " in router");
+      console.log(userDetail, " in router");
   
       const userPosts = await db.query (
         "select * from posts p inner join images i on"+
                                 " p.postid =i.postid where p.userid=$1"+
                                 " order by p.postdate desc ", [req.params.userid]
       )
+      console.log(userPosts);
       res.status(200).json({
         status: "success",
         userDetail:{
@@ -56,8 +57,8 @@ router.get("/:userid", async (req, res) => {
       console.log(req.params.userid + " is param in put");
       console.log(req.body.userlastname);
       const results = await db.query(
-        "UPDATE users SET username = $1, useremail = $2, userprename = $3, userlastname = $4, userbirthdate = $5, userimage = $6, userdescription =$7, userpassword = $8 where userid = $9 returning *;",
-        [req.body.username, req.body.useremail, req.body.userprename, req.body.userlastname, req.body.userbirthdate, req.body.userimage, req.body.userdescription, req.body.userpassword, req.params.userid]
+        "UPDATE users SET username = $1, useremail = $2, userprename = $3, userlastname = $4, userbirthdate = $5, userimage = $6, userdescription =$7, userimage = $8 where userid = $9 returning *;",
+        [req.body.username, req.body.useremail, req.body.userprename, req.body.userlastname, req.body.userbirthdate, req.body.userimage, req.body.userdescription, req.body.userimage, req.params.userid]
       ); 
         console.log("db anfrage ausgeführt");
       res.status(200).json({

@@ -1,18 +1,19 @@
 import React, {useState, useEffect, useContext} from "react";
+import { useHistory } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './route.css';
-import DataServer from "../api/DataServer";
 import { AppContext } from "../context/AppContext";
-
-
-
+import DataServer from "../api/DataServer";
+import Cookies from "js-cookie";
 
 
 const Register = () => {
 
+  let history = useHistory();
   const {logged, setLogged} = useContext(AppContext);
+  const {setUser} = useContext(AppContext);
   // eslint-disable-next-line no-lone-blocks
   {/* Werte mit State in Input Objekt initialisieren*/}
   const [inputs, setInputs] = useState({
@@ -23,17 +24,24 @@ const Register = () => {
     userprename: "",
     userdescription: "",
     userbirthdate: "",
+    userimage: "Images/profileImages/default.jpg",
+    datarequirements:"false"
 
   });
   /* Werte werden im Objekt inputs gespeichert um sie mit ...props zu übergeben*/
-  const { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate } = inputs;
+  const { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate, userimage, datarequirements } = inputs;
   const [validated, setValidated] = useState(false);
     
   /* Spricht in der e.target Funktion erst den Namen an und übergibt dann den Wert, d.h. Name muss identisch sein
   mit dem Namen im Input field*/
   const onChange = e => {
     e.preventDefault();
+    if(e.target.name !="userimage"){
     setInputs({ ...inputs, [e.target.name]: e.target.value });
+    }
+    else{
+      setInputs({ ...inputs, [e.target.name]: e.target.files[0]});
+    }
     console.log("onChange in Register ausgeführt");
     console.log("onChange2 in Register ausgeführt");
 
@@ -44,6 +52,7 @@ const Register = () => {
   }
 
   const onSubmitForm = async e => {
+    e.preventDefault();
     console.log("onSubmitForm in Register ausgeführt");
     
     if(!validEmail(useremail)){
@@ -51,37 +60,60 @@ const Register = () => {
     }
     else{
     
-    try {      
-      const response = await DataServer.post("/authentication/register", {
-        useremail: useremail,
-        userpassword: userpassword,
-        username: username,
-        userlastname: userlastname,
-        userprename: userprename,
-        userdescription: userdescription,
-        userbirthdate: userbirthdate,
-      })
+      
+      try {
 
+        const formData = new FormData();
+        
+        //Okay aus zeitgründen machen wir es "DOOF"  
+        formData.append("userimage", userimage)
+        formData.append("userlastname", userlastname);
+        formData.append("useremail", useremail);
+        formData.append("userpassword", userpassword);
+        formData.append("username", username);
+        formData.append("userprename", userprename);
+        formData.append("userdescription", userdescription);
+        formData.append("userbirthdate", userbirthdate);
+        formData.append("datarequirements", inputs.datarequirements);
+        
+        const response = await DataServer.post("Authentication/Register", formData);
+        
+        console.log("registri", response);
 
-      const parseRes = await response.json();
-
-      if (parseRes.jwtToken) {
-        localStorage.setItem("token", parseRes.jwtToken);
-        setLogged(true);
+      if (response.data.jwtToken) {
         console.log("Registrierung erfolgreich");
+        setLogged(true);
+        setUser(response.data.data.user[0]);
+        localStorage.setItem("token", response.data.jwtToken);
+        console.log(response.data.data.user[0].userid);
+        Cookies.set("userId", response.data.data.user[0].userid);
 
       } else {
         setLogged(false);
-        console.log(parseRes);
-      
       }
+      
+
+      history.push("/");
     } catch (err) {
       console.log("user schon da");
       console.error(err.message);
     }
     
+    
+    
   }
-}
+  }
+    const dataRequirement =(e)=>{
+      
+      if(inputs.datarequirements=="false"){
+        inputs.datarequirements="true";
+      }
+
+      else{
+        inputs.datarequirements="false";
+      }
+      
+    }
 
 
     useEffect(()=>{
@@ -94,6 +126,12 @@ const Register = () => {
       }
     
     },[useremail])
+
+    useEffect(()=>{
+
+      console.log("requirements", inputs.datarequirements )
+    
+    },[inputs.datarequirements])
  
     return (
       <Container className="routeContainer">
@@ -103,7 +141,6 @@ const Register = () => {
             <Form.Group  controlId="Useremail">
               <Form.Label>E-Mail Adresse</Form.Label>
               <Form.Control 
-                className="is-invalid"
                 required
                 type="email" 
                 name="useremail"
@@ -212,6 +249,8 @@ const Register = () => {
                 id="UserImage" 
                 label="Profilbild" 
                 name="userimage"
+                isValid="true"
+                onChange={(e)=>{onChange(e)}}
               />
             </Form.Group>
           <Form.Group id="formGridCheckbox">
@@ -222,6 +261,7 @@ const Register = () => {
                 type="checkbox" 
                 label="Datenschutzbestimmungen" 
                 name="dataprivacy"
+                onClick={(e)=>{dataRequirement(e)}}
                 > 
                 </Form.Check> 
                 <a className="link" href="./Cookiepolicy"> siehe hier.</a>
@@ -233,9 +273,9 @@ const Register = () => {
            </Form.Control.Feedback>
           </Form.Group>
 
- 
+            
     <div className="buttonBackground" >
-        <Button href="/" type="submit" className="button">Registrieren</Button>
+        <Button   type="submit" className="button">Registrieren</Button>
         
     </div>
     

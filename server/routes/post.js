@@ -11,6 +11,9 @@ router.get("/:postid", async (req, res) => {
         "Select * from posts p inner join users u on p.userid = u.userid where postId=$1 order by p.postdate desc", [req.params.postid]
       );
       console.log("test");
+      console.log("test2");
+      console.log(postDetail);
+      
   
       res.status(200).json({
         status: "success",
@@ -24,12 +27,13 @@ router.get("/:postid", async (req, res) => {
   });
 
 
-  // Alle Posts fetchen
-  router.get("/allposts", authorize, async (req, res) =>{
+  /* Alle Posts fetchen
+  //router.get("/allposts", authorize, async (req, res) =>{
     //console.log("treffer");
     try{
       const posts = await db.query("select * from posts");
       console.log(posts);
+      console.log("Posts abfrage im Server")
       res.status(200).json({
         status: "success",
         postList :{
@@ -40,7 +44,7 @@ router.get("/:postid", async (req, res) => {
       console.log(err);
     }
   })
-
+*/
   // Alle Marktplatz Posts fetchen
   router.get("/Marktplatz", async (req, res) => {
     try {   
@@ -86,7 +90,7 @@ router.get("/:postid", async (req, res) => {
   });
 
   //Post hinzufügen
-router.post("/AddPost", async (req, res)=>{
+router.post("/AddPost", authorize, async (req, res)=>{
     console.log(req.body);
     try{
         const result = await db.query("INSERT INTO posts(userId, postTitle, postCategory,"+
@@ -97,6 +101,7 @@ router.post("/AddPost", async (req, res)=>{
         
                                   //Das Ergebnis des Posts zurück senden
         //console.log(result.rows);
+        
         res.status(200).json({
           success:true,
             data: {
@@ -108,13 +113,14 @@ router.post("/AddPost", async (req, res)=>{
         }           
   })
 
+  
 //Post updaten
-router.put("/:postid", async (req, res) => {
+router.put("/:postid", authorize, async (req, res) => {
   try {
     console.log(req.params.postid + " is param in put");
     console.log(req.body);
     const results = await db.query(
-      "UPDATE posts SET userId = $1, postTitle = $2, postCategory = $3, postType = §4, postPriceType = §5, postPrice = $6, postDescription = $7 where postid = $8 returning *",
+      "UPDATE posts SET userId = $1, postTitle = $2, postCategory = $3, postType = $4, postPriceType = $5, postPrice = $6, postDescription = $7 where postid = $8 returning *",
       [req.body.userId, req.body.postTitle, req.body.postCategory, req.body.postType, req.body.postPriceType, req.body.postPrice, req.body.postDescription, req.params.postid]
     );
 
@@ -131,7 +137,7 @@ router.put("/:postid", async (req, res) => {
 
 
 //Post löschen --> Funktioniert
-router.delete("/:postid", async (req, res) => {
+router.delete("/:postid", authorize,  async (req, res) => {
   try {
     console.log(req.params.postid + " is param in delete");
 

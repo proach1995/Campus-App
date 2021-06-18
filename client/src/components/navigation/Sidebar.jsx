@@ -6,6 +6,9 @@ import Figure from 'react-bootstrap/Figure';
 import { HamburgerSpring } from 'react-animated-burgers';
 import Button from 'react-bootstrap/Button';
 import { AppContext } from '../../context/AppContext';
+import DataServer from '../../api/DataServer';
+import Cookies from 'js-cookie';
+
 import * as AiIcons from 'react-icons/ai';
 import { BsPeopleCircle } from "react-icons/bs";
 import { IoCalendarOutline } from "react-icons/io5";  
@@ -16,8 +19,9 @@ import { IoEarthOutline } from "react-icons/io5";
 
 
 
-function Sidebar({ logout}) {
- 
+
+function Sidebar() {
+    
   const {logged, setLogged} = useContext(AppContext);
   const {user, setUser} = useContext(AppContext);
 
@@ -52,7 +56,7 @@ function Sidebar({ logout}) {
     }
   ];
 
-  console.log(SidebarData);
+  //console.log(SidebarData);
 
 
   let history = useHistory();
@@ -63,27 +67,52 @@ function Sidebar({ logout}) {
      [],
   );
 
+  const refreshHandler = async()=>{
+   
+    const userData = await DataServer.get("User/"+Cookies.get("userId"));
+    console.log("egal", userData);
+    setUser(userData.data.userDetail.user);
+    setLogged(true);
+  }
 
 
 
     const logoutHandler =(e) =>{
-
-      logout(e);
       setLogged(false);
-      setUser(null);
-      
-     
+      user.userid="";
+      user.userprename="";
+      user.userdescription="";
+      user.useremail="";
+      user.userimage="";
+      user.userlastname="";
+      user.username ="";
+      user.userpassword="";
+      user.userbirthdate="";
 
+      Cookies.remove("userId");
+      localStorage.removeItem("token");
       //History muss in einem componenten benutzt werden und nicht in der App
       history.push("/login");
     }
 
     useEffect(()=>{
-      console.log("user in sidebar " , user);
-      console.log("logged = ",logged);
+      
+      if(localStorage.getItem("token") !=null && logged ==null){
+        console.log("Refresh");
+        refreshHandler();
+      }
+      console.log("sidebarUser", user);
+    },[logged]);
+
+    useEffect(()=>{
+      console.log("sidebar user=",user.userimage);
     },[user])
 
-    
+    useEffect(()=>{
+      console.log("userimage",user.userimage);
+    },[])
+
+
   return (
     <>
     <div>
@@ -109,7 +138,7 @@ function Sidebar({ logout}) {
                 width={120}
                 height={130}
                 alt="171x180"
-                src="../pb.jpg"
+                src={user.userimage}
                 roundedCircle
               />             
               </Link>
@@ -155,13 +184,13 @@ function Sidebar({ logout}) {
               })}
             </ul> 
             </div>
-            <Link to="/">
             <div className="logout-btn-container">
+            <Link to="/">
             <Button  onClick={(e) => logoutHandler(e)} style={{display: logged ? '' : 'none' }} className="button logout-btn login-btn" variant="secondary" >
                       Logout
             </Button>
-            </div>
             </Link>
+            </div>
 
           </div>
         </nav>
