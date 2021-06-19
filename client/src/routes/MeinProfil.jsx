@@ -35,25 +35,25 @@ const MeinProfil = () => {
   const [authorPosts, setAuthorPosts] = useState([]);
 
   //Update
-  const [updateUser, setUpdateUser] = useState(null);
+  const [updateUser, setUpdateUser] = useState(false);
 
 
   const [validated, setValidated] = useState(false);
 
 
   const [inputs, setInputs] = useState({
-    useremail: "",
-    userpassword: "",
-    username: "",
-    userlastname: "",
-    userprename: "",
-    userdescription: "",
-    userbirthdate: "",
+    useremail: user.useremail,
+    userpassword: user.userpassword,
+    username: user.username,
+    userlastname: user.userlastname,
+    userprename: user.userprename,
+    userdescription: user.userdescription,
+    userbirthdate: user.userbirthdate.substring(0,9),
+    userimage:"",
   
   });
   /* Werte werden an einzelne Objekte übergeben*/
-  const { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate } = inputs;
-
+  const { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate, userimage } = inputs;
 
 
 
@@ -85,7 +85,7 @@ const MeinProfil = () => {
       console.log("Fetchuser hat nicht funktioniert");
     }
   };
-
+console.log("meinProfil", user);
   if(user.userid != userid){
   fetchAuthor();
   setUserIsAuthor(false);
@@ -111,6 +111,11 @@ useEffect(() => {
 }, [authorPosts])
 */
 
+useEffect(()=>{
+  //wird übernommen. Sind sozusagen verknüpft
+  console.log("inputs:", userbirthdate)
+  
+},[inputs])
 
 /**********  DELETE *****************/
 
@@ -147,7 +152,9 @@ function validEmail(useremail) {
 const updateUserHandler = async (e, userId)=>{ // Wird im Dropdown der default eingeloggt Seite geöffnet
   e.stopPropagation();
   setUpdateUser(true); // Zum Rendern des HTML Teils
-  setUserIsAuthor(false); // Zum Rendern des HTML Teils
+  
+  //Dennis.S: Wozu wenn der Button nur für den eingelogten User erhältlich ist?
+  //setUserIsAuthor(false); // Zum Rendern des HTML Teils
   
 }
 
@@ -157,29 +164,41 @@ const submitUpdateHandler = async (e, userId)=>{
   e.stopPropagation();
   setUpdateUser(false); // Zum Rendern des HTML Teils
   setUserIsAuthor(true); // Zum Rendern des HTML Teils
+
+  let oldImage = user.userimage;
   console.log("submitUpdateHandler in Profil ausgeführt");
   
-    if(!validEmail(useremail) && useremail !=""){
+    if(!validEmail(useremail)){
       console.log("WARNUNG hinzufügen");
     }
     else{
     
     try {
+      const formData = new FormData();
+        
+      //Okay aus zeitgründen machen wir es "DOOF"  
+      formData.append("userlastname", userlastname);
+      formData.append("useremail", useremail);
+      formData.append("username", username);
+      formData.append("userprename", userprename);
+      formData.append("userdescription", userdescription);
+      formData.append("userbirthdate", userbirthdate);
+      formData.append("jwt_token", localStorage.token);
       
-      console.log(userprename);
-      /*
-      const response = await DataServer.put(`/user/${userid}`, {
-        jwt_token:localStorage.token,
-        useremail: useremail,
-        userpassword: userpassword,
-        username: username,
-        userlastname: userlastname,
-        userprename: userprename,
-        userdescription: userdescription,
-        userbirthdate: userbirthdate,
 
-      })
-      */
+      if(userimage==""){
+        formData.append("userimage", user.userimage);
+        formData.append("changeImage", "false");
+      }
+
+      else{
+        formData.append("userimage", userimage);
+        formData.append("changeImage", "true");
+      }
+      
+      const response = await DataServer.put(`/user/${userid}`, formData);
+
+      
       
       //console.log(response);
 
@@ -192,6 +211,20 @@ const submitUpdateHandler = async (e, userId)=>{
 //window.location.reload();
 }
 
+const cancelHandler=(e)=>{
+  e.preventDefault();
+
+  //Alle Werte zum ursprüglichen zurückändern
+  inputs.usermail= user.usermail;
+  inputs.username= user.username;
+  inputs.userlastname= user.userlastname;
+  inputs.userprename= user.userprename;
+  inputs.userdescription= user.userdescription;
+  inputs.userbirthdate= user.userbirthdate.substring(0,9);
+
+  setUpdateUser(false);
+
+}
 
 
   return (
@@ -199,7 +232,7 @@ const submitUpdateHandler = async (e, userId)=>{
 
       {/* Profil des eingeloggten Nutzers anzeigen */}
 
-   {userIsAuthor &&
+   {userIsAuthor && updateUser == false &&
     <>
     <Container className="routeContainer">
         <h1 className="header">Ihr Profil</h1> 
@@ -283,7 +316,7 @@ const submitUpdateHandler = async (e, userId)=>{
                 />
                 <Figure.Caption className="">
                   <Form.File id="formcheck-api-custom" custom>
-                    <Form.File.Input isValid />
+                    <Form.File.Input isValid onChange={(e)=>{setInputs({ ...inputs, userimage: e.target.files[0] })}} />
                     <Form.File.Label data-browse="Hochladen">
                       Bild hier einfügen
                     </Form.File.Label>
@@ -338,6 +371,7 @@ const submitUpdateHandler = async (e, userId)=>{
                 name="userprename"
                 value={userprename}
                 onChange={e => onChange(e)}
+                placeholder={userprename}
                 />
                <Form.Control.Feedback>Sieht gut aus!</Form.Control.Feedback>
                <Form.Control.Feedback type="invalid">
@@ -381,9 +415,15 @@ const submitUpdateHandler = async (e, userId)=>{
         </Col>  
       </Row>
       <div className="buttonBackground" >
+
+      <Button style={{backgroundColor:"red"}} onClick={(e)=>{cancelHandler(e)}}>
+        Abbruch
+      </Button>
+
       <Button className="button" onClick={(e)=>{submitUpdateHandler(e)}}>
         Speichern
       </Button>
+
       </div>
         
     </Container>

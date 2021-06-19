@@ -28,7 +28,8 @@ router.post("/PostImages/:postId", async (req, res) =>{
           maxNumber = maxNumber +1;
           const insertedImage = await db.query("INSERT INTO images(postId, imagePath) values($1, $2) returning*",
                                 [req.params.postId,imagePath+maxNumber+imageFiles.name]);
-                      
+          
+                                
           imageFiles.mv("../client/public/"+imagePath+maxNumber+imageFiles.name, err => {
             //Falls etwas nicht funktioniert
             if (err) {

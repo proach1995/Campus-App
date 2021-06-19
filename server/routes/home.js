@@ -13,7 +13,6 @@ router.post("/Offerings", async (req, res) => {
     }
 
      if(req.body.type=="searchbar"){
-       console.log("searched");
         resOfferings = await db.query("select * from posts p inner join images i on"+
                                       " p.postid =i.postid where p.posttitle ilike $1"+
                                       " and p.posttype='Marktplatz'",

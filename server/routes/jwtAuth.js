@@ -14,7 +14,7 @@ router.post("/Register", validInfo, async (req, res) => {
   console.log("register wird ausgeführt");
   //deconstruct  http request
   
-
+  console.log(req.body);
   try {
     let newUser = null;
     const user = await pool.query("SELECT * FROM users WHERE userEmail = $1", [
@@ -55,7 +55,8 @@ router.post("/Register", validInfo, async (req, res) => {
                                   " VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
                                   [req.body.username, req.body.useremail,
                                   bcryptPassword, req.body.userprename, req.body.userlastname,
-                                  req.body.userbirthdate, req.body.userimage, req.body.datarequirements]);
+                                  req.body.userbirthdate, "/Images/profileImages/"+countedUsers.rows[0].count+imageFile.name,
+                                  req.body.datarequirements]);
         
       imageFile.mv("../client/public/Images/profileImages/"+countedUsers.rows[0].count+imageFile.name);
     }
