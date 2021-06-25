@@ -223,6 +223,7 @@ const PostUpload = () => {
 
   }
   history.push("/");
+  window.location.reload();
 
 }
   return(

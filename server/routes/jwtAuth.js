@@ -55,7 +55,7 @@ router.post("/Register", validInfo, async (req, res) => {
                                   " VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
                                   [req.body.username, req.body.useremail,
                                   bcryptPassword, req.body.userprename, req.body.userlastname,
-                                  req.body.userbirthdate, "/Images/profileImages/"+countedUsers.rows[0].count+imageFile.name,
+                                  req.body.userbirthdate, "Images/profileImages/"+countedUsers.rows[0].count+imageFile.name,
                                   req.body.datarequirements]);
         
       imageFile.mv("../client/public/Images/profileImages/"+countedUsers.rows[0].count+imageFile.name);

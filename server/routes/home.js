@@ -18,7 +18,7 @@ router.post("/Offerings", async (req, res) => {
                                       " and p.posttype='Marktplatz'",
                                       [req.body.title]);
                                       console.log(resOfferings)
-      console.log(resOfferings);
+      //console.log(resOfferings);
       }
       
      res.status(200).json({

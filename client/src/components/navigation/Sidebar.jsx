@@ -100,16 +100,15 @@ function Sidebar() {
       if(localStorage.getItem("token") !=null && logged ==null){
         console.log("Refresh");
         refreshHandler();
+        console.log("logged", logged);
       }
-      console.log("sidebarUser", user);
     },[logged]);
 
     useEffect(()=>{
-      console.log("sidebar user=",user.userimage);
     },[user])
 
     useEffect(()=>{
-      console.log("userimage",user.userimage);
+      console.log( logged == true);
     },[])
 
 
@@ -134,11 +133,13 @@ function Sidebar() {
                <> 
                <Figure style={{display: logged ? '' : 'none' }} className="sidebarProfilSection">
               <Link onClick={toggleButton} to={logged ? "/user/" + user.userid : "unknown"}>
+              {/*Warum auch immer... Vor bild muss "/" hin
+              https://stackoverflow.com/questions/54176669/how-to-keep-pictures-after-refreshing-page-on-react*/}
               <Figure.Image className="profilSectionImage"
                 width={120}
                 height={130}
                 alt="171x180"
-                src={user.userimage}
+                src={"/"+user.userimage}
                 roundedCircle
               />             
               </Link>

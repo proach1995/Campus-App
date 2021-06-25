@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -14,6 +14,7 @@ import { AppContext } from "../context/AppContext";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import moment from 'moment';
+import Cookies from 'js-cookie';
 
 
 
@@ -40,6 +41,8 @@ const MeinProfil = () => {
 
   const [validated, setValidated] = useState(false);
 
+  //Seite wechseln
+  let history = useHistory();
 
   const [inputs, setInputs] = useState({
     useremail: user.useremail,
@@ -48,7 +51,7 @@ const MeinProfil = () => {
     userlastname: user.userlastname,
     userprename: user.userprename,
     userdescription: user.userdescription,
-    userbirthdate: user.userbirthdate.substring(0,9),
+    userbirthdate: user.userbirthdate.substring(0,10),
     userimage:"",
   
   });
@@ -58,9 +61,19 @@ const MeinProfil = () => {
 
 
 /**********  GET *****************/
+  //Aus Zeitgründen wird es vielleicht dumm aber sicher programmiert
+  const fetchUserPost= async () => {
+    try {
+      const response = await DataServer.get(`/User/${userid}`);
+      setUserPosts(response.data.userDetail.posts);
 
+    } catch (err) {
+      console.log(err);
+      console.log("Fetchuser hat nicht funktioniert");
+    }
+  }
 
-  useEffect(() => {
+    useEffect(() => {
   
   const fetchAuthor= async () => {
     try {
@@ -70,6 +83,8 @@ const MeinProfil = () => {
       setAuthor(response.data.userDetail.user);
       
       setAuthorPosts(response.data.userDetail.posts);
+      
+      //Wozu?? wenn es der author ist und in author gespeichert wird
       setInputs({ 
       useremail: response.data.userDetail.user.useremail,
       userpassword: response.data.userDetail.user.userpassword,
@@ -77,7 +92,8 @@ const MeinProfil = () => {
       userlastname: response.data.userDetail.user.userlastname,
       userprename: response.data.userDetail.user.userprename,
       userdescription: response.data.userDetail.user.userdescription,
-      userbirthdate: response.data.userDetail.user.userbirthdate.toLocaleDateString(),
+      userbirthdate: response.data.userDetail.user.userbirthdate.substring(0,10),
+      userimage: response.data.userDetail.user.userimage,
      });
 
     } catch (err) {
@@ -85,54 +101,45 @@ const MeinProfil = () => {
       console.log("Fetchuser hat nicht funktioniert");
     }
   };
-console.log("meinProfil", user);
-  if(user.userid != userid){
+  if(user.userid != userid && user.userid!=""){
   fetchAuthor();
   setUserIsAuthor(false);
   }
   else{
     setUserIsAuthor(true);
+    fetchUserPost();
   }
+  
 }, []);
 
-
-/*
-useEffect(() => {
-  const IsUserCheck = async () => {
-    console.log(user.userid + " = " + userid);
-    if( user.userid === userid){
-      return setUserIsAuthor(true);
-    } else {
-      return setUserIsAuthor(false);
-    }
-  }
-  IsUserCheck();
-  console.log(userIsAuthor);
-}, [authorPosts])
-*/
-
 useEffect(()=>{
-  //wird übernommen. Sind sozusagen verknüpft
-  console.log("inputs:", userbirthdate)
-  
-},[inputs])
+  console.log("userPosts", userPosts)
+},[userPosts])
+
 
 /**********  DELETE *****************/
 
 
-const deleteHandler = async (e, userId)=>{
+const deleteHandler = async (e)=>{
   e.stopPropagation();
   const deleteUser= async () => {
     try {
-      const deletedUser = await DataServer.delete(`/User/${userid}`, {jwt_token:localStorage.token});
+      console.log("delete")
+      //in Axios muss der delete Request wie folgt geschrieben werden:
+      //axios.delete("URL",{data:{daten die gegeben werden}});
+      const deletedUser = await DataServer.delete(`/User/${user.userid}`,{data:{jwt_token:localStorage.token}});
       localStorage.removeItem("token");
       setLogged(false);
+      Cookies.remove("userId");
       console.log("User wurde erfolgreich gelöscht");
+      history.push("/");
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }
   };
   deleteUser();
+  
 }
 /**********  UPDATE *****************/
 /* Spricht in der e.target Funktion erst den Namen an und übergibt dann den Wert, d.h. Name muss identisch sein
@@ -184,31 +191,26 @@ const submitUpdateHandler = async (e, userId)=>{
       formData.append("userdescription", userdescription);
       formData.append("userbirthdate", userbirthdate);
       formData.append("jwt_token", localStorage.token);
-      
 
       if(userimage==""){
-        formData.append("userimage", user.userimage);
         formData.append("changeImage", "false");
       }
 
       else{
         formData.append("userimage", userimage);
         formData.append("changeImage", "true");
+        formData.append("userOldImage",user.userimage);//gibt Pfad+Name
       }
       
       const response = await DataServer.put(`/user/${userid}`, formData);
-
       
-      
-      //console.log(response);
-
+      setUser(response.data.data.user);
       
     } catch (err) {
       console.error(err.message);
     }
     
   }
-//window.location.reload();
 }
 
 const cancelHandler=(e)=>{
@@ -221,6 +223,7 @@ const cancelHandler=(e)=>{
   inputs.userprename= user.userprename;
   inputs.userdescription= user.userdescription;
   inputs.userbirthdate= user.userbirthdate.substring(0,9);
+  inputs.userimage = "";
 
   setUpdateUser(false);
 
@@ -245,7 +248,7 @@ const cancelHandler=(e)=>{
               <Dropdown.Item onClick={(e)=>{updateUserHandler(e)}}>Daten bearbeiten</Dropdown.Item>
               <Dropdown.Item href="/">Passwort zurücksetzen</Dropdown.Item>
               <Dropdown.Divider className="delete" />
-              <Dropdown.Item onClick={(e)=>{deleteHandler(e)}} className="delete" href="/">Profil löschen</Dropdown.Item>
+              <Dropdown.Item onClick={(e)=>{deleteHandler(e)}} className="delete">Profil löschen</Dropdown.Item>
           </Dropdown.Menu>
     </Dropdown>
         
@@ -282,7 +285,7 @@ const cancelHandler=(e)=>{
         <Col>
             <Tabs defaultActiveKey="home" id="">
                 <Tab eventKey="home" title="Meine Posts">
-                 <PostsRow postElement={authorPosts} /> 
+                 <PostsRow postElement={userPosts} /> 
                 </Tab>
               {/*  <Tab eventKey="profile" title="Bewertungen">
                     <div>Hier könnten ihre Bewertungen stehen</div>
@@ -435,7 +438,7 @@ const cancelHandler=(e)=>{
 
 
   {/* Profil eines fremden Nutzers anzeigen */}
-  {!userIsAuthor && !updateUser && author != null &&
+  {!userIsAuthor && author != null &&
   <>
     <Container className="routeContainer">
  
@@ -443,12 +446,13 @@ const cancelHandler=(e)=>{
 
       <Row className="profile">
         <Col sm={6} className=" profilSectionWrapper" >
+          
           <Figure>
                 <Figure.Image 
                   width={160}
                   height={150}
                   alt="171x180"
-                  src="../pb.jpg" //{user.userimage}
+                  src={"/"+author.userimage}
                   roundedCircle
                 />
                 <Figure.Caption className="profilCaption">
@@ -460,7 +464,7 @@ const cancelHandler=(e)=>{
           <Form>
           <p><strong>Username:</strong> <br/>{author.username}</p>
           <p><strong>E-Mail:</strong> <br/>{author.useremail}</p>
-          <p><strong>Geburtsdatum:</strong> <br/>  {author.userbirthdate}</p>
+          <p><strong>Geburtsdatum:</strong> <br/>  {author.userbirthdate.substring(0,10)}</p>
           </Form>
         </Col>
       </Row>

@@ -74,8 +74,6 @@ const Home = ({searchedOffers, searchedEvents}) => {
     
     <Container className="routeContainer">
    
-    
-    
       <>
       <Row>
         <Col>

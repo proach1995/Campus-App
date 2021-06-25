@@ -99,8 +99,7 @@ const Register = () => {
       console.error(err.message);
     }
     
-    
-    
+
   }
   }
     const dataRequirement =(e)=>{

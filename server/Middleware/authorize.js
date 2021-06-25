@@ -7,6 +7,7 @@ require("dotenv").config();
 module.exports = function (req, res, next) {
   //console.log("authorize wird ausgeführt");
   // Get token from header
+  
   let token = null;
   if (req.header("jwt_token") == null ) {
     token = req.body.jwt_token;
