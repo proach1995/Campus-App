@@ -73,8 +73,6 @@ const MeinProfil = () => {
     }
   }
 
-    useEffect(() => {
-  
   const fetchAuthor= async () => {
     try {
       const response = await DataServer.get(`/User/${userid}`);
@@ -100,7 +98,9 @@ const MeinProfil = () => {
       console.log(err);
       console.log("Fetchuser hat nicht funktioniert");
     }
-  };
+  }
+    useEffect(() => {
+
   if(user.userid != userid && user.userid!=""){
   fetchAuthor();
   setUserIsAuthor(false);
@@ -112,9 +112,17 @@ const MeinProfil = () => {
   
 }, []);
 
+//Wechsel vom fremden Profil zum eingeloggten Profil ermöglichen
 useEffect(()=>{
-  console.log("userPosts", userPosts)
-},[userPosts])
+  if(user.userid != userid && user.userid!=""){
+    fetchAuthor();
+    setUserIsAuthor(false);
+    }
+    else{
+      setUserIsAuthor(true);
+      fetchUserPost();
+    }
+},[userid])
 
 
 /**********  DELETE *****************/
@@ -127,7 +135,8 @@ const deleteHandler = async (e)=>{
       console.log("delete")
       //in Axios muss der delete Request wie folgt geschrieben werden:
       //axios.delete("URL",{data:{daten die gegeben werden}});
-      const deletedUser = await DataServer.delete(`/User/${user.userid}`,{data:{jwt_token:localStorage.token}});
+      const deletedUser = await DataServer.delete(`/User/${user.userid}`,{data:{jwt_token:localStorage.token,
+                                                                                "userimage":user.userimage}});
       localStorage.removeItem("token");
       setLogged(false);
       Cookies.remove("userId");
@@ -222,7 +231,7 @@ const cancelHandler=(e)=>{
   inputs.userlastname= user.userlastname;
   inputs.userprename= user.userprename;
   inputs.userdescription= user.userdescription;
-  inputs.userbirthdate= user.userbirthdate.substring(0,9);
+  inputs.userbirthdate= user.userbirthdate.substring(0,10);
   inputs.userimage = "";
 
   setUpdateUser(false);

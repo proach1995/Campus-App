@@ -144,7 +144,7 @@ router.get("/:userid", async (req, res) => {
                                     " posts p on u.userid = p.userid inner"+
                                     " join images i on p.postid=i.postid"+
                                     " where u.userid= $1", [req.params.userid]);
-      console.log(userInfos);
+      console.log("userinfo", userInfos);
 
       //Ob der User etwas gepostet hat
       
@@ -165,13 +165,14 @@ router.get("/:userid", async (req, res) => {
         req.params.userid,
       ]);
 
-      console.log(deletePosts);
+      console.log("post", deletePosts);
 
       //User löschen
-      const deleteUser = db.query("DELETE FROM users where userid = $1", [
+      const deleteUser = db.query("DELETE FROM users where userid = $1 returning*", [
         req.params.userid,
       ]);
 
+      console.log("user", deleteUser);
       //Bilder im Server löschen
       for(let i = 0; i<userInfos.rowCount; i++){
         fs.unlink('../client/public/'+userInfos.rows[i].imagepath,function(err){
@@ -179,8 +180,29 @@ router.get("/:userid", async (req, res) => {
       })
          console.log('file deleted successfully');
     }
+
+
+    //Profilbild löschen und Kontrolle ob es das defaultbild ist
+    if(req.body.userimage.substring(21,req.body.userimage.length)!="default.jpg"){
+      console.log("kein default")
+    fs.unlink('../client/public/'+req.body.userimage, function(err){
+       if(err) return console.log(err);
+    });
+       console.log('profile Image deleted successfully');
+  }
+
   }
   else {
+    
+    if(req.body.userimage.substring(21,req.body.userimage.length)!="default.jpg"){
+      console.log("kein default")
+    fs.unlink('../client/public/'+req.body.userimage, function(err){
+       if(err) return console.log(err);
+    });
+       console.log('profile Image deleted successfully');
+  }
+
+  console.log("delte single user");
     const deleteUser = db.query("DELETE FROM users where userid = $1", [
                                 req.params.userid,
     ]);
