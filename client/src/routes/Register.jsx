@@ -12,7 +12,7 @@ import Cookies from "js-cookie";
 const Register = () => {
 
   let history = useHistory();
-  const {logged, setLogged} = useContext(AppContext);
+  const {setLogged} = useContext(AppContext);
   const {setUser} = useContext(AppContext);
   // eslint-disable-next-line no-lone-blocks
   {/* Werte mit State in Input Objekt initialisieren*/}
@@ -29,14 +29,14 @@ const Register = () => {
 
   });
   /* Werte werden im Objekt inputs gespeichert um sie mit ...props zu übergeben*/
-  const { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate, userimage, datarequirements } = inputs;
+  const { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate, userimage } = inputs;
   const [validated, setValidated] = useState(false);
     
   /* Spricht in der e.target Funktion erst den Namen an und übergibt dann den Wert, d.h. Name muss identisch sein
   mit dem Namen im Input field*/
   const onChange = e => {
     e.preventDefault();
-    if(e.target.name !="userimage"){
+    if(e.target.name !=="userimage"){
     setInputs({ ...inputs, [e.target.name]: e.target.value });
     }
     else{
@@ -104,7 +104,7 @@ const Register = () => {
   }
     const dataRequirement =(e)=>{
       
-      if(inputs.datarequirements=="false"){
+      if(inputs.datarequirements==="false"){
         inputs.datarequirements="true";
       }
 

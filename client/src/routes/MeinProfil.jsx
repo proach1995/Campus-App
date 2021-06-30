@@ -25,7 +25,7 @@ const MeinProfil = () => {
 
   const { userid } = useParams();
 
-  const {logged, setLogged} = useContext(AppContext);
+  const {setLogged} = useContext(AppContext);
   const {user, setUser} = useContext(AppContext);
 
   //Seite vom User oder Seite vom author
@@ -40,7 +40,7 @@ const MeinProfil = () => {
   const [updateUser, setUpdateUser] = useState(false);
 
 
-  const [validated, setValidated] = useState(false);
+  //const [validated, setValidated] = useState(false);
 
   //Seite wechseln
   let history = useHistory();
@@ -57,7 +57,7 @@ const MeinProfil = () => {
   
   });
   /* Werte werden an einzelne Objekte übergeben*/
-  const { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate, userimage } = inputs;
+  const { useremail, username, userlastname, userprename, userdescription, userbirthdate, userimage } = inputs;
 
 
 
@@ -102,7 +102,7 @@ const MeinProfil = () => {
   }
     useEffect(() => {
 
-  if(user.userid != userid && user.userid!=""){
+  if(user.userid !== userid && user.userid!==""){
   fetchAuthor();
   setUserIsAuthor(false);
   }
@@ -115,7 +115,7 @@ const MeinProfil = () => {
 
 //Wechsel vom fremden Profil zum eingeloggten Profil ermöglichen
 useEffect(()=>{
-  if(user.userid != userid && user.userid!=""){
+  if(user.userid !== userid && user.userid!==""){
     fetchAuthor();
     setUserIsAuthor(false);
     }
@@ -202,7 +202,7 @@ const submitUpdateHandler = async (e, userId)=>{
       formData.append("userbirthdate", userbirthdate);
       formData.append("jwt_token", localStorage.token);
 
-      if(userimage==""){
+      if(userimage===""){
         formData.append("changeImage", "false");
       }
 
@@ -245,7 +245,7 @@ const cancelHandler=(e)=>{
 
       {/* Profil des eingeloggten Nutzers anzeigen */}
 
-   {userIsAuthor && updateUser == false &&
+   {userIsAuthor && updateUser === false &&
     <>
     <Container className="routeContainer">
         <h1 className="header">Ihr Profil</h1> 
