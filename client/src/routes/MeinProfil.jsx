@@ -15,6 +15,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import moment from 'moment';
 import Cookies from 'js-cookie';
+import './route.css';
 
 
 
@@ -327,14 +328,18 @@ const cancelHandler=(e)=>{
                   roundedCircle
                 />
                 <Figure.Caption className="">
-                  <Form.File id="formcheck-api-custom" custom>
-                    <Form.File.Input  onChange={(e)=>{setInputs({ ...inputs, userimage: e.target.files[0] })}} />
-                    <Form.File.Label data-browse="Hochladen">
-                      Bild hier einfügen
-                    </Form.File.Label>
+                    <Form.Group >
+                      <Form.File
+                        id="UserImage" 
+                        label="Profilbild" 
+                        name="userimage"
+                        isValid="true"
+                        className="userImageChange"
+                        onChange={(e)=>{setInputs({ ...inputs, userimage: e.target.files[0] })}}
+                      />
+                    </Form.Group>
                     <Form.Control.Feedback type="valid">Erfolgreich hochgeladen!</Form.Control.Feedback>
-                  </Form.File>
-                </Figure.Caption>
+                  </Figure.Caption>
               </Figure>
         </Col>
         <Col sm={6} className=" profilSectionWrapper"> 
