@@ -187,7 +187,7 @@ function Sidebar() {
             </div>
             <div className="logout-btn-container">
             <Link to="/">
-            <Button  onClick={(e) => logoutHandler(e)} style={{display: logged ? '' : 'none' }} className="button logout-btn login-btn" variant="secondary" >
+            <Button  onClick={(e) => logoutHandler(e)} style={{display: logged ? '' : 'none' }} className="button logout-btn " variant="secondary" >
                       Logout
             </Button>
             </Link>

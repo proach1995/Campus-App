@@ -159,8 +159,9 @@
 }
 
 .logout-btn {
-  background-color: red;
+  background-color:rgb(143, 0, 0);
   color: white;
   position: relative;
   bottom: 5em;
+  width: 150px;
 }

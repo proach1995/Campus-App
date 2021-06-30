@@ -7,7 +7,8 @@ import { Link, useHistory } from 'react-router-dom';
 import DataServer from "../api/DataServer";
 import { AppContext } from "../context/AppContext";
 import LoginRequired from "../components/Content/LoginRequired";
-import Spinner from 'react-bootstrap/Spinner'
+import Spinner from 'react-bootstrap/Spinner';
+import './route.css';
 
 
 
@@ -257,12 +258,12 @@ const PostUpload = () => {
                 {formComponents.map(form=>(
                   <>
                   <div key={form.inputId}>
-                    <Form.Row>
-                      <Form.File id="productimage"
-                        onChange={(e)=>{inputFieldHandler(e, form.inputId)}}
+                    <Form.Row >
+                      <Form.File  id="productimage"
+                        onChange={(e)=>{inputFieldHandler(e, form.inputId)}} 
                       /> 
                       <div >
-                        <a onClick={(e)=>{cancelButtonHandler(e, form.inputId)}} className="cancelButton">Entfernen</a>
+                        <a onClick={(e)=>{cancelButtonHandler(e, form.inputId)}}  className="cancelButton">Entfernen</a>
                       </div>     
                         {noImage===true && <p style={{color:"red",
                         fontSize:"20px",
