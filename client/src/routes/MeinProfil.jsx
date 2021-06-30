@@ -328,7 +328,7 @@ const cancelHandler=(e)=>{
                 />
                 <Figure.Caption className="">
                   <Form.File id="formcheck-api-custom" custom>
-                    <Form.File.Input isValid onChange={(e)=>{setInputs({ ...inputs, userimage: e.target.files[0] })}} />
+                    <Form.File.Input  onChange={(e)=>{setInputs({ ...inputs, userimage: e.target.files[0] })}} />
                     <Form.File.Label data-browse="Hochladen">
                       Bild hier einfügen
                     </Form.File.Label>
