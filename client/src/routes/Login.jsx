@@ -134,13 +134,15 @@ console.log("user Login = ", user);
                     </div>
 
               </Form>
-            <div className="register">
-            <Button href="/register" className="button register-btn login-btn" variant="secondary" >
-              Registrieren
-              </Button> 
+            <div >
+            <h3>Noch kein Konto? </h3>
+            <h5>Dann Registriere dich schnell und einfach hier mit deiner Hochschuladresse.</h5>
             </div>
                   
-
+            <div className="buttonBackground" >
+        <Button   href="/register" type="submit" className="button">Registrieren</Button>
+        
+    </div>
           </>
       </Container>
 
