@@ -258,13 +258,12 @@ const PostUpload = () => {
                 {formComponents.map(form=>(
                   <>
                   <div key={form.inputId}>
-                    <Form.Row >
+                    <Form.Row id="FormUpload">
                       <Form.File  id="productimage"
                         onChange={(e)=>{inputFieldHandler(e, form.inputId)}} 
                       /> 
-                      <div >
                         <a onClick={(e)=>{cancelButtonHandler(e, form.inputId)}}  className="cancelButton">Entfernen</a>
-                      </div>     
+                          
                         {noImage===true && <p style={{color:"red",
                         fontSize:"20px",
                         marginLeft:"20px",
@@ -276,7 +275,7 @@ const PostUpload = () => {
                   ))}
                  <Form.Group>
                     <Form.Row>
-                      <Form.Label>Titel</Form.Label>
+                      <Form.Label id="FormTitle">Titel</Form.Label>
                       {noTitel === true &&
                       <p style={{color:"red",
                         fontSize:"20px",
@@ -320,7 +319,7 @@ const PostUpload = () => {
                       </Form.Group>
                     <Link to="/">
                       <Button className="button" variant="primary" type="submit" onClick={(e)=>{submitHandler(e)}}>
-                        Submit
+                        Erstellen
                       </Button>
                     </Link>
               </Form> 

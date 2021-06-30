@@ -236,8 +236,20 @@ background-color:rgb(255, 255, 255) ;
     font-size: 15px;
 }
 
+#productimage {
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+}
 
+#FormTitle {
+    margin-top: 0.5em;
+}
 
+#FormUpload {
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+}
 .jumboButton {
     display: flex;
     flex-direction: row;
