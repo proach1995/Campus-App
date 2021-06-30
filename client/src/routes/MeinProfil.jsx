@@ -328,22 +328,16 @@ const cancelHandler=(e)=>{
                   roundedCircle
                 />
                 <Figure.Caption className="">
-                    <Form.Group >
-                      <Form.File
-                        id="UserImage" 
-                        label="Profilbild" 
-                        name="userimage"
-                        isValid="true"
-                        className="userImageChange"
-                        onChange={(e)=>{setInputs({ ...inputs, userimage: e.target.files[0] })}}
-                      />
-                    </Form.Group>
+                  <Form.File id="formcheck-api-custom" custom onChange={(e)=>{setInputs({ ...inputs, userimage: e.target.files[0] })}}>
+                    <Form.File.Input   />
+                    <Form.File.Label data-browse="Hochladen">
+                      Bild hier einfügen
+                    </Form.File.Label>
                     <Form.Control.Feedback type="valid">Erfolgreich hochgeladen!</Form.Control.Feedback>
                   </Figure.Caption>
               </Figure>
         </Col>
         <Col sm={6} className=" profilSectionWrapper"> 
-          <div>
           <Form.Group  controlId="Useremail">
               <Form.Label>E-Mail Adresse</Form.Label>
               <Form.Control 
@@ -411,7 +405,6 @@ const cancelHandler=(e)=>{
             </Form.Control.Feedback>
             </Form.Group>
 
-          </div>
         </Col>
       </Row>
 
