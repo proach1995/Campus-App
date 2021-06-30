@@ -25,7 +25,7 @@ const MeinProfil = () => {
 
   const { userid } = useParams();
 
-  const {setLogged} = useContext(AppContext);
+  const {logged, setLogged} = useContext(AppContext);
   const {user, setUser} = useContext(AppContext);
 
   //Seite vom User oder Seite vom author
@@ -40,7 +40,7 @@ const MeinProfil = () => {
   const [updateUser, setUpdateUser] = useState(false);
 
 
-  //const [validated, setValidated] = useState(false);
+  const [validated, setValidated] = useState(false);
 
   //Seite wechseln
   let history = useHistory();
@@ -57,7 +57,7 @@ const MeinProfil = () => {
   
   });
   /* Werte werden an einzelne Objekte übergeben*/
-  const { useremail, username, userlastname, userprename, userdescription, userbirthdate, userimage } = inputs;
+  const { useremail, userpassword, username, userlastname, userprename, userdescription, userbirthdate, userimage } = inputs;
 
 
 
@@ -102,7 +102,7 @@ const MeinProfil = () => {
   }
     useEffect(() => {
 
-  if(user.userid !== userid && user.userid!==""){
+  if(user.userid != userid && user.userid!=""){
   fetchAuthor();
   setUserIsAuthor(false);
   }
@@ -115,7 +115,7 @@ const MeinProfil = () => {
 
 //Wechsel vom fremden Profil zum eingeloggten Profil ermöglichen
 useEffect(()=>{
-  if(user.userid !== userid && user.userid!==""){
+  if(user.userid != userid && user.userid!=""){
     fetchAuthor();
     setUserIsAuthor(false);
     }
@@ -202,7 +202,7 @@ const submitUpdateHandler = async (e, userId)=>{
       formData.append("userbirthdate", userbirthdate);
       formData.append("jwt_token", localStorage.token);
 
-      if(userimage===""){
+      if(userimage==""){
         formData.append("changeImage", "false");
       }
 
@@ -245,7 +245,7 @@ const cancelHandler=(e)=>{
 
       {/* Profil des eingeloggten Nutzers anzeigen */}
 
-   {userIsAuthor && updateUser === false &&
+   {userIsAuthor && updateUser == false &&
     <>
     <Container className="routeContainer">
         <h1 className="header">Ihr Profil</h1> 
@@ -328,16 +328,22 @@ const cancelHandler=(e)=>{
                   roundedCircle
                 />
                 <Figure.Caption className="">
-                  <Form.File id="formcheck-api-custom" custom onChange={(e)=>{setInputs({ ...inputs, userimage: e.target.files[0] })}}>
-                    <Form.File.Input   />
-                    <Form.File.Label data-browse="Hochladen">
-                      Bild hier einfügen
-                    </Form.File.Label>
+                    <Form.Group >
+                      <Form.File
+                        id="UserImage" 
+                        label="Profilbild" 
+                        name="userimage"
+                        isValid="true"
+                        className="userImageChange"
+                        onChange={(e)=>{setInputs({ ...inputs, userimage: e.target.files[0] })}}
+                      />
+                    </Form.Group>
                     <Form.Control.Feedback type="valid">Erfolgreich hochgeladen!</Form.Control.Feedback>
                   </Figure.Caption>
               </Figure>
         </Col>
         <Col sm={6} className=" profilSectionWrapper"> 
+          <div>
           <Form.Group  controlId="Useremail">
               <Form.Label>E-Mail Adresse</Form.Label>
               <Form.Control 
@@ -405,6 +411,7 @@ const cancelHandler=(e)=>{
             </Form.Control.Feedback>
             </Form.Group>
 
+          </div>
         </Col>
       </Row>
 
