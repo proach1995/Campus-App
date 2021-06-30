@@ -150,29 +150,33 @@ router.get("/:userid", async (req, res) => {
       
       if(userInfos.rowCount!=0){
       //Bilder in DB löschen
-      let postIdReminder = null;
-      for(let i = 0;i<userInfos.rowCount;i++){
+       let postIdReminder = null;
+        for(let i = 0;i<userInfos.rowCount;i++){
         //Bilder von neuen posts löschen
         if(postIdReminder !=userInfos.rows[i].postid){
           postIdReminder = userInfos.rows[i].postid;
-          const deleteImages = db.query("DELETE FROM images where postid = $1 returning*", [
+          const deleteImages = await db.query("DELETE FROM images where postid = $1 returning*", [
             postIdReminder]);
+            console.log(deleteImages);
         }
       }
 
+      
+
       //Posts vom user Löschen
-      const deletePosts = db.query("DELETE FROM posts where userid = $1 returning*", [
+      const deletePosts = await db.query("DELETE FROM posts where userid = $1 returning*", [
         req.params.userid,
       ]);
 
       console.log("post", deletePosts);
 
       //User löschen
-      const deleteUser = db.query("DELETE FROM users where userid = $1 returning*", [
+      const deleteUser = await db.query("DELETE FROM users where userid = $1 returning*", [
         req.params.userid,
       ]);
 
       console.log("user", deleteUser);
+
       //Bilder im Server löschen
       for(let i = 0; i<userInfos.rowCount; i++){
         fs.unlink('../client/public/'+userInfos.rows[i].imagepath,function(err){
