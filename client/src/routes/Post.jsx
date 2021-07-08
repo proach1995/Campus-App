@@ -42,10 +42,11 @@ const [inputs, setInputs] = useState({
   posttitle:"",
   postdescription: "",
   postpricetype: "",
+  postemail: "",
   
 });
 /* Werte werden im Objekt inputs gespeichert um sie mit ...props zu übergeben*/
-const { postprice, postcategory, postdate, posttype, posttitle, postdescription, postpricetype} = inputs;
+const { postprice, postcategory, postdate, posttype, posttitle, postdescription, postpricetype, postemail} = inputs;
 
   //post und user fetchen
   const fetchPost= async () => {
@@ -56,7 +57,7 @@ const { postprice, postcategory, postdate, posttype, posttitle, postdescription,
       console.log(response.data.postDetail.post);
       setPost(response.data.postDetail.post);
       setPostImages(response.data.postDetail.images);
-
+      console.log(post.useremail);
       //Entscheiden, ob es fremder User ist oder eingeloggter User
       if(response.data.postDetail.post.userid == user.userid){
         setUserIsAuthor(true);
@@ -86,7 +87,10 @@ setInputs({
         posttype: post.posttype,
         posttitle:post.posttitle,
         postdescrption: post.postdescription,
-        postpricetype:post.postpricetype});
+        postpricetype:post.postpricetype,
+        postuseremail: post.postuseremail,
+      
+      });
 
 },[post])
 /**********  DELETE *****************/
@@ -142,7 +146,8 @@ const submitUpdateHandler = async (e, postId)=>{
         posttype: inputs.posttype,
         postdescription:inputs.postdescription,
         posttitle:inputs.posttitle,
-        postpricetype:inputs.postpricetype
+        postpricetype:inputs.postpricetype,
+        postuseremail:inputs.postuseremail,
        
       });
       setUpdatePost(false); // Zum Rendern des HTML Teils
@@ -164,12 +169,15 @@ const submitUpdateHandler = async (e, postId)=>{
       postdate: post.postdate,
       posttype: post.posttype,
       posttitle:post.posttitle,
-      postdescription: post.postdescription});
+      postdescription: post.postdescription,
+      postemail:post.postemail});
     setUpdatePost(false);
     setUserIsAuthor(true); 
 
 }
 
+console.log(post.useremail);
+console.log(post.postprice);
 
   return (
     <>
@@ -269,9 +277,11 @@ const submitUpdateHandler = async (e, postId)=>{
         </Col>
         </Row>
         <Row className="contentbtn">
+        <a href={"mailto:"+ post.useremail}>
         <Button  className="button login-btn " variant="primary" >
-                        Kontaktieren
+        {post.postemail} Kontakt
               </Button>
+              </a>
         </Row>
         
       </Row>   
@@ -527,9 +537,11 @@ const submitUpdateHandler = async (e, postId)=>{
         </Col>
         </Row>
         <Row className="contentbtn">
+          <a href={"mailto:"+ post.useremail}>
         <Button  className="button login-btn " variant="primary" >
-                        Kontaktieren
+              Kontakt
               </Button>
+              </a>
         </Row>
         
       </Row>
