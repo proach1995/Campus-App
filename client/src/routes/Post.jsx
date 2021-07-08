@@ -378,6 +378,7 @@ const submitUpdateHandler = async (e, postId)=>{
                 />
             </Form.Group>
             </Col>
+           {/*
             <Col>
             <Dropdown className="postSettings">
               <Dropdown.Toggle className="settingsbtn color dropdown-btn "  id="dropdown-basic">
@@ -390,7 +391,8 @@ const submitUpdateHandler = async (e, postId)=>{
                 </Dropdown.Menu>
         </Dropdown>
     
-            </Col>
+            </Col> 
+           */}
           </Row>
           
      
