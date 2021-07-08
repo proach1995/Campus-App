@@ -176,8 +176,7 @@ const submitUpdateHandler = async (e, postId)=>{
 
 }
 
-console.log(post.useremail);
-console.log(post.postprice);
+
 
   return (
     <>
@@ -388,7 +387,7 @@ console.log(post.postprice);
                 />
             </Form.Group>
             </Col>
-            <Col>
+            {/* <Col>
             <Dropdown className="postSettings">
               <Dropdown.Toggle className="settingsbtn color dropdown-btn "  id="dropdown-basic">
               <AiIcons.AiOutlineSetting className="icon" />
@@ -400,18 +399,18 @@ console.log(post.postprice);
                 </Dropdown.Menu>
         </Dropdown>
     
-            </Col>
+            </Col> */}
           </Row>
           
      
 
           <h3 className="contentHeading">Beschreibung</h3>
-      <Row className="contentSection ">
-      <Form.Group controlId="PostDescription">
+      <Row className="contentSection">
+      <Form.Group controlId="PostDescription" style={{width:"100%"}}>
                 
                 <Form.Control 
                 as="textarea" 
-                rows={3} 
+                rows={10} 
                 name="postdescription"
                 placeholder={post.postdescription}
                 value={postdescription}
