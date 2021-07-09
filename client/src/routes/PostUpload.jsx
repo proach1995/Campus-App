@@ -153,7 +153,7 @@ const PostUpload = () => {
 }
 
   const submitHandler = async (e)=>{
-    //e.preventDefault();
+    e.preventDefault();
 
     
     let errorFlag = false;
@@ -221,10 +221,10 @@ const PostUpload = () => {
                                 postResult.data.data.post[0].postid,
                                  formData, {headers}//Header ist ein muss
 );
-
-  }
   history.push("/");
   window.location.reload();
+  }
+  
 
 }
   return(
@@ -317,11 +317,11 @@ const PostUpload = () => {
                         <Form.Label>Beschreibung</Form.Label>
                         <Form.Control as="textarea" rows={10} placeholder="Beschreibung" onChange={(e)=>{setDescription(e.target.value)}}/>
                       </Form.Group>
-                    <Link to="/">
+                    
                       <Button className="button" variant="primary" type="submit" onClick={(e)=>{submitHandler(e)}}>
                         Erstellen
                       </Button>
-                    </Link>
+                    
               </Form> 
             }
       </div>

@@ -256,7 +256,7 @@ const cancelHandler=(e)=>{
         </Dropdown.Toggle>
           <Dropdown.Menu>
               <Dropdown.Item onClick={(e)=>{updateUserHandler(e)}}>Daten bearbeiten</Dropdown.Item>
-              <Dropdown.Item href="/">Passwort zurücksetzen</Dropdown.Item>
+              {/* <Dropdown.Item href="/">Passwort zurücksetzen</Dropdown.Item> */}
               <Dropdown.Divider className="delete" />
               <Dropdown.Item onClick={(e)=>{deleteHandler(e)}} className="delete">Profil löschen</Dropdown.Item>
           </Dropdown.Menu>
